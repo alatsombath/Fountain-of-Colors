@@ -1,12 +1,14 @@
--- ColorChanger v2.0, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v2.1, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
-local Colors,ColorsIdx,Out,VarColors,Mode,Check,Measure,Meter,random={},{},{},{},{},{},{},{},math.random
+local Colors,ColorsIdx,Out,VarColors,Mode,Check,OldMeasureValue,Measure,Meter,random,abs,concat={},{},{},{},{},{},{},{},{},math.random,math.abs,table.concat
 function Initialize()
+	if SKIN:ReplaceVariables("#BarOrientation#")=="Vertical"
+		then Threshold=1/SKIN:ParseFormula(SKIN:ReplaceVariables("#BarHeight#")) else Threshold=1/SKIN:ParseFormula(SKIN:ReplaceVariables("#BarWidth#")) end
 	Counter,TransitionTime=0,math.floor((SKIN:ReplaceVariables("#ColorTransitionTime#")*1000)/16)
 	Sub,Index,Limit,Amp=SELF:GetOption("Sub"),SKIN:ParseFormula(SELF:GetOption("Index")),SKIN:ParseFormula(SELF:GetOption("Limit")),SKIN:ReplaceVariables("#ColorIntensity#")
 	local MeasureName,MeterName,gsub=SKIN:ReplaceVariables("#MeasureName#"),SKIN:ReplaceVariables("#MeterName#"),string.gsub
-	for i=Index,Limit do Measure[i]=SKIN:GetMeasure((gsub(MeasureName,Sub,i))) Meter[i]=(gsub(MeterName,Sub,i)) end
+	for i=Index,Limit do OldMeasureValue[i],Measure[i],Meter[i]=0,SKIN:GetMeasure((gsub(MeasureName,Sub,i))),(gsub(MeterName,Sub,i)) end
 	Playlist(SKIN:ReplaceVariables("#ColorPlaylist#")) end
 	
 function Playlist(Name)
@@ -37,9 +39,13 @@ function Update()
 			if i~=-1 then if Check[j]==2 then local c=(i-Index)%Limit local b=Limit-c
 				for k=1,3 do VarColors[j][i][k]=(Colors1[k]*b+Colors2[k]*c)/Limit end return VarColors[j][i]
 				
-				else local AmpValue=Amp*Measure[i]:GetValue() if AmpValue>1 then AmpValue=1 end
-				local ColorsTable,b={},1-AmpValue for k=1,3 do ColorsTable[k]=Colors1[k]*b+Colors2[k]*AmpValue end
-				SKIN:Bang("!SetOption",Meter[i],"BarColor",table.concat(ColorsTable,",")) end
+				else local Value=Measure[i]:GetValue()
+					if abs(Value-OldMeasureValue[i])>Threshold then
+						local AmpValue=Value if AmpValue>1 then AmpValue=1 end
+						local ColorsTable,b={},1-AmpValue for k=1,3 do ColorsTable[k]=Colors1[k]*b+Colors2[k]*AmpValue end
+						SKIN:Bang("!SetOption",Meter[i],"BarColor",concat(ColorsTable,","))
+					end OldMeasureValue[i]=Value
+				end
 				
 			elseif Mode[j]=="RightToLeft" then local b=TransitionTime-Counter
 				for k=1,3 do VarColors[j][k]=(Colors1[k]*b+Colors2[k]*Counter)/TransitionTime end
@@ -49,21 +55,21 @@ function Update()
 		if j==Idx and Out[j]=="" then local ColorsTable,DoubleCheck,k={},{},Next for a=1,2 do
 			if Check[j]==0 and Check[k]==0 then ColorsTable[a]=Main(Colors[j][a],Colors[k][a],-1)
 			elseif Check[j][a] and Check[k][a] then ColorsTable[a],DoubleCheck[a]={},1
-				for i=Index,Limit do if Measure[i]:GetValue()~=0 then ColorsTable[a][i]=Main(Colors[j][a][i],Colors[k][a][i],i) end end
+				for i=Index,Limit do ColorsTable[a][i]=Main(Colors[j][a][i],Colors[k][a][i],i) end
 			elseif Check[j][a] then ColorsTable[a],DoubleCheck[a]={},1
-				for i=Index,Limit do if Measure[i]:GetValue()~=0 then ColorsTable[a][i]=Main(Colors[j][a][i],Colors[k][a],i) end end
+				for i=Index,Limit do ColorsTable[a][i]=Main(Colors[j][a][i],Colors[k][a],i) end
 			elseif Check[k][a] then ColorsTable[a],DoubleCheck[a]={},1
-				for i=Index,Limit do if Measure[i]:GetValue()~=0 then ColorsTable[a][i]=Main(Colors[j][a],Colors[k][a][i],i) end end end end
+				for i=Index,Limit do ColorsTable[a][i]=Main(Colors[j][a],Colors[k][a][i],i) end end end
 			
 			Out[j]="Meter"
-				if Check[j]==0 and Check[k]==0 then for i=Index,Limit do if Measure[i]:GetValue()~=0 then Main(ColorsTable[1],ColorsTable[2],i) end end
-				elseif DoubleCheck[1] and DoubleCheck[2] then for i=Index,Limit do if Measure[i]:GetValue()~=0 then Main(ColorsTable[1][i],ColorsTable[2][i],i) end end
-				elseif DoubleCheck[1] then for i=Index,Limit do if Measure[i]:GetValue()~=0 then Main(ColorsTable[1][i],ColorsTable[2],i) end end
-				elseif DoubleCheck[2] then for i=Index,Limit do if Measure[i]:GetValue()~=0 then Main(ColorsTable[1],ColorsTable[2][i],i) end end end
+				if Check[j]==0 and Check[k]==0 then for i=Index,Limit do Main(ColorsTable[1],ColorsTable[2],i) end
+				elseif DoubleCheck[1] and DoubleCheck[2] then for i=Index,Limit do Main(ColorsTable[1][i],ColorsTable[2][i],i) end
+				elseif DoubleCheck[1] then for i=Index,Limit do Main(ColorsTable[1][i],ColorsTable[2],i) end
+				elseif DoubleCheck[2] then for i=Index,Limit do Main(ColorsTable[1],ColorsTable[2][i],i) end end
 			Out[j]=""
 		
 		elseif Check[j]==0 or Check[j]==1 then Main(Colors[j][1],Colors[j][2],-1)
-		elseif Check[j]==2 or Check[j]==3 then for i=Index,Limit do if Measure[i]:GetValue()~=0 then Main(Colors[j][1],Colors[j][2],i) end end
-		elseif Check[j][1] and Check[j][2] then for i=Index,Limit do if Measure[i]:GetValue()~=0 then Main(Colors[j][1][i],Colors[j][2][i],i) end end
-		elseif Check[j][1] then for i=Index,Limit do if Measure[i]:GetValue()~=0 then Main(Colors[j][1][i],Colors[j][2],i) end end
-		elseif Check[j][2] then for i=Index,Limit do if Measure[i]:GetValue()~=0 then Main(Colors[j][1],Colors[j][2][i],i) end end end end end
+		elseif Check[j]==2 or Check[j]==3 then for i=Index,Limit do Main(Colors[j][1],Colors[j][2],i) end
+		elseif Check[j][1] and Check[j][2] then for i=Index,Limit do Main(Colors[j][1][i],Colors[j][2][i],i) end
+		elseif Check[j][1] then for i=Index,Limit do Main(Colors[j][1][i],Colors[j][2],i) end
+		elseif Check[j][2] then for i=Index,Limit do Main(Colors[j][1],Colors[j][2][i],i) end end end end

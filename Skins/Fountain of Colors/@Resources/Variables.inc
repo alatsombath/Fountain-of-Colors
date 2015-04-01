@@ -57,22 +57,20 @@ Shuffle=1
 Measure=String
 String=[MeasureNowPlayingArtist]
 DynamicVariables=1
-IfMatch=^$
-IfMatchAction[!CommandMeasure ScriptColorChanger Playlist(#ColorPlaylist#)]
 
 ; IfMatchN=ARTIST_NAME$
 ; IfMatchActionN[!CommandMeasure ScriptColorChanger """Playlist("PLAYLIST_NAME")"""]
 
-IfMatch2=The Beatles$
+IfMatch=The Beatles$
 ; DO NOT REMOVE "$" symbol, DO NOT ADD "" quotes
-IfMatchAction2=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
+IfMatchAction=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
 ; DO NOT REMOVE """ quotes
 
-IfMatch3=Led Zeppelin$
-IfMatchAction3=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
+IfMatch2=Led Zeppelin$
+IfMatchAction2=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
 
-IfMatch4=Coldplay$
-IfMatchAction4=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
+IfMatch3=Coldplay$
+IfMatchAction3=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
 
 [AlbumColorSettings]
 Measure=String
