@@ -2,31 +2,35 @@
 -- This work is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 License.
 
 function Initialize()
-	local SKIN,SELF=SKIN,SELF
-	MinValue=SKIN:ParseFormula(SELF:GetOption("MinimumValue",0))
-	MaxMin,ColorsTable,Var,Output=(SKIN:ParseFormula(SELF:GetOption("MaximumValue",1))-MinValue),{},{},SELF:GetOption("Output")
-	Measure,Meter,Option=SELF:GetOption("MeasureName"),SELF:GetOption("MeterName"),SELF:GetOption("MeterOption")
-	Sub,Index,Limit=SELF:GetOption("Sub"),SKIN:ParseFormula(SELF:GetOption("Index")),SKIN:ParseFormula(SELF:GetOption("Limit"))
-	find,gmatch,gsub,ceil,floor,concat=string.find,string.gmatch,string.gsub,math.ceil,math.floor,table.concat
+	ColorsTable,Var,MinValue,MaxMin,Measure,Meter,Option={},{},{},{},{},{},{}
 	
-	if Output ~= "" then local Output,ColorsTable,Var=Output,ColorsTable,Var for i=1,Output do ColorsTable[i],Var[i]="Colors"..i,"VarName"..i end end
+	local SKIN,SELF=SKIN,SELF
+	Sub,Index,Limit=SELF:GetOption("Sub"),SKIN:ParseFormula(SELF:GetOption("Index")),SKIN:ParseFormula(SELF:GetOption("Limit"))
+	
+	Output=SELF:GetOption("Output")
+	for i=1,Output do
+		ColorsTable[i],Var[i]="Colors"..i,SELF:GetOption("VarName"..i)
+		MinValue[i]=SKIN:ParseFormula(SELF:GetOption("MinimumValue"..i,0))
+		MaxMin[i]=(SKIN:ParseFormula(SELF:GetOption("MaximumValue"..i,1))-MinValue[i])
+		Measure[i],Meter[i],Option[i]=SELF:GetOption("MeasureName"..i),SELF:GetOption("MeterName"..i),SELF:GetOption("MeterOption"..i)
+	end
 end
 
 function Update()
-	local MinValue,MaxMin,ColorsTable,Var,Output,Measure,Meter,Option,Sub,Index,Limit=MinValue,MaxMin,ColorsTable,Var,Output,Measure,Meter,Option,Sub,Index,Limit
-	local SKIN,SELF,find,gmatch,gsub,ceil,floor,concat=SKIN,SELF,find,gmatch,gsub,ceil,floor,concat
+	local VarTable,Output,ColorsTable,Var,MinValue,MaxMin,Measure,Meter,Option,Sub,Index,Limit={},Output,ColorsTable,Var,MinValue,MaxMin,Measure,Meter,Option,Sub,Index,Limit
+	local SKIN,SELF,find,gmatch,gsub,ceil,floor,concat=SKIN,SELF,string.find,string.gmatch,string.gsub,math.ceil,math.floor,table.concat
 	
-	local function Check(ColorsStr)
-		local MinValue,MaxMin,Var,Measure,Meter,Option,Sub=MinValue,MaxMin,Var,Measure,Meter,Option,Sub
+	local function Check(j)
+		local Output,Var,MinValue,MaxMin,Measure,Meter,Option,Sub=Output,Var,MinValue,MaxMin,Measure,Meter,Option,Sub
 		local SKIN,SELF,find,gmatch,gsub,ceil,floor,concat=SKIN,SELF,find,gmatch,gsub,ceil,floor,concat
 		
-		local function Main(ColorsStr, i, j)
+		local function Main(ColorsStr,i,j)
 			local MinValue,MaxMin,ceil,floor,concat=MinValue,MaxMin,ceil,floor,concat
 			
-			local function Calculate(MeasureValue, Colors)
+			local function Calculate(MeasureValue,Colors,j)
 				local function Average(a,b,c,d) return (a*(d-c)+(b and b or 0)*c)/d end
 
-				local uColor,rValue,Divider={},MeasureValue-MinValue,ceil(MaxMin/(#Colors[1]-1))
+				local uColor,rValue,Divider={},MeasureValue-MinValue[j],ceil(MaxMin[j]/(#Colors[1]-1))
 				local Num=floor(rValue/Divider)
 				for i=1,4 do uColor[i]=Average(Colors[i][Num+1],Colors[i][Num+2],rValue%Divider,Divider) end
 				return concat(uColor,',')
@@ -42,16 +46,27 @@ function Update()
 			
 			if i ~= -1 then
 				local gsub=gsub
-				if Meter ~= "" then SKIN:Bang("!SetOption", (gsub(Meter,Sub, i)), Option, Calculate(SKIN:GetMeasure((gsub(Measure,Sub,i))):GetValue(), Colors))
-				else SKIN:Bang("!SetVariable", (gsub(SELF:GetOption(Var[j]),Sub,i)), Calculate(i, Colors)) end
-			else SKIN:Bang("!SetVariable", SELF:GetOption(Var[j]), Calculate(SKIN:GetMeasure(Measure):GetValue(), Colors)) end
+				if Meter[j] ~= "" then SKIN:Bang("!SetOption",(gsub(Meter[j],Sub,i)),Option[j],Calculate(SKIN:GetMeasure((gsub(Measure[j],Sub,i))):GetValue(),Colors,j))
+				else VarTable[(gsub(Var[j],Sub,i))]=Calculate(i,Colors,j) end
+			else VarTable[Var[j]]=Calculate(SKIN:GetMeasure(Measure[j]):GetValue(),Colors,j) end
 		end
 	
-		if Sub ~= "" then
-			if find(ColorsStr,Sub) ~= nil then local Index,Limit=Index,Limit for i=Index,Limit do Main(SKIN:ReplaceVariables((gsub(ColorsStr,Sub,i))), i, j) end
-			else local Index,Limit=Index,Limit for i=Index,Limit do Main(ColorsStr, i, j) end end
-		else Main(ColorsStr, -1, j) end
+		local ColorsStr=SKIN:ReplaceVariables(SELF:GetOption(ColorsTable[j]))
+		
+		if find(ColorsStr,Sub) ~= nil then
+			for i=Index,Limit do
+				for k=1,Output do
+					if find(ColorsStr,Var[k]) ~= nil then
+						if find(Var[k],Sub) ~= nil then ColorsStr=(gsub(ColorsStr,Var[k],VarTable[(gsub(Var[k],Sub,i))]))
+						else ColorsStr=(gsub(ColorsStr,Var[k],VarTable[Var[k]])) end end end
+				Main(ColorsStr,i,j)
+			end
+		else 
+			for k=1,Output do if find(ColorsStr,Var[k])~= nil then ColorsStr=(gsub(ColorsStr,Var[k],VarTable[Var[k]])) end end
+			if find(Var[j],Sub) ~= nil then for i=Index,Limit do Main(ColorsStr,i,j) end
+			else Main(ColorsStr,-1,j) end
+		end
 	end
 
-	if Output ~= "" then for j=1,Output do Check(SKIN:ReplaceVariables(SELF:GetOption(ColorsTable[j]))) end else Check(SKIN:ReplaceVariables(SELF:GetOption("Colors"))) end
+	for j=1,Output do Check(j) end
 end
