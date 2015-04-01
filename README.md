@@ -172,7 +172,7 @@ Sub=Repeat
 Index=01
 Limit=63
 Threshold=0
-MeasureName=measureAudioOutSmoothed_Repeat
+MeasureName=measureAudioOut_Repeat
 MeterName=Meter_barRepeat
 OptionName=BarColor
 ```
