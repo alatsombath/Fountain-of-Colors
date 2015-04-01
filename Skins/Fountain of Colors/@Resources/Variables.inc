@@ -1,7 +1,7 @@
 [Variables]
-BarWidth=14
-BarHeight=(#WORKAREAHEIGHT#/2)
-BarGapX=3.5R
+BarWidth=10
+BarHeight=(#WORKAREAHEIGHT#/3)
+BarGapX=0R
 BarGapY=0
 BarOrientation=Vertical
 
@@ -20,7 +20,7 @@ PlayerName=CAD
 ; The interface name for the media player
 ; http://docs.rainmeter.net/manual-beta/plugins/nowplaying#playerlist
 
-Bands=96
+Bands=160
 Sensitivity=42
 ColorIntensity=1.75
 ColorTransitionTime=3.5
