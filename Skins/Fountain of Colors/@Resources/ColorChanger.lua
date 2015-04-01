@@ -1,4 +1,4 @@
--- ColorChanger v2.1, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v2.2, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 local Colors,ColorsIdx,Out,VarColors,Mode,Check,OldMeasureValue,Measure,Meter,random,abs,concat={},{},{},{},{},{},{},{},{},math.random,math.abs,table.concat
@@ -41,10 +41,10 @@ function Update()
 				
 				else local Value=Measure[i]:GetValue()
 					if abs(Value-OldMeasureValue[i])>Threshold then
-						local AmpValue=Value if AmpValue>1 then AmpValue=1 end
+						local AmpValue=Amp*Value if AmpValue>1 then AmpValue=1 end
 						local ColorsTable,b={},1-AmpValue for k=1,3 do ColorsTable[k]=Colors1[k]*b+Colors2[k]*AmpValue end
 						SKIN:Bang("!SetOption",Meter[i],"BarColor",concat(ColorsTable,","))
-					end OldMeasureValue[i]=Value
+					OldMeasureValue[i]=Value end
 				end
 				
 			elseif Mode[j]=="RightToLeft" then local b=TransitionTime-Counter
