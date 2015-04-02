@@ -1,5 +1,3 @@
-# Customizable Colors for Your Favorite Songs
-
 Select the "Edit variables" context menu option. An example color playlist:
 ```
 1=255,0,0|255,165,0
@@ -22,8 +20,7 @@ IfMatchAction=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlayl
 
 Do not remove the "$" symbol, and do not the remove the """ quotes. They are used for literal string matching and sending proper arguments to the script.
 
-
-
+![Screenshot](http://orig14.deviantart.net/663a/f/2015/069/8/d/fountain_of_colors__music_visualizer___rainmeter__by_alatsombath-d8kxplv.png)
 
 # Using ColorChanger.lua with other visualizers
 
@@ -137,7 +134,6 @@ Favorite song colors require additional measures to be included in the skin's .i
 	IfMatch3=Make It with You$
 	IfMatchAction3=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
 
-
 ## [ScriptColorChanger] section options
 	
 - **Sub:** "Repeat" (It's our pattern substitution string)
@@ -154,13 +150,11 @@ Favorite song colors require additional measures to be included in the skin's .i
 
 - **OptionName:** The color option that is dynamically updated
 
-
 ## List of default visualizer settings
 
 After including the core settings, place the [ScriptColorChanger] section(s) in the skin's .ini file
 
 I would appreciate it a lot if someone could help compile a complete list of the options for all the released visualizers
-
 
 ### [MarcoPixel's Monstercat Visualizer 1.1](http://marcopixel.deviantart.com/art/UPDATE-Monstercat-Visualizer-for-Rainmeter-1-1-486330771)
 visualizer.ini
@@ -176,7 +170,6 @@ MeasureName=measureAudioOut_Repeat
 MeterName=Meter_barRepeat
 OptionName=BarColor
 ```
-
 
 ### [madhoe's Visbubble 1.6](http://madhoe.deviantart.com/art/VisBubble-for-Rainmeter-488601501)
 BarExtrude.ini / LineExtrude.ini
