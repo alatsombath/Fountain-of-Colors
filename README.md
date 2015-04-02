@@ -4,11 +4,17 @@ Select the "Edit variables" context menu option. An example color playlist:
 2=0,255,0|0,0,255
 ```
 
-Each "Number=" option includes two colors: One for the bottom of the visualizer, and the other for the top of the visualizer. With quieter sounds, "255,0,0" (Red) will be displayed. With louder sounds, "255,165,0" (Orange) will be displayed. You move to the next "Number=" option like a song playlist. "255,0,0" transitions to "0,255,0" (Red to Green), and "255,165,0" transitions to "0,0,255" (Orange to Blue)
+Each "Number=" option includes two colors: One for the bottom of the visualizer, and the other for the top of the visualizer
 
-Change the TransitionTime to the number of seconds it takes to move to the next "Number=" item
+With quieter sounds, "255,0,0" (Red) will be displayed. With louder sounds, "255,165,0" (Orange) will be displayed
+
+You move to the next "Number=" option like a song playlist. "255,0,0" transitions to "0,255,0" (Red to Green), and "255,165,0" transitions to "0,0,255" (Orange to Blue)
+
+You can add as many colors to the playlist as you want!
 
 Use the Shuffle option if you want to play the colors randomly
+
+Change the TransitionTime to the number of seconds it takes to move to the next "Number=" item
 
 You can also create a horizontal color gradient across the spectrum. If you don't know how to get started, feel free to ask for help!
 
@@ -18,7 +24,7 @@ IfMatch=Hotel California$
 IfMatchAction=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
 ```
 
-Do not remove the "$" symbol, and do not the remove the """ quotes. They are used for literal string matching and sending proper arguments to the script.
+Do not remove the "$" symbol, and do not the remove the """ quotes. They are used for literal string matching and sending proper arguments to the script
 
 ![Screenshot](http://orig14.deviantart.net/663a/f/2015/069/8/d/fountain_of_colors__music_visualizer___rainmeter__by_alatsombath-d8kxplv.png)
 
@@ -50,6 +56,15 @@ Attach these core settings ***at the end* of the [Variables] section** in the sk
 	Out4=TopRepeat
 	5=Bottom|TopRepeat
 	Out5=Meter
+
+If there is no [Variables] section, but an @Include instead, add a section header below the line:
+	
+	@Include=(Whatever external variables file)
+	
+	[Variables]
+	ColorPlaylist=RandomColorPlaylist
+	
+	... (Other core settings) ...
 
 (We're not done yet, we still need to include a measure for the Script)
 
@@ -171,7 +186,7 @@ MeterName=Meter_barRepeat
 OptionName=BarColor
 ```
 
-### [madhoe's Visbubble 1.6](http://madhoe.deviantart.com/art/VisBubble-for-Rainmeter-488601501)
+### [madhoe's VisBubble 1.6](http://madhoe.deviantart.com/art/VisBubble-for-Rainmeter-488601501)
 BarExtrude.ini / LineExtrude.ini
 ```
 [ScriptColorChanger]
@@ -224,5 +239,19 @@ MeasureName=mBandRRepeat
 MeterName=LineRRepeat
 OptionName=LineColor
 ```	
+
+### [alatsombath's Ocean 1.4.1](http://alatsombath.deviantart.com/art/Ocean-Music-Visualizer-for-Rainmeter-522306245)
+Ocean.ini / OceanBars.ini / Wave.ini - You also need to [use this modified version of ColorChanger.lua](https://gist.github.com/alatsombath/2ecfb7869e320e4ac1de)
+
+```
+[ScriptColorChanger]
+Measure=Script
+ScriptFile=#@#ColorChanger.lua
+Sub=Repeat
+Index=1
+Limit=(#Bands#-1)
+Threshold=0
+MeasureName=MeasureAudioRepeat
+```
 
 Don't worry if something breaks! Feel free to drop a message and we'll work together to try and fix the problem
