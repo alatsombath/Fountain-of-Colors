@@ -1,9 +1,8 @@
--- ColorChanger v2.3, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v2.3.1, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 local Colors,ColorsIdx,VarColors,Check,Out,Mode,OldMeasureValue,Measure,Meter={},{},{},{},{},{},{},{},{}
 local random,abs,concat=math.random,math.abs,table.concat
-local Counter=0
 
 function Initialize()
 
@@ -65,6 +64,8 @@ function Playlist(Name)
 		Idx,Next=1,2
 	end
 	
+	-- Initialize counter
+	Counter=0
 	TransitionTime=math.floor((PlaylistMeasure:GetNumberOption("TransitionTime",3.5)*1000)/16)
 	
 	local SplitColors,Sub,Index,Limit,find,gmatch={},Sub,Index,Limit,string.find,string.gmatch
@@ -73,8 +74,10 @@ function Playlist(Name)
 	-- For each color item in the playlist
 	for j=1,Total do
 	
+		-- Initialize the tables for colors and color item options
 		Colors[j],ColorsIdx[j],VarColors[j],SplitColors[j],Out[j],Mode[j]={},{},{},{},PlaylistMeasure:GetOption("Out"..j),PlaylistMeasure:GetOption("Mode"..j)
 		
+		-- Retrieve the color item
 		local ColorsStr=SKIN:ReplaceVariables(PlaylistMeasure:GetOption(j))
 		
 		-- Check output variables

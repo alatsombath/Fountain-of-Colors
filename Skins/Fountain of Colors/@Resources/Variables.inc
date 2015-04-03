@@ -52,6 +52,8 @@ FFTDecay=350
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel#FFTAttack
 
 FFTSize=2048
+; Increase this if the bars "stick" together too much
+
 FFTOverlap=(#FFTSize#/2)
 FreqMin=40
 FreqMax=16000
