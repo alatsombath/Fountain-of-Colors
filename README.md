@@ -26,6 +26,8 @@ IfMatchAction=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlayl
 
 Do not remove the "$" symbol, and do not the remove the """ quotes. They are used for literal string matching and sending proper arguments to the script
 
+GIF was recorded in [ScreenToGif](https://screentogif.codeplex.com/)
+
 ![Preview](http://orig03.deviantart.net/3f7a/f/2015/093/2/a/fountain_of_colors__music_visualizer___rainmeter__by_alatsombath-d8kxplv.gif)
 
 # Using ColorChanger.lua with other visualizers
