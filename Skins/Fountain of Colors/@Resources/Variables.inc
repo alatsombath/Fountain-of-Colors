@@ -19,7 +19,8 @@ BarGapY=0
 ; "R" means relative to the bottom/right edge of the previous meter
 ; http://docs.rainmeter.net/manual-beta/meters/general-options#XY
 
-BarOrientation=Vertical
+Flip=0
+; Flip the bars upside down
 
 
 ; MECHANICS
@@ -52,6 +53,8 @@ FFTDecay=350
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel#FFTAttack
 
 FFTSize=2048
+; Increase this if the bars "stick" together too much
+
 FFTOverlap=(#FFTSize#/2)
 FreqMin=40
 FreqMax=16000
