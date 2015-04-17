@@ -31,7 +31,7 @@ ColorPlaylist=RandomColorPlaylist
 ; Scroll down for more examples below
 
 ColorTransitionTime=3.5
-; The default transition time for the RandomColorPlaylist
+; The default transition time for the RandomColorPlaylist or ColorHexPalette
 
 ColorIntensity=1.75
 ; Play around with this to change color vibrancy, based on the loudness of sound
