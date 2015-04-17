@@ -1,6 +1,6 @@
 Good news! You can now easily choose and display [color palettes from the Color-Hex.com website](http://www.color-hex.com/color-palettes/)
 
-Just go to the "Enter Color-Hex.com Palette ID#" context menu option (Right-click the visualizer or tray icon) and enter the palette ID# in the textbox
+Right-click the visualizer or tray icon, select the "Enter Color-Hex.com Palette ID#" context menu option, and enter the palette ID# in the textbox
 
 Example: If the URL is [color-hex.com/color-palette/4482](http://www.color-hex.com/color-palette/4482), enter "4482" in the textbox
 
