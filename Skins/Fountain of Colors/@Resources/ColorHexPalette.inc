@@ -74,7 +74,7 @@ DynamicVariables=1
 UpdateDivider=-1
 
 ; Transition the color items from right-to-left, replace the right-hand side with a random palette color, and call ColorChanger.lua to reinitialize the color items in the playlist
-OnUpdateAction=[!SetVariable Left1 #Left2#][!SetVariable Right1 #Right2#][!SetVariable Bottom1 #Bottom2#][!SetVariable Left2 [ParseLeftColor]][!SetVariable Right2 [ParseRightColor]][!SetVariable Bottom2 [ParseBottomColor]][!UpdateMeasure ColorHexPalette][!CommandMeasure ScriptColorChanger Playlist(#ColorPlaylist#)]
+OnUpdateAction=[!SetVariable Left1 #Left2#][!SetVariable Right1 #Right2#][!SetVariable Bottom1 #Bottom2#][!SetVariable Left2 [ParseLeftColor]][!SetVariable Right2 [ParseRightColor]][!SetVariable Bottom2 [ParseBottomColor]][!UpdateMeasure ColorHexPalette][!CommandMeasure ScriptColorChanger """Playlist("#ColorPlaylist#")"""]
 
 [ColorHexPalette]
 Measure=String
