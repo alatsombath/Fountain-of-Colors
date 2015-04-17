@@ -161,8 +161,8 @@ Mode2=RightToLeft
 Out2=Right
 
 3=Random,Random,Random|Random,Random,Random
-Out3=Bottom
 Mode3=RightToLeft
+Out3=Bottom
 
 4=Left|Right
 ; "Repeat" designates a table of interpolated colors, one specific color for each bar/band
