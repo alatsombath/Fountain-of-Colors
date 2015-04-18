@@ -9,50 +9,28 @@
 Bands=96
 ; Number of bars
 
-BarWidth=14
-BarHeight=(#WORKAREAHEIGHT#/2)
-; "#WORKAREAHEIGHT#" is generally your monitor's height
-; http://docs.rainmeter.net/manual-beta/variables/built-in-variables#WORKAREAXYWH
+BarGap=4
+; Spacing between the bars
 
-BarGapX=3.5R
-BarGapY=0
-; "R" means relative to the bottom/right edge of the previous meter
-; http://docs.rainmeter.net/manual-beta/meters/general-options#XY
+BarWidth=12
+BarHeight=300
 
 Flip=0
 ; Flip the bars upside down
 
 
-; MECHANICS
-; =========
-
-ColorPlaylist=RandomColorPlaylist
-; ColorPlaylist=ExampleColorPlaylist
-; Scroll down for more examples below
-
-ColorTransitionTime=3.5
-; The default transition time for the RandomColorPlaylist or ColorHexPalette
-
-ColorIntensity=1.75
-; Play around with this to change color vibrancy, based on the loudness of sound
-
-PlayerName=CAD
-; The interface name for the media player
-; http://docs.rainmeter.net/manual-beta/plugins/nowplaying#playerlist
-
-
 ; AUDIO
 ; =====
 
-Sensitivity=42
+Sensitivity=50
 ; Increase this if the spectrum is not visible enough
 
-FFTAttack=350
-FFTDecay=350
+FFTAttack=175
+FFTDecay=175
 ; Decrease for faster response, increase for slower response
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel#FFTAttack
 
-FFTSize=2048
+FFTSize=3072
 ; Increase this if the bars "stick" together too much
 
 FFTOverlap=(#FFTSize#/2)
@@ -61,6 +39,28 @@ FreqMax=16000
 Port=Output
 ; Additional audio settings
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel#FFTOptions
+
+
+; MECHANICS
+; =========
+
+ColorTransitionTime=3
+; Number of seconds between changing to the next set of colors
+; (Default transition time for the RandomColorPlaylist and ColorHexPalette)
+
+ColorIntensity=1.5
+; Play around with this to change color vibrancy, based on the loudness of sound
+
+ColorPlaylist=RandomColorPlaylist
+; ColorPlaylist=ExampleColorPlaylist
+; Scroll down for more examples below
+
+PlayerName=CAD
+; The interface name for the media player
+; http://docs.rainmeter.net/manual-beta/plugins/nowplaying#playerlist
+
+Refresh=0
+; Check if the skin has refreshed twice to include updated meters in WriteBands.inc
 
 
 ; === DO NOT ADD VARIABLES BELOW THIS LINE ===
@@ -92,6 +92,7 @@ TransitionTime=1
 Measure=String
 String=[MeasureArtist]
 DynamicVariables=1
+UpdateDivider=31.25
 
 ; IfMatchN=ARTIST_NAME$
 ; IfMatchActionN[!CommandMeasure ScriptColorChanger """Playlist("PLAYLIST_NAME")"""]
@@ -112,6 +113,7 @@ IfMatchAction3=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlay
 Measure=String
 String=[MeasureAlbum]
 DynamicVariables=1
+UpdateDivider=31.25
 
 ; IfMatchN=ALBUM_NAME$
 ; IfMatchActionN[!CommandMeasure ScriptColorChanger """Playlist("PLAYLIST_NAME")"""]
@@ -130,6 +132,7 @@ IfMatchAction3=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlay
 Measure=String
 String=[MeasureTrack]
 DynamicVariables=1
+UpdateDivider=31.25
 
 ; IfMatchN=TRACK_NAME$
 ; IfMatchActionN[!CommandMeasure ScriptColorChanger """Playlist("PLAYLIST_NAME")"""]
@@ -154,20 +157,27 @@ TransitionTime=#ColorTransitionTime#
 ; Transition this color string from right to left
 Mode1=RightToLeft
 ; Output to a temporary variable, for use in the next sequence
-Out1=Left
+Out1=LeftTop
 
 2=Random,Random,Random|Random,Random,Random
 Mode2=RightToLeft
-Out2=Right
+Out2=RightTop
 
 3=Random,Random,Random|Random,Random,Random
 Mode3=RightToLeft
-Out3=Bottom
+Out3=LeftBottom
 
-4=Left|Right
+4=Random,Random,Random|Random,Random,Random
+Mode4=RightToLeft
+Out4=RightBottom
+
+5=LeftTop|RightTop
 ; "Repeat" designates a table of interpolated colors, one specific color for each bar/band
-Out4=TopRepeat
+Out5=TopRepeat
 
-5=Bottom|TopRepeat
+6=LeftBottom|RightBottom
+Out6=BottomRepeat
+
+7=BottomRepeat|TopRepeat
 ; Output to display
-Out5=Meter
+Out7=Meter
