@@ -4,6 +4,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=1
+AverageSize=#AverageSize#
 
 [MeterBar1]
 Meter=Bar
@@ -16,6 +17,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=2
+AverageSize=#AverageSize#
 
 [MeterBar2]
 Meter=Bar
@@ -28,6 +30,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=3
+AverageSize=#AverageSize#
 
 [MeterBar3]
 Meter=Bar
@@ -40,6 +43,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=4
+AverageSize=#AverageSize#
 
 [MeterBar4]
 Meter=Bar
@@ -52,6 +56,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=5
+AverageSize=#AverageSize#
 
 [MeterBar5]
 Meter=Bar
@@ -64,6 +69,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=6
+AverageSize=#AverageSize#
 
 [MeterBar6]
 Meter=Bar
@@ -76,6 +82,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=7
+AverageSize=#AverageSize#
 
 [MeterBar7]
 Meter=Bar
@@ -88,6 +95,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=8
+AverageSize=#AverageSize#
 
 [MeterBar8]
 Meter=Bar
@@ -100,6 +108,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=9
+AverageSize=#AverageSize#
 
 [MeterBar9]
 Meter=Bar
@@ -112,6 +121,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=10
+AverageSize=#AverageSize#
 
 [MeterBar10]
 Meter=Bar
@@ -124,6 +134,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=11
+AverageSize=#AverageSize#
 
 [MeterBar11]
 Meter=Bar
@@ -136,6 +147,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=12
+AverageSize=#AverageSize#
 
 [MeterBar12]
 Meter=Bar
@@ -148,6 +160,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=13
+AverageSize=#AverageSize#
 
 [MeterBar13]
 Meter=Bar
@@ -160,6 +173,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=14
+AverageSize=#AverageSize#
 
 [MeterBar14]
 Meter=Bar
@@ -172,6 +186,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=15
+AverageSize=#AverageSize#
 
 [MeterBar15]
 Meter=Bar
@@ -184,6 +199,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=16
+AverageSize=#AverageSize#
 
 [MeterBar16]
 Meter=Bar
@@ -196,6 +212,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=17
+AverageSize=#AverageSize#
 
 [MeterBar17]
 Meter=Bar
@@ -208,6 +225,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=18
+AverageSize=#AverageSize#
 
 [MeterBar18]
 Meter=Bar
@@ -220,6 +238,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=19
+AverageSize=#AverageSize#
 
 [MeterBar19]
 Meter=Bar
@@ -232,6 +251,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=20
+AverageSize=#AverageSize#
 
 [MeterBar20]
 Meter=Bar
@@ -244,6 +264,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=21
+AverageSize=#AverageSize#
 
 [MeterBar21]
 Meter=Bar
@@ -256,6 +277,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=22
+AverageSize=#AverageSize#
 
 [MeterBar22]
 Meter=Bar
@@ -268,6 +290,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=23
+AverageSize=#AverageSize#
 
 [MeterBar23]
 Meter=Bar
@@ -280,6 +303,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=24
+AverageSize=#AverageSize#
 
 [MeterBar24]
 Meter=Bar
@@ -292,6 +316,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=25
+AverageSize=#AverageSize#
 
 [MeterBar25]
 Meter=Bar
@@ -304,6 +329,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=26
+AverageSize=#AverageSize#
 
 [MeterBar26]
 Meter=Bar
@@ -316,6 +342,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=27
+AverageSize=#AverageSize#
 
 [MeterBar27]
 Meter=Bar
@@ -328,6 +355,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=28
+AverageSize=#AverageSize#
 
 [MeterBar28]
 Meter=Bar
@@ -340,6 +368,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=29
+AverageSize=#AverageSize#
 
 [MeterBar29]
 Meter=Bar
@@ -352,6 +381,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=30
+AverageSize=#AverageSize#
 
 [MeterBar30]
 Meter=Bar
@@ -364,6 +394,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=31
+AverageSize=#AverageSize#
 
 [MeterBar31]
 Meter=Bar
@@ -376,6 +407,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=32
+AverageSize=#AverageSize#
 
 [MeterBar32]
 Meter=Bar
@@ -388,6 +420,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=33
+AverageSize=#AverageSize#
 
 [MeterBar33]
 Meter=Bar
@@ -400,6 +433,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=34
+AverageSize=#AverageSize#
 
 [MeterBar34]
 Meter=Bar
@@ -412,6 +446,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=35
+AverageSize=#AverageSize#
 
 [MeterBar35]
 Meter=Bar
@@ -424,6 +459,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=36
+AverageSize=#AverageSize#
 
 [MeterBar36]
 Meter=Bar
@@ -436,6 +472,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=37
+AverageSize=#AverageSize#
 
 [MeterBar37]
 Meter=Bar
@@ -448,6 +485,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=38
+AverageSize=#AverageSize#
 
 [MeterBar38]
 Meter=Bar
@@ -460,6 +498,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=39
+AverageSize=#AverageSize#
 
 [MeterBar39]
 Meter=Bar
@@ -472,6 +511,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=40
+AverageSize=#AverageSize#
 
 [MeterBar40]
 Meter=Bar
@@ -484,6 +524,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=41
+AverageSize=#AverageSize#
 
 [MeterBar41]
 Meter=Bar
@@ -496,6 +537,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=42
+AverageSize=#AverageSize#
 
 [MeterBar42]
 Meter=Bar
@@ -508,6 +550,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=43
+AverageSize=#AverageSize#
 
 [MeterBar43]
 Meter=Bar
@@ -520,6 +563,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=44
+AverageSize=#AverageSize#
 
 [MeterBar44]
 Meter=Bar
@@ -532,6 +576,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=45
+AverageSize=#AverageSize#
 
 [MeterBar45]
 Meter=Bar
@@ -544,6 +589,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=46
+AverageSize=#AverageSize#
 
 [MeterBar46]
 Meter=Bar
@@ -556,6 +602,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=47
+AverageSize=#AverageSize#
 
 [MeterBar47]
 Meter=Bar
@@ -568,6 +615,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=48
+AverageSize=#AverageSize#
 
 [MeterBar48]
 Meter=Bar
@@ -580,6 +628,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=49
+AverageSize=#AverageSize#
 
 [MeterBar49]
 Meter=Bar
@@ -592,6 +641,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=50
+AverageSize=#AverageSize#
 
 [MeterBar50]
 Meter=Bar
@@ -604,6 +654,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=51
+AverageSize=#AverageSize#
 
 [MeterBar51]
 Meter=Bar
@@ -616,6 +667,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=52
+AverageSize=#AverageSize#
 
 [MeterBar52]
 Meter=Bar
@@ -628,6 +680,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=53
+AverageSize=#AverageSize#
 
 [MeterBar53]
 Meter=Bar
@@ -640,6 +693,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=54
+AverageSize=#AverageSize#
 
 [MeterBar54]
 Meter=Bar
@@ -652,6 +706,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=55
+AverageSize=#AverageSize#
 
 [MeterBar55]
 Meter=Bar
@@ -664,6 +719,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=56
+AverageSize=#AverageSize#
 
 [MeterBar56]
 Meter=Bar
@@ -676,6 +732,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=57
+AverageSize=#AverageSize#
 
 [MeterBar57]
 Meter=Bar
@@ -688,6 +745,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=58
+AverageSize=#AverageSize#
 
 [MeterBar58]
 Meter=Bar
@@ -700,6 +758,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=59
+AverageSize=#AverageSize#
 
 [MeterBar59]
 Meter=Bar
@@ -712,6 +771,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=60
+AverageSize=#AverageSize#
 
 [MeterBar60]
 Meter=Bar
@@ -724,6 +784,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=61
+AverageSize=#AverageSize#
 
 [MeterBar61]
 Meter=Bar
@@ -736,6 +797,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=62
+AverageSize=#AverageSize#
 
 [MeterBar62]
 Meter=Bar
@@ -748,6 +810,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=63
+AverageSize=#AverageSize#
 
 [MeterBar63]
 Meter=Bar
@@ -760,6 +823,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=64
+AverageSize=#AverageSize#
 
 [MeterBar64]
 Meter=Bar
@@ -772,6 +836,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=65
+AverageSize=#AverageSize#
 
 [MeterBar65]
 Meter=Bar
@@ -784,6 +849,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=66
+AverageSize=#AverageSize#
 
 [MeterBar66]
 Meter=Bar
@@ -796,6 +862,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=67
+AverageSize=#AverageSize#
 
 [MeterBar67]
 Meter=Bar
@@ -808,6 +875,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=68
+AverageSize=#AverageSize#
 
 [MeterBar68]
 Meter=Bar
@@ -820,6 +888,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=69
+AverageSize=#AverageSize#
 
 [MeterBar69]
 Meter=Bar
@@ -832,6 +901,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=70
+AverageSize=#AverageSize#
 
 [MeterBar70]
 Meter=Bar
@@ -844,6 +914,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=71
+AverageSize=#AverageSize#
 
 [MeterBar71]
 Meter=Bar
@@ -856,6 +927,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=72
+AverageSize=#AverageSize#
 
 [MeterBar72]
 Meter=Bar
@@ -868,6 +940,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=73
+AverageSize=#AverageSize#
 
 [MeterBar73]
 Meter=Bar
@@ -880,6 +953,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=74
+AverageSize=#AverageSize#
 
 [MeterBar74]
 Meter=Bar
@@ -892,6 +966,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=75
+AverageSize=#AverageSize#
 
 [MeterBar75]
 Meter=Bar
@@ -904,6 +979,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=76
+AverageSize=#AverageSize#
 
 [MeterBar76]
 Meter=Bar
@@ -916,6 +992,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=77
+AverageSize=#AverageSize#
 
 [MeterBar77]
 Meter=Bar
@@ -928,6 +1005,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=78
+AverageSize=#AverageSize#
 
 [MeterBar78]
 Meter=Bar
@@ -940,6 +1018,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=79
+AverageSize=#AverageSize#
 
 [MeterBar79]
 Meter=Bar
@@ -952,6 +1031,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=80
+AverageSize=#AverageSize#
 
 [MeterBar80]
 Meter=Bar
@@ -964,6 +1044,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=81
+AverageSize=#AverageSize#
 
 [MeterBar81]
 Meter=Bar
@@ -976,6 +1057,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=82
+AverageSize=#AverageSize#
 
 [MeterBar82]
 Meter=Bar
@@ -988,6 +1070,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=83
+AverageSize=#AverageSize#
 
 [MeterBar83]
 Meter=Bar
@@ -1000,6 +1083,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=84
+AverageSize=#AverageSize#
 
 [MeterBar84]
 Meter=Bar
@@ -1012,6 +1096,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=85
+AverageSize=#AverageSize#
 
 [MeterBar85]
 Meter=Bar
@@ -1024,6 +1109,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=86
+AverageSize=#AverageSize#
 
 [MeterBar86]
 Meter=Bar
@@ -1036,6 +1122,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=87
+AverageSize=#AverageSize#
 
 [MeterBar87]
 Meter=Bar
@@ -1048,6 +1135,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=88
+AverageSize=#AverageSize#
 
 [MeterBar88]
 Meter=Bar
@@ -1060,6 +1148,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=89
+AverageSize=#AverageSize#
 
 [MeterBar89]
 Meter=Bar
@@ -1072,6 +1161,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=90
+AverageSize=#AverageSize#
 
 [MeterBar90]
 Meter=Bar
@@ -1084,6 +1174,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=91
+AverageSize=#AverageSize#
 
 [MeterBar91]
 Meter=Bar
@@ -1096,6 +1187,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=92
+AverageSize=#AverageSize#
 
 [MeterBar92]
 Meter=Bar
@@ -1108,6 +1200,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=93
+AverageSize=#AverageSize#
 
 [MeterBar93]
 Meter=Bar
@@ -1120,6 +1213,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=94
+AverageSize=#AverageSize#
 
 [MeterBar94]
 Meter=Bar
@@ -1132,6 +1226,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=95
+AverageSize=#AverageSize#
 
 [MeterBar95]
 Meter=Bar

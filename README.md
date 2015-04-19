@@ -1,4 +1,4 @@
-Right-click the visualizer > Fountain of Colors > @Resources > Variables.inc file
+Right-click the visualizer > Custom skin actions > More options... > Manually edit settings...
 
 An example color playlist:
 ```

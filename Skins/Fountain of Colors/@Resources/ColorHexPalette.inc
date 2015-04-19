@@ -1,10 +1,10 @@
 [Variables]
 ; Dynamically set via !WriteKeyValue in FetchColorHexPalette.ini
-PaletteColor1=
-PaletteColor2=
-PaletteColor3=
-PaletteColor4=
-PaletteColor5=
+PaletteColor1=nil
+PaletteColor2=nil
+PaletteColor3=nil
+PaletteColor4=nil
+PaletteColor5=nil
 
 [Counter]
 Measure=Calc

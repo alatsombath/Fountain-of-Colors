@@ -4,6 +4,7 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=Repeat
+AverageSize=#AverageSize#
 
 [MeterBarRepeat]
 Meter=Bar

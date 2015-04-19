@@ -18,6 +18,10 @@ BarHeight=300
 Flip=0
 ; Flip the bars upside down
 
+AverageSize=2
+; Transition smoothness
+; (Number of past measure values to average from)
+
 
 ; AUDIO
 ; =====
