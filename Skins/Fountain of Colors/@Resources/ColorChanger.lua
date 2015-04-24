@@ -1,14 +1,11 @@
--- ColorChanger v2.3.1, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v2.3.2, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
-local Colors,ColorsIdx,VarColors,Check,Out,Mode,OldMeasureValue,Measure,Meter={},{},{},{},{},{},{},{},{}
+local Colors,ColorsIdx,VarColors,Check,Out,Mode,Measure,Meter={},{},{},{},{},{},{},{}
 local random,abs,concat=math.random,math.abs,table.concat
 
 function Initialize()
 
-	-- See local "Main" function within global "Update" function
-	Amp,Threshold=SKIN:ParseFormula(SKIN:ReplaceVariables("#ColorIntensity#")),SKIN:ParseFormula(SELF:GetNumberOption("Threshold"))
-	
 	-- Color option that is dynamically updated
 	Option=SELF:GetOption("OptionName","BarColor")
 	
@@ -23,22 +20,25 @@ function Initialize()
 		-- Retrieve measures and meter names, store in tables
 		for i=0,9 do
 			Measure[i],Meter[i]=SKIN:GetMeasure((gsub(MeasureName,Sub,"0"..i))),(gsub(MeterName,Sub,"0"..i))
-			OldMeasureValue[i]=0
 		end
 		
 		for i=10,Limit do
 			Measure[i],Meter[i]=SKIN:GetMeasure((gsub(MeasureName,Sub,i))),(gsub(MeterName,Sub,i))
-			OldMeasureValue[i]=0
 		end
 	
 	else
 	
 		for i=Index,Limit do
 			Measure[i],Meter[i]=SKIN:GetMeasure((gsub(MeasureName,Sub,i))),(gsub(MeterName,Sub,i))
-			OldMeasureValue[i]=0
 		end
 		
 	end
+	
+	-- See local "Main" function within global "Update" function
+	Amp=SKIN:ParseFormula(SKIN:ReplaceVariables("#ColorIntensity#"))
+	
+	-- Set counter limit
+	TransitionTime=math.floor(SKIN:ReplaceVariables("#ColorTransitionTime#")*SKIN:ReplaceVariables("#ColorUpdatesPerSecond#"))
 	
 	-- Initialize colors based on the default playlist
 	Playlist(SKIN:ReplaceVariables("#ColorPlaylist#"))
@@ -66,7 +66,7 @@ function Playlist(Name)
 	
 	-- Initialize counter
 	Counter=0
-	TransitionTime=math.floor((PlaylistMeasure:GetNumberOption("TransitionTime",3.5)*1000)/16)
+	
 	
 	local SplitColors,Sub,Index,Limit,find,gmatch={},Sub,Index,Limit,string.find,string.gmatch
 	
@@ -255,31 +255,23 @@ function Update()
 					return VarColors[j][i]
 				
 				else
-					local Value=Measure[i]:GetValue()
-					
-					-- Minimum measure value difference to update meter color, based on visible changes to the meter
-					if abs(Value-OldMeasureValue[i])>=Threshold then
-						
-						-- Shift measure floor upward to increase average color vibrancy
-						local AmpValue=Amp*Value
-						if AmpValue>1 then
-							AmpValue=1
-						end
-						
-						local ColorsTable,b={},1-AmpValue
-						
-						-- Calculate average color
-						for k=1,4 do
-							ColorsTable[k]=Colors1[k]*b+Colors2[k]*AmpValue
-						end
-						
-						-- Update meter color
-						SKIN:Bang("!SetOption",Meter[i],Option,concat(ColorsTable,","))
-						
-						OldMeasureValue[i]=Value
-						
+
+					-- Shift measure floor upward to increase average color vibrancy
+					local AmpValue=Amp*Measure[i]:GetValue()
+					if AmpValue>1 then
+						AmpValue=1
 					end
 					
+					local ColorsTable,b={},1-AmpValue
+					
+					-- Calculate average color
+					for k=1,4 do
+						ColorsTable[k]=Colors1[k]*b+Colors2[k]*AmpValue
+					end
+					
+					-- Update meter color
+					SKIN:Bang("!SetOption",Meter[i],Option,concat(ColorsTable,","))
+						
 				end
 			
 			

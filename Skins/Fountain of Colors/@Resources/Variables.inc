@@ -6,14 +6,16 @@
 ; DISPLAY
 ; =======
 
-Bands=96
+Bands=72
 ; Number of bars
 
-BarGap=4
+BarGap=3
 ; Spacing between the bars
 
-BarWidth=12
-BarHeight=300
+BarWidth=9
+BarHeight=200
+
+BarOrientation=Vertical
 
 Flip=0
 ; Flip the bars upside down
@@ -41,6 +43,7 @@ FFTOverlap=(#FFTSize#/2)
 FreqMin=40
 FreqMax=16000
 Port=Output
+ID=""
 ; Additional audio settings
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel#FFTOptions
 
@@ -48,16 +51,18 @@ Port=Output
 ; MECHANICS
 ; =========
 
-ColorTransitionTime=3
-; Number of seconds between changing to the next set of colors
-; (Default transition time for the RandomColorPlaylist and ColorHexPalette)
-
-ColorIntensity=1.5
-; Play around with this to change color vibrancy, based on the loudness of sound
-
 ColorPlaylist=RandomColorPlaylist
 ; ColorPlaylist=ExampleColorPlaylist
 ; Scroll down for more examples below
+
+ColorIntensity=1
+; Play around with this to change color vibrancy, based on the loudness of sound
+
+ColorTransitionTime=2
+; Number of seconds between changing to the next set of colors
+
+ColorUpdatesPerSecond=62.5
+; Number of times to update the colors per second
 
 PlayerName=CAD
 ; The interface name for the media player
@@ -77,9 +82,6 @@ Measure=String
 Shuffle=0
 ; 0 = Play the colors in order
 ; 1 = Play the colors in a random order
-
-TransitionTime=1
-; Number of seconds to move to the next "Number=" item
 
 ; R,G,B,(A) color format
 ; http://docs.rainmeter.net/manual-beta/skins/option-types#Color
@@ -150,38 +152,28 @@ IfMatchAction2=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlay
 IfMatch3=Make It with You$
 IfMatchAction3=[!CommandMeasure ScriptColorChanger """Playlist("ExampleColorPlaylist")"""]
 
-
 [RandomColorPlaylist]
 ; For advanced users
 Measure=String
-
-TransitionTime=#ColorTransitionTime#
 
 1=Random,Random,Random|Random,Random,Random
 ; Transition this color string from right to left
 Mode1=RightToLeft
 ; Output to a temporary variable, for use in the next sequence
-Out1=LeftTop
+Out1=Left
 
 2=Random,Random,Random|Random,Random,Random
 Mode2=RightToLeft
-Out2=RightTop
+Out2=Right
 
 3=Random,Random,Random|Random,Random,Random
+Out3=Bottom
 Mode3=RightToLeft
-Out3=LeftBottom
 
-4=Random,Random,Random|Random,Random,Random
-Mode4=RightToLeft
-Out4=RightBottom
-
-5=LeftTop|RightTop
+4=Left|Right
 ; "Repeat" designates a table of interpolated colors, one specific color for each bar/band
-Out5=TopRepeat
+Out4=TopRepeat
 
-6=LeftBottom|RightBottom
-Out6=BottomRepeat
-
-7=BottomRepeat|TopRepeat
+5=Bottom|TopRepeat
 ; Output to display
-Out7=Meter
+Out5=Meter
