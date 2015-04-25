@@ -28,20 +28,20 @@ AverageSize=2
 ; AUDIO
 ; =====
 
-Sensitivity=50
+Sensitivity=35
 ; Increase this if the spectrum is not visible enough
 
-FFTAttack=175
-FFTDecay=175
+FFTAttack=300
+FFTDecay=300
 ; Decrease for faster response, increase for slower response
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel#FFTAttack
 
-FFTSize=3072
+FFTSize=4096
 ; Increase this if the bars "stick" together too much
 
 FFTOverlap=(#FFTSize#/2)
-FreqMin=40
-FreqMax=16000
+FreqMin=20
+FreqMax=20000
 Port=Output
 ID=""
 ; Additional audio settings
