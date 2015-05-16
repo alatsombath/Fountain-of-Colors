@@ -1,12 +1,11 @@
 [MeasureAudioRepeat]
 Measure=Plugin
+Group=Audio
 Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
-BandIdx=Repeat
-AverageSize=#AverageSize#
+BandIdx=(Abs((#Invert# = 1 ? #Bands# : 0)-Repeat))
 
 [MeterBarRepeat]
 Meter=Bar
-MeterStyle=MeterBar
 MeasureName=MeasureAudioRepeat

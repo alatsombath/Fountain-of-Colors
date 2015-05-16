@@ -1,7 +1,8 @@
--- ColorChanger v2.3.2, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v2.4, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
-local Colors,ColorsIdx,VarColors,Check,Out,Mode,Measure,Meter={},{},{},{},{},{},{},{}
+Colors={}
+local CheckColors,DoubleCheck,BlankTable,FinalColors,ColorsIdx,VarColors,Check,Out,Mode,Measure,Meter,OldColor,Child={},{},{},{},{},{},{},{},{},{},{},{},{}
 local random,abs,concat=math.random,math.abs,table.concat
 
 function Initialize()
@@ -34,20 +35,135 @@ function Initialize()
 		
 	end
 	
-	-- See local "Main" function within global "Update" function
-	Amp=SKIN:ParseFormula(SKIN:ReplaceVariables("#ColorIntensity#"))
+	-- Set this script instance as a child unless overriden by SetParent()
+	Parent=0
+	
+	-- Set initial total number of child script instances associated with this one
+	ChildTotal=0
 	
 	-- Set counter limit
 	TransitionTime=math.floor(SKIN:ReplaceVariables("#ColorTransitionTime#")*SKIN:ReplaceVariables("#ColorUpdatesPerSecond#"))
+	
+	-- See local "Main" function within global "Update" function
+	Amp=SKIN:ParseFormula(SKIN:ReplaceVariables("#ColorIntensity#"))
+	
+	-- Check if spectrum is inverted
+	Invert=SKIN:ParseFormula(SKIN:ReplaceVariables("#Invert#"))
 	
 	-- Initialize colors based on the default playlist
 	Playlist(SKIN:ReplaceVariables("#ColorPlaylist#"))
 	
 end
 
+function SetParent()
+	Parent=1
+end
+
+function AddChild(Name)
+	
+	-- Associate child script instances in other configs (must have no variant skins) with this one
+	ChildTotal=ChildTotal+1
+	Child[ChildTotal]=Name
+	
+	-- Immediately update the colors for this instance and all other childs
+	Counter=TransitionTime-1
+	
+end
+
+function InitColors(ColorsStr,j)
+
+	local SplitColors,Sub,Index,Limit,find,gmatch={},Sub,Index,Limit,string.find,string.gmatch
+	
+	-- Initialize the tables for colors and color item options
+	Colors[j],ColorsIdx[j],VarColors[j],SplitColors[j],Out[j],Mode[j]={},{},{},{},PlaylistMeasure:GetOption("Out"..j),PlaylistMeasure:GetOption("Mode"..j)
+	
+	-- Check output variables
+	if Out[j]=="Meter" then
+		Check[j]=3
+	
+	elseif Out[j]~="" then
+		Check[j]=1
+		
+		-- Check if interpolation is designated in the output variable
+		if find(Out[j],Sub) then
+			Check[j]=2
+			for i=Index,Limit do
+				VarColors[j][i]={}
+			end
+		end
+		
+	else
+		Check[j]=0
+	end
+	
+	-- Check if interpolation is designated in the colors string
+	if find(ColorsStr,Sub) then
+		Check[j]={}
+	end
+	
+	-- Split colors string at the "|" separator into left-hand and right-hand substrings
+	local a=1
+	for b in gmatch(ColorsStr,"[^%|]+") do
+		SplitColors[j][a]=b
+		a=a+1
+	end
+	
+	
+	-- For each left-hand and right-hand substring
+	for a=1,2 do
+	
+		Colors[j][a],ColorsIdx[j][a]={},{}
+		
+		-- Split left-hand and right-hand substrings at the "," commas into individual R,G,B,(A) channels
+		local b=1
+		for c in gmatch(SplitColors[j][a],"[^,]+") do
+		
+			-- Initialize index table
+			ColorsIdx[j][a][b]=c
+			b=b+1
+			
+		end
+		
+		-- Check for transparency
+		if ColorsIdx[j][a][4]==nil then
+			ColorsIdx[j][a][4]=255
+		end
+		
+		-- Initialize manipulated table
+		for d=1,4 do
+			if ColorsIdx[j][a][d]=="Random" then
+				Colors[j][a][d]=random(0,255)
+			else
+				Colors[j][a][d]=ColorsIdx[j][a][d]
+			end
+		end
+		 
+		for k=1,Total do
+		
+			-- Check if left-hand or right-hand substring matches an output variable
+			if SplitColors[j][a]==Out[k] then
+			
+				-- Set the manipulated left-hand or right-hand color table as a reference to the designated output color table
+				Colors[j][a]=VarColors[k]
+				
+				-- Check if interpolation is designated in the substring
+				if Check[k]==2 then
+					Check[j][a]=1
+				end
+				
+				break
+				
+			end
+			
+		end
+		
+	end
+
+end
+
 function Playlist(Name)
 
-	local PlaylistMeasure=SKIN:GetMeasure(Name)
+	PlaylistMeasure=SKIN:GetMeasure(Name)
 	
 	-- Determine total number of color items in the playlist
 	local j=1
@@ -67,101 +183,24 @@ function Playlist(Name)
 	-- Initialize counter
 	Counter=0
 	
-	
-	local SplitColors,Sub,Index,Limit,find,gmatch={},Sub,Index,Limit,string.find,string.gmatch
-	
+	-- Synchronize the counters of child script instances
+	for k=1,ChildTotal do
+		SKIN:Bang("!CommandMeasure","ScriptColorChanger","Counter=0",Child[k])
+	end
 	
 	-- For each color item in the playlist
 	for j=1,Total do
-	
-		-- Initialize the tables for colors and color item options
-		Colors[j],ColorsIdx[j],VarColors[j],SplitColors[j],Out[j],Mode[j]={},{},{},{},PlaylistMeasure:GetOption("Out"..j),PlaylistMeasure:GetOption("Mode"..j)
 		
 		-- Retrieve the color item
 		local ColorsStr=SKIN:ReplaceVariables(PlaylistMeasure:GetOption(j))
 		
-		-- Check output variables
-		if Out[j]=="Meter" then
-			Check[j]=3
+		-- Initialize colors
+		InitColors(ColorsStr,j)
 		
-		elseif Out[j]~="" then
-			Check[j]=1
-			
-			-- Check if interpolation is designated in the output variable
-			if find(Out[j],Sub) then
-				Check[j]=2
-				for i=Index,Limit do
-					VarColors[j][i]={}
-				end
-			end
-			
-		else
-			Check[j]=0
+		-- Initialize colors for child script instances
+		for k=1,ChildTotal do
+			SKIN:Bang("!CommandMeasure","ScriptColorChanger","InitColors(\""..ColorsStr.."\","..j..")",Child[k])
 		end
-		
-		-- Check if interpolation is designated in the colors string
-		if find(ColorsStr,Sub) then
-			Check[j]={}
-		end
-		
-		-- Split colors string at the "|" separator into left-hand and right-hand substrings
-		local a=1
-		for b in gmatch(ColorsStr,"[^%|]+") do
-			SplitColors[j][a]=b
-			a=a+1
-		end
-		
-		
-		-- For each left-hand and right-hand substring
-		for a=1,2 do
-		
-			Colors[j][a],ColorsIdx[j][a]={},{}
-			
-			-- Split left-hand and right-hand substrings at the "," commas into individual R,G,B,(A) channels
-			local b=1
-			for c in gmatch(SplitColors[j][a],"[^,]+") do
-			
-				-- Initialize index table
-				ColorsIdx[j][a][b]=c
-				b=b+1
-				
-			end
-			
-			-- Check for transparency
-			if ColorsIdx[j][a][4]==nil then
-				ColorsIdx[j][a][4]=255
-			end
-			
-			-- Initialize manipulated table
-			for d=1,4 do
-				if ColorsIdx[j][a][d]=="Random" then
-					Colors[j][a][d]=random(0,255)
-				else
-					Colors[j][a][d]=ColorsIdx[j][a][d]
-				end
-			end
-			 
-			for k=1,Total do
-			
-				-- Check if left-hand or right-hand substring matches an output variable
-				if SplitColors[j][a]==Out[k] then
-				
-					-- Set the manipulated left-hand or right-hand color table as a reference to the designated output color table
-					Colors[j][a]=VarColors[k]
-					
-					-- Check if interpolation is designated in the substring
-					if Check[k]==2 then
-						Check[j][a]=1
-					end
-					
-					break
-					
-				end
-				
-			end
-			
-		end
-		
 		
 	end
 	
@@ -169,19 +208,31 @@ function Playlist(Name)
 end
 
 local function Transition(j)
-
+	
+	local ColorsIdx,random=ColorsIdx,random
+	
 	if Mode[j]=="RightToLeft" then
 	
 		for a=1,4 do
-		
+
 			-- Set left-hand color as right-hand color
 			Colors[j][1][a]=Colors[j][2][a]
+			
+			-- Update the manipulated color table for child script instances
+			for k=1,ChildTotal do
+				SKIN:Bang("!CommandMeasure","ScriptColorChanger","Colors["..j.."][1]["..a.."]="..Colors[j][2][a],Child[k])
+			end
 			
 			-- Set right-hand color retrieved from index
 			if ColorsIdx[j][2][a]=="Random" then
 				Colors[j][2][a]=random(0,255)
 			else
 				Colors[j][2][a]=ColorsIdx[j][2][a]
+			end
+			
+			-- Update the manipulated color table for child script instances
+			for k=1,ChildTotal do
+				SKIN:Bang("!CommandMeasure","ScriptColorChanger","Colors["..j.."][2]["..a.."]="..Colors[j][2][a],Child[k])
 			end
 			
 		end
@@ -197,6 +248,12 @@ local function Transition(j)
 				else
 					Colors[j][a][b]=ColorsIdx[j][a][b]
 				end
+				
+				-- Update the manipulated color table for child script instances
+				for k=1,ChildTotal do
+					SKIN:Bang("!CommandMeasure","ScriptColorChanger","Colors["..j.."]["..a.."]["..b.."]="..Colors[j][a][b],Child[k])
+				end
+				
 			end
 		end
 		
@@ -208,13 +265,15 @@ function Update()
 
 	Counter=Counter+1
 	
-	-- Update color item iteration index when counter reaches limit
-	if Counter==TransitionTime then
+	-- If the counter reaches the limit and if this script instance is not a child to another one
+	if Counter==TransitionTime and Parent==1 then
 		
+		-- Transition the colors
 		for j=1,Total do
 			Transition(j)
-		end 
+		end
 		
+		-- Update color item iteration index
 		if Shuffle==1 then
 			Idx=Next
 			Next=random(1,Total)
@@ -229,22 +288,41 @@ function Update()
 			end
 		end
 		
+		-- Reset the counter
 		Counter=0
+		
+		-- Synchronize the playlist index and counter of child script instances
+		for k=1,ChildTotal do
+			SKIN:Bang("!CommandMeasure","ScriptColorChanger","Idx="..Idx,Child[k])
+			SKIN:Bang("!CommandMeasure","ScriptColorChanger","Next="..Next,Child[k])
+			SKIN:Bang("!CommandMeasure","ScriptColorChanger","Counter=0",Child[k])
+		end
 		
 	end
 	
 	local Idx,Next,Amp,Index,Limit=Idx,Next,Amp,Index,Limit
+	local Check,CheckColors,DoubleCheck,BlankTable,FinalColors,Measure,Meter,OldColor=Check,CheckColors,DoubleCheck,BlankTable,FinalColors,Measure,Meter,OldColor
 	
 	-- For each color item in the playlist
 	for j=1,Total do
-	
+		
+		local FinalColors,Measure,Meter,OldColor=FinalColors,Measure,Meter,OldColor
+		
 		-- Color calculation and updating meter color
 		local function Main(Colors1,Colors2,i)
 		
 			if i~=-1 then
 			
 				if Check[j]==2 then
-					local c=(i-Index)%Limit
+				
+					local c=0
+					
+					if Invert==0 then
+						c=(i-Index)%Limit
+					else
+						c=(Index-i)%Limit
+					end
+					
 					local b=Limit-c
 					
 					-- Calculate and store average color in the designated output color table
@@ -255,22 +333,38 @@ function Update()
 					return VarColors[j][i]
 				
 				else
-
-					-- Shift measure floor upward to increase average color vibrancy
-					local AmpValue=Amp*Measure[i]:GetValue()
-					if AmpValue>1 then
-						AmpValue=1
+					
+					local Value=Measure[i]:GetValue()
+					
+					-- Check if sound is playing
+					if Value~=0 then
+						
+						-- Shift measure floor upward to increase average color vibrancy
+						local AmpValue=Amp*Value
+						
+						if AmpValue>1 then
+							AmpValue=1
+						end
+						
+						local FinalColors,b=FinalColors,1-AmpValue
+						
+						-- Calculate average color
+						for k=1,4 do
+							local Color=Colors1[k]*b+Colors2[k]*AmpValue+0.5
+							FinalColors[k]=Color-Color%1
+						end
+						
+						-- Check if it's a different color
+						local Color=concat(FinalColors,",")
+						if Color~=OldColor[i] then
+							OldColor[i]=Color
+							
+							-- Update meter color
+							SKIN:Bang("!SetOption",Meter[i],Option,Color)
+							
+						end
+						
 					end
-					
-					local ColorsTable,b={},1-AmpValue
-					
-					-- Calculate average color
-					for k=1,4 do
-						ColorsTable[k]=Colors1[k]*b+Colors2[k]*AmpValue
-					end
-					
-					-- Update meter color
-					SKIN:Bang("!SetOption",Meter[i],Option,concat(ColorsTable,","))
 						
 				end
 			
@@ -285,14 +379,14 @@ function Update()
 			
 			
 			elseif j==Idx then 
-				local ColorsTable,b={},TransitionTime-Counter
+				local FinalColors,b=FinalColors,TransitionTime-Counter
 				
 				-- Calculate average color based on transition time
 				for k=1,4 do
-					ColorsTable[k]=(Colors1[k]*b+Colors2[k]*Counter)/TransitionTime
+					FinalColors[k]=(Colors1[k]*b+Colors2[k]*Counter)/TransitionTime
 				end
 				
-				return ColorsTable
+				return FinalColors
 			end
 			
 		end
@@ -300,35 +394,35 @@ function Update()
 		
 		-- Color item matches iteration index, without output variables
 		if j==Idx and Out[j]=="" then
-		
-			local ColorsTable,DoubleCheck={},{}
+			
+			local CheckColors,DoubleCheck,BlankTable=CheckColors,DoubleCheck,BlankTable
 			local k=Next
 			
 			for a=1,2 do
 			
 				-- Output variable is null
 				if Check[j]==0 and Check[k]==0 then
-					ColorsTable[a]=Main(Colors[j][a],Colors[k][a],-1)
+					CheckColors[a]=Main(Colors[j][a],Colors[k][a],-1)
 				
 				-- Left-hand or right-hand substrings exist in both color items that designate interpolation
 				elseif Check[j][a] and Check[k][a] then
-					ColorsTable[a],DoubleCheck[a]={},1
+					CheckColors[a],DoubleCheck[a]=BlankTable,1
 					for i=Index,Limit do
-						ColorsTable[a][i]=Main(Colors[j][a][i],Colors[k][a][i],i)
+						CheckColors[a][i]=Main(Colors[j][a][i],Colors[k][a][i],i)
 					end
 				
 				-- Left-hand or right-hand substrings exist in the current color item that designate interpolation
 				elseif Check[j][a] then
-					ColorsTable[a],DoubleCheck[a]={},1
+					CheckColors[a],DoubleCheck[a]=BlankTable,1
 					for i=Index,Limit do
-						ColorsTable[a][i]=Main(Colors[j][a][i],Colors[k][a],i)
+						CheckColors[a][i]=Main(Colors[j][a][i],Colors[k][a],i)
 					end
 				
 				-- Left-hand or right-hand substrings exist in the next color item that designate interpolation
 				elseif Check[k][a] then
-					ColorsTable[a],DoubleCheck[a]={},1
+					CheckColors[a],DoubleCheck[a]=BlankTable,1
 					for i=Index,Limit do
-						ColorsTable[a][i]=Main(Colors[j][a],Colors[k][a][i],i)
+						CheckColors[a][i]=Main(Colors[j][a],Colors[k][a][i],i)
 					end
 					
 				end
@@ -338,25 +432,25 @@ function Update()
 			-- Output variable is null
 			if Check[j]==0 and Check[k]==0 then
 				for i=Index,Limit do
-					Main(ColorsTable[1],ColorsTable[2],i)
+					Main(CheckColors[1],CheckColors[2],i)
 				end
 			
 			-- Both left-hand and right-hand substrings exist in a color item that designate interpolation
 			elseif DoubleCheck[1] and DoubleCheck[2] then
 				for i=Index,Limit do
-					Main(ColorsTable[1][i],ColorsTable[2][i],i)
+					Main(CheckColors[1][i],CheckColors[2][i],i)
 				end
 			
 			-- Left-hand substring exists in a color item that designate interpolation
 			elseif DoubleCheck[1] then
 				for i=Index,Limit do
-					Main(ColorsTable[1][i],ColorsTable[2],i)
+					Main(CheckColors[1][i],CheckColors[2],i)
 				end
 			
 			-- Right-hand substring exists in a color item that designate interpolation
 			elseif DoubleCheck[2] then
 				for i=Index,Limit do
-					Main(ColorsTable[1],ColorsTable[2][i],i)
+					Main(CheckColors[1],CheckColors[2][i],i)
 				end
 			end
 		

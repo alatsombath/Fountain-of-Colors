@@ -11,11 +11,11 @@ Measure=Calc
 Formula=(Counter+1)%(Ceil((#ColorTransitionTime#*1000)/16))
 IfCondition=(Counter = 0)
 IfTrueAction=[!UpdateMeasure CheckPalettePlaylist]
+UpdateDivider=1
 
 [CheckPalettePlaylist]
 Measure=String
 String=#ColorPlaylist#
-UpdateDivider=-1
 IfMatchMode=1
 IfMatch=ColorHexPalette
 
@@ -32,7 +32,6 @@ Formula=Random
 LowBound=1
 HighBound=5
 UpdateRandom=1
-UpdateDivider=-1
 
 OnUpdateAction=[!UpdateMeasure RandomRightColorIndex]
 
@@ -43,7 +42,7 @@ Formula=Random
 LowBound=1
 HighBound=5
 UpdateRandom=1
-UpdateDivider=-1
+
 IfConditionMode=1
 
 ; Prevent random indices from being the same
@@ -58,7 +57,7 @@ Formula=Random
 LowBound=1
 HighBound=5
 UpdateRandom=1
-UpdateDivider=-1
+
 IfConditionMode=1
 
 IfCondition=(RandomBottomColorIndex = RandomLeftColorIndex) || (RandomBottomColorIndex = RandomRightColorIndex)
@@ -71,19 +70,16 @@ IfFalseAction=[!SetOption ParseLeftColor String #PaletteColor[RandomLeftColorInd
 Measure=String
 Group=Parse
 DynamicVariables=1
-UpdateDivider=-1
 
 [ParseRightColor]
 Measure=String
 Group=Parse
 DynamicVariables=1
-UpdateDivider=-1
 
 [ParseBottomColor]
 Measure=String
 Group=Parse
 DynamicVariables=1
-UpdateDivider=-1
 
 ; Transition the color items from right-to-left, replace the right-hand side with a random palette color, and call ColorChanger.lua to reinitialize the color items in the playlist
 OnUpdateAction=[!SetVariable Left1 #Left2#][!SetVariable Right1 #Right2#][!SetVariable Bottom1 #Bottom2#][!SetVariable Left2 [ParseLeftColor]][!SetVariable Right2 [ParseRightColor]][!SetVariable Bottom2 [ParseBottomColor]][!UpdateMeasure ColorHexPalette][!CommandMeasure ScriptColorChanger """Playlist("#ColorPlaylist#")"""]
@@ -91,7 +87,6 @@ OnUpdateAction=[!SetVariable Left1 #Left2#][!SetVariable Right1 #Right2#][!SetVa
 [ColorHexPalette]
 Measure=String
 DynamicVariables=1
-UpdateDivider=-1
 
 1=#Left1#|#Left2#
 ; Transition this color string from right to left
