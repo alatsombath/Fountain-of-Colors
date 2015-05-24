@@ -1,9 +1,9 @@
--- ColorChanger v2.4, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v2.4.1, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 Colors={}
 local CheckColors,DoubleCheck,BlankTable,FinalColors,ColorsIdx,VarColors,Check,Out,Mode,Measure,Meter,OldColor,Child={},{},{},{},{},{},{},{},{},{},{},{},{}
-local random,abs,concat=math.random,math.abs,table.concat
+local random,concat=math.random,table.concat
 
 function Initialize()
 
@@ -301,12 +301,12 @@ function Update()
 	end
 	
 	local Idx,Next,Amp,Index,Limit=Idx,Next,Amp,Index,Limit
-	local Check,CheckColors,DoubleCheck,BlankTable,FinalColors,Measure,Meter,OldColor=Check,CheckColors,DoubleCheck,BlankTable,FinalColors,Measure,Meter,OldColor
+	local concat,Check,CheckColors,DoubleCheck,BlankTable,FinalColors,Measure,Meter,OldColor=concat,Check,CheckColors,DoubleCheck,BlankTable,FinalColors,Measure,Meter,OldColor
 	
 	-- For each color item in the playlist
 	for j=1,Total do
 		
-		local FinalColors,Measure,Meter,OldColor=FinalColors,Measure,Meter,OldColor
+		local concat,FinalColors,Measure,Meter,OldColor=concat,FinalColors,Measure,Meter,OldColor
 		
 		-- Color calculation and updating meter color
 		local function Main(Colors1,Colors2,i)

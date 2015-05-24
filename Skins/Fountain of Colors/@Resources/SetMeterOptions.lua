@@ -71,6 +71,9 @@ function Update()
 		SKIN:Bang("!SetOptionGroup","Bars","BarColor",SKIN:ReplaceVariables("#BarColor#"))
 	end
 	
+	SKIN:Bang("!SetOptionGroup","Bars","MouseOverAction","[!SetOptionGroup Bars TooltipText \"Right-click to change settings\"]")
+	SKIN:Bang("!SetOptionGroup","Bars","MouseLeaveAction","[!SetOptionGroup Bars TooltipText \"\"]")
+	
 	SKIN:Bang("!SetOptionGroup","Bars","RightMouseDownAction","[!SkinCustomMenu]")
 	SKIN:Bang("!SetOptionGroup","Bars","UpdateDivider",1)
 	SKIN:Bang("!UpdateMeterGroup","Bars")

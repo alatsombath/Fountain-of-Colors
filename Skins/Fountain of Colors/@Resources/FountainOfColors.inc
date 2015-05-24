@@ -39,7 +39,7 @@ UpdateDivider=1
 
 ; Hide meters and disable measures when idle
 IfCondition=(MeasureAudio < 0.000000000000000001)
-IfTrueAction=[!DisableMeasureGroup Audio][!DisableMeasure ScriptColorChanger][!HideMeterGroup Bars][!HideMeter BoundingBox]
+IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!HideMeterGroup Bars][!HideMeter BoundingBox]
 
 [Standby]
 Measure=Plugin
@@ -47,10 +47,11 @@ Plugin=AudioLevel
 Port=#Port#
 ID=#ID#
 UpdateDivider=1
+IfConditionMode=1
 
 ; Show meters and enable measures when sound begins playing
 IfCondition=(Standby > 0.000000000000000001)
-IfTrueAction=[!EnableMeasureGroup Audio][!EnableMeasure ScriptColorChanger][!ShowMeterGroup Bars][!ShowMeter BoundingBox]
+IfTrueAction=[!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!ShowMeterGroup Bars][!ShowMeter BoundingBox]
 
 [MeasureNowPlaying]
 Measure=Plugin
