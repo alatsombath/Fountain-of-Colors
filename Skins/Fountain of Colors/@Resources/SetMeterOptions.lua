@@ -67,7 +67,7 @@ function Update()
 	end
 	
 	-- If the ColorChanger script is disabled
-	if SKIN:ReplaceVariables("#ColorUpdatesPerSecond#")==-62.5 then
+	if SKIN:ReplaceVariables("#ColorUpdatesPerSecond#")=="-62.5" then
 		SKIN:Bang("!SetOptionGroup","Bars","BarColor",SKIN:ReplaceVariables("#BarColor#"))
 	end
 	
