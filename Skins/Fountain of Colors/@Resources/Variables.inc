@@ -4,24 +4,24 @@
 
 Bands=80
 BarGap=7
-BarWidth=12
+BarWidth=13
 BarHeight=400
 
 BarColor=008000
 ; Overriden by the ColorChanger script if enabled
 
-AverageSize=4
+AverageSize=5
 ; Number of past measure values to average from, increasing continuity
 
 Port=Output
 ID=""
 FFTSize=9216
 FFTOverlap=(#FFTSize#*0.5)
-FFTAttack=300
-FFTDecay=300
+FFTAttack=0
+FFTDecay=250
 FreqMin=20
 FreqMax=16000
-Sensitivity=40
+Sensitivity=35
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
 ColorIntensity=1.25
