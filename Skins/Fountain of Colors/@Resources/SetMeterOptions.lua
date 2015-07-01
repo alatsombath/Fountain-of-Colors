@@ -25,10 +25,8 @@ function Update()
 		SKIN:Bang("!SetOptionGroup","Bars","W",BarWidth)
 		SKIN:Bang("!SetOptionGroup","Bars","H",BarHeight)
 		
-		-- First bar is offset by the gap value
-		SKIN:Bang("!SetOption","MeterBar1","X",BarGap)
 		for i=2,Limit do
-			SKIN:Bang("!SetOption",Meter[i],"X",BarGap+Offset*(i-1))
+			SKIN:Bang("!SetOption",Meter[i],"X",Offset*(i-1))
 		end	
 		
 	-- If the rotation is closer to the Y-axis
@@ -37,10 +35,8 @@ function Update()
 		SKIN:Bang("!SetOptionGroup","Bars","W",BarHeight)
 		SKIN:Bang("!SetOptionGroup","Bars","H",BarWidth)
 		
-		-- First bar is offset by the gap value
-		SKIN:Bang("!SetOption","MeterBar1","Y",BarGap)
 		for i=2,Limit do
-			SKIN:Bang("!SetOption",Meter[i],"Y",BarGap+Offset*(i-1))
+			SKIN:Bang("!SetOption",Meter[i],"Y",Offset*(i-1))
 		end
 		
 	end
@@ -71,9 +67,9 @@ function Update()
 		SKIN:Bang("!SetOptionGroup","Bars","BarColor",SKIN:ReplaceVariables("#BarColor#"))
 	end
 	
-	SKIN:Bang("!SetOptionGroup","Bars","MouseOverAction","[!SetOptionGroup Bars TooltipText \"Right-click to change settings\"]")
+	SKIN:Bang("!SetOptionGroup","Bars","MouseOverAction","[!SetOptionGroup Bars TooltipText \"Right-click to change settings#CRLF#Left-click and drag to move around\"]")
 	SKIN:Bang("!SetOptionGroup","Bars","MouseLeaveAction","[!SetOptionGroup Bars TooltipText \"\"]")
-	
+
 	SKIN:Bang("!SetOptionGroup","Bars","RightMouseDownAction","[!SkinCustomMenu]")
 	SKIN:Bang("!SetOptionGroup","Bars","UpdateDivider",1)
 	SKIN:Bang("!UpdateMeterGroup","Bars")

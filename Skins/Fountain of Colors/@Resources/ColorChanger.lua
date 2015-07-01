@@ -1,4 +1,4 @@
--- ColorChanger v2.4.1, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v2.4.2, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 Colors={}
@@ -45,7 +45,11 @@ function Initialize()
 	TransitionTime=math.floor(SKIN:ReplaceVariables("#ColorTransitionTime#")*SKIN:ReplaceVariables("#ColorUpdatesPerSecond#"))
 	
 	-- See local "Main" function within global "Update" function
-	Amp=SKIN:ParseFormula(SKIN:ReplaceVariables("#ColorIntensity#"))
+	BlendingMultiplier=SKIN:ParseFormula(SKIN:ReplaceVariables("#ColorIntensity#"))
+	
+	TransparencyLower=SKIN:ParseFormula(SKIN:ReplaceVariables("#TransparencyLower#"))
+	TransparencyUpper=SKIN:ParseFormula(SKIN:ReplaceVariables("#TransparencyUpper#"))
+	TransparencyMultiplier=SKIN:ParseFormula(SKIN:ReplaceVariables("#TransparencyIntensity#"))
 	
 	-- Check if spectrum is inverted
 	Invert=SKIN:ParseFormula(SKIN:ReplaceVariables("#Invert#"))
@@ -300,12 +304,14 @@ function Update()
 		
 	end
 	
-	local Idx,Next,Amp,Index,Limit=Idx,Next,Amp,Index,Limit
+	local Idx,Next,Index,Limit=Idx,Next,Index,Limit
+	local BlendingMultiplier,TransparencyLower,TransparencyUpper,TransparencyMultiplier=BlendingMultiplier,TransparencyLower,TransparencyUpper,TransparencyMultiplier
 	local concat,Check,CheckColors,DoubleCheck,BlankTable,FinalColors,Measure,Meter,OldColor=concat,Check,CheckColors,DoubleCheck,BlankTable,FinalColors,Measure,Meter,OldColor
 	
 	-- For each color item in the playlist
 	for j=1,Total do
 		
+		local BlendingMultiplier,TransparencyLower,TransparencyUpper,TransparencyMultiplier=BlendingMultiplier,TransparencyLower,TransparencyUpper,TransparencyMultiplier
 		local concat,FinalColors,Measure,Meter,OldColor=concat,FinalColors,Measure,Meter,OldColor
 		
 		-- Color calculation and updating meter color
@@ -334,28 +340,41 @@ function Update()
 				
 				else
 					
-					local Value=Measure[i]:GetValue()
+					local MeasureValue=Measure[i]:GetValue()
 					
 					-- Check if sound is playing
-					if Value~=0 then
+					if MeasureValue~=0 then
 						
-						-- Shift measure floor upward to increase average color vibrancy
-						local AmpValue=Amp*Value
+						-- Color difference among bars, based on sound level
+						local BlendingValue=BlendingMultiplier*MeasureValue
 						
-						if AmpValue>1 then
-							AmpValue=1
+						if BlendingValue>1 then
+							BlendingValue=1
 						end
 						
-						local FinalColors,b=FinalColors,1-AmpValue
+						local FinalColors,b=FinalColors,1-BlendingValue
 						
 						-- Calculate average color
-						for k=1,4 do
-							local Color=Colors1[k]*b+Colors2[k]*AmpValue+0.5
+						for k=1,3 do
+							local Color=Colors1[k]*b+Colors2[k]*BlendingValue+0.5
 							FinalColors[k]=Color-Color%1
 						end
 						
+						-- Transparency based on sound level
+						Colors1[4]=TransparencyLower
+						Colors2[4]=TransparencyUpper
+						
+						local TransparencyValue=TransparencyMultiplier*MeasureValue
+						if TransparencyValue>1 then
+							TransparencyValue=1
+						end
+						
+						-- Calculate transparency
+						local Color=Colors1[4]*(1-TransparencyValue)+Colors2[4]*TransparencyValue+0.5
+						FinalColors[4]=Color-Color%1
+						
 						-- Check if it's a different color
-						local Color=concat(FinalColors,",")
+						Color=concat(FinalColors,",")
 						if Color~=OldColor[i] then
 							OldColor[i]=Color
 							

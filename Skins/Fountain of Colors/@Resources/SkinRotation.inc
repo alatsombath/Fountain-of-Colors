@@ -1,6 +1,6 @@
 [Width]
 Measure=Calc
-Formula=((#Bands#-1)*(#BarWidth#+#BarGap#))
+Formula=(-#BarGap#+((#Bands#-1)*(#BarWidth#+#BarGap#)))
 
 [Height]
 Measure=Calc
