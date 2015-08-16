@@ -1,48 +1,48 @@
 [Variables]
 
-; Save this text file and refresh the skin after editing these settings!
-
-Bands=56
-; Number of bars
-; Activate the GenerateBands.ini file after changing this value
+Bands=44
+; Number of bars - Activate the GenerateBands.ini file after changing this value
 
 BarGap=7
-BarWidth=13
-BarHeight=325
-
-BarColor=008000
-; Overriden by the ColorChanger script if enabled
+BarWidth=16
+BarHeight=350
 
 AverageSize=4
-; Number of past measure values to average from, increasing continuity
+; "Smoothness" - Number of past measure values used to increase continuity
 
-Port=Output
-ID=""
-FFTSize=8192
+FFTSize=6144
 FFTOverlap=(#FFTSize#*0.5)
 FFTAttack=0
-FFTDecay=300
+FFTDecay=320
 FreqMin=20
 FreqMax=20000
-Sensitivity=35
+Sensitivity=30
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
-TransparencyLower=0
-TransparencyUpper=178.5
-TransparencyIntensity=1.25
-; Transparency based on sound level
+Colors=Random
 
-ColorIntensity=0.75
-ColorTransitionTime=4
-ColorUpdatesPerSecond=62.5
-ColorPlaylist=RandomColorPlaylist
-; See ColorPlaylists.inc
+PaletteColor1=255,0,0
+PaletteColor2=0,255,0
+PaletteColor3=0,0,255
+PaletteColor4=0,0,0
 
-PlayerName=CAD
-; http://docs.rainmeter.net/manual-beta/plugins/nowplaying#playerlist
+TransitionTime=6
+hBlendingMultiplier=0.3
+vBlendingMultiplier=0.2
+OpacityLower=153
+OpacityUpper=255
+OpacityMultiplier=1
 
-; Context menu environment variables
+ModeKeyboard=0
+FirstBandIndex=1
+
+; Environment variables for settings window
+SkinGroup=FountainOfColors
 Config=Fountain of Colors
 ConfigPath=C:\Users\YourName\My Documents\Rainmeter\Skins\Fountain of Colors\Fountain of Colors.ini
+WriteVariable=PaletteColor1
 Angle=0
-TransparencyContext=Lower
+Invert=0
+Channel=Avg
+Port=Output
+ID=

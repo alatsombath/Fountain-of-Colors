@@ -1,19 +1,15 @@
--- RepeatSection v1.1
+-- RepeatSection v1.2
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
-
-	local w,j,ini,gsub={},1,io.input(SKIN:ReplaceVariables(SELF:GetOption("ReadFile"))):read("*all"),string.gsub
-	
-	local Sub,Index,Limit=SELF:GetOption("Sub"),SKIN:ParseFormula(SELF:GetNumberOption("Index")),SKIN:ParseFormula(SELF:GetNumberOption("Limit"))
-	
-	for i=Index,Limit do
-		w[j]=gsub(ini,Sub,i)
-		j=j+1
-	end
-	
-	local f=io.open(SKIN:ReplaceVariables(SELF:GetOption("WriteFile")),"w")
-	f:write(table.concat(w,"\n\n"))
-	f:close()
-	
+  local index, section, gsub, readFile = 1, {}, string.gsub, io.input(SKIN:ReplaceVariables(SELF:GetOption("ReadFile"))):read("*all")
+  local substitution, lowerLimit, upperLimit = SELF:GetOption("Substitution"), SELF:GetNumberOption("LowerLimit") + 1, SELF:GetNumberOption("UpperLimit") + 1
+  
+  for i = lowerLimit, upperLimit do
+    section[index], index = gsub(readFile, substitution, i-1), index + 1
+  end
+  
+  local file = io.open(SKIN:ReplaceVariables(SELF:GetOption("WriteFile")), "w")
+  file:write(table.concat(section, "\n\n"))
+  file:close()
 end

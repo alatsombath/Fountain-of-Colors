@@ -1,77 +1,43 @@
 function Update()
-	
-	-- Parse these values only once to be easily read on every update cycle
-	local BarHeight=SKIN:ParseFormula(SKIN:ReplaceVariables("#BarHeight#"))
-	local BarWidth=SKIN:ParseFormula(SKIN:ReplaceVariables("#BarWidth#"))
-	local BarGap=SKIN:ParseFormula(SKIN:ReplaceVariables("#BarGap#"))
-	local Offset=BarWidth+BarGap
-	
-	local NearestAxis=SKIN:GetMeasure("NearestAxis"):GetValue()
-	local CheckRotation=SKIN:GetMeasure("CheckRotation"):GetValue()
-	
-	local Limit=SKIN:ParseFormula(SKIN:ReplaceVariables("#Bands#")-1)
-	
-	local Meter={}
-	local gsub,Sub,MeterName=string.gsub,SELF:GetOption("Sub"),SELF:GetOption("MeterName")
-	for i=1,Limit do
-		Meter[i]=(gsub(MeterName,Sub,i))
-		SKIN:Bang("!SetOption",Meter[i],"Group","Bars")
-		SKIN:Bang("!UpdateMeter",Meter[i])
-	end
-	
-	-- If the rotation is closer to the X-axis
-	if NearestAxis==0 then
-		
-		SKIN:Bang("!SetOptionGroup","Bars","W",BarWidth)
-		SKIN:Bang("!SetOptionGroup","Bars","H",BarHeight)
-		
-		for i=2,Limit do
-			SKIN:Bang("!SetOption",Meter[i],"X",Offset*(i-1))
-		end	
-		
-	-- If the rotation is closer to the Y-axis
-	else
-		
-		SKIN:Bang("!SetOptionGroup","Bars","W",BarHeight)
-		SKIN:Bang("!SetOptionGroup","Bars","H",BarWidth)
-		
-		for i=2,Limit do
-			SKIN:Bang("!SetOption",Meter[i],"Y",Offset*(i-1))
-		end
-		
-	end
-			
-	-- If the spectrum has not rotated
-	if CheckRotation==0 then
-	
-		SKIN:Bang("!HideMeter","BoundingBox")
-	
-	-- If the spectrum has rotated
-	else
-		
-		if NearestAxis==1 then
-			SKIN:Bang("!SetOptionGroup","Bars","BarOrientation","Horizontal")
-		end
-		
-		SKIN:Bang("!SetOptionGroup","Bars","AntiAlias",1)
-		SKIN:Bang("!SetOptionGroup","Bars","TransformationMatrix",SKIN:GetMeasure("Matrix"):GetStringValue())
-		SKIN:Bang("!UpdateMeterGroup","Bars")
-		
-		-- Unset the matrix after the meters have been transformed
-		SKIN:Bang("!SetOptionGroup","Bars","TransformationMatrix","")
-		
-	end
-	
-	-- If the ColorChanger script is disabled
-	if SKIN:ReplaceVariables("#ColorUpdatesPerSecond#")=="-62.5" then
-		SKIN:Bang("!SetOptionGroup","Bars","BarColor",SKIN:ReplaceVariables("#BarColor#"))
-	end
-	
-	SKIN:Bang("!SetOptionGroup","Bars","MouseOverAction","[!SetOptionGroup Bars TooltipText \"Right-click to change settings#CRLF#Left-click and drag to move around\"]")
-	SKIN:Bang("!SetOptionGroup","Bars","MouseLeaveAction","[!SetOptionGroup Bars TooltipText \"\"]")
-
-	SKIN:Bang("!SetOptionGroup","Bars","RightMouseDownAction","[!SkinCustomMenu]")
-	SKIN:Bang("!SetOptionGroup","Bars","UpdateDivider",1)
-	SKIN:Bang("!UpdateMeterGroup","Bars")
-	
+  local barHeight = SKIN:ParseFormula(SKIN:GetVariable("BarHeight"))
+  local barWidth, barGap = SKIN:ParseFormula(SKIN:GetVariable("BarWidth")), SKIN:ParseFormula(SKIN:GetVariable("BarGap"))
+  local offset = barWidth + barGap
+  local nearestAxis, checkRotation = SKIN:GetMeasure("NearestAxis"):GetValue(), SKIN:GetMeasure("CheckRotation"):GetValue()
+  local meterName, lowerLimit, upperLimit = {}, SKIN:ParseFormula(SKIN:GetVariable("FirstBandIndex")) + 1, (SKIN:ParseFormula(SKIN:GetVariable("Bands")) - 1) + 1
+  
+  for i = lowerLimit, upperLimit do
+    meterName[i] = "MeterBar" .. i-1
+    SKIN:Bang("!SetOption", meterName[i], "Group", "Bars")
+    SKIN:Bang("!UpdateMeter", meterName[i])
+  end
+  
+  if nearestAxis == 0 then
+    SKIN:Bang("!SetOptionGroup", "Bars", "W", barWidth)
+    SKIN:Bang("!SetOptionGroup", "Bars", "H", barHeight)
+    for i = lowerLimit, upperLimit do
+      SKIN:Bang("!SetOption", meterName[i], "X", offset * (i-1))
+    end  
+  else
+    SKIN:Bang("!SetOptionGroup", "Bars", "W", barHeight)
+    SKIN:Bang("!SetOptionGroup", "Bars", "H", barWidth)
+    for i = lowerLimit, upperLimit do
+      SKIN:Bang("!SetOption", meterName[i], "Y", offset * (i-1))
+    end
+  end
+      
+  if checkRotation == 0 then
+    SKIN:Bang("!HideMeter", "BoundingBox")
+  else
+    if nearestAxis == 1 then
+      SKIN:Bang("!SetOptionGroup", "Bars", "BarOrientation", "Horizontal")
+    end
+    SKIN:Bang("!SetOptionGroup", "Bars", "AntiAlias", 1)
+    SKIN:Bang("!SetOptionGroup", "Bars", "TransformationMatrix", SKIN:GetMeasure("Matrix"):GetStringValue())
+    SKIN:Bang("!UpdateMeterGroup", "Bars")
+    SKIN:Bang("!SetOptionGroup", "Bars", "TransformationMatrix", "")
+  end
+  
+  SKIN:Bang("!SetOptionGroup","Bars","LeftMouseUpAction","[]")
+  SKIN:Bang("!SetOptionGroup", "Bars", "UpdateDivider", 1)
+  SKIN:Bang("!UpdateMeterGroup", "Bars")
 end

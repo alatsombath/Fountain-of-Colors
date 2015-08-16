@@ -1,6 +1,6 @@
 [Width]
 Measure=Calc
-Formula=(-#BarGap#+((#Bands#-1)*(#BarWidth#+#BarGap#)))
+Formula=(-#BarGap#+(#Bands#*(#BarWidth#+#BarGap#)))
 
 [Height]
 Measure=Calc
@@ -68,11 +68,9 @@ Measure=String
 String="(Cos([Angle]*PI/180));(-Sin([Angle]*PI/180));(Sin([Angle]*PI/180));(Cos([Angle]*PI/180));[MoveX];[MoveY]"
 DynamicVariables=1
 
-; Reveal the transformation through an invisible meter
+; Reveal the transformation by expanding the skin window through an invisible meter
 [BoundingBox]
-Meter=Bar
+Meter=Image
 W=([AbsCosWidth]+[AbsSinHeight])
 H=([AbsSinWidth]+[AbsCosHeight])
-BarColor=255,255,255,0
-MeasureName=Matrix
 DynamicVariables=1

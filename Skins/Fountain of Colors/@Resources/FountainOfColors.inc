@@ -1,29 +1,17 @@
 [Rainmeter]
 Update=16
 DefaultUpdateDivider=-1
-Group=FountainOfColors
+Group=#SkinGroup#
+OnCloseAction=[!RefreshGroup #SkinGroup#]
 
-; Reassociate child ColorChanger script instances
-OnCloseAction=[!RefreshGroup FountainOfColors]
-
-ContextTitle="Color settings..."
-ContextAction=[!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!ActivateConfig "Fountain of Colors\ContextMenus" "Color.ini"]
-ContextTitle2="Display settings..."
-; Each skin file uses a specific rotation angle
-ContextAction2=[!WriteKeyValue Variables Angle #Angle# "#@#Variables.inc"][!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!WriteKeyValue Variables ConfigPath "#CURRENTPATH##CURRENTFILE#" "#@#Variables.inc"][!ActivateConfig "Fountain of Colors\ContextMenus" "Display.ini"]
-ContextTitle3="Audio settings..."
-ContextAction3=[!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!WriteKeyValue Variables ConfigPath "#CURRENTPATH##CURRENTFILE#" "#@#Variables.inc"][!ActivateConfig "Fountain of Colors\ContextMenus" "Audio.ini"]
-ContextTitle4="Performance settings..."
-ContextAction4=[!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!ActivateConfig "Fountain of Colors\ContextMenus" "Performance.ini"]
-ContextTitle5=---
-ContextTitle6="Edit local settings..."
-ContextAction6=["Notepad" "#CURRENTPATH##CURRENTFILE#"]
-ContextTitle7="Edit global settings..."
-ContextAction7=["Notepad" "#@#Variables.inc"]
+; Since each skin file has some specific settings, their config name and settings should be written to the global Variables file for access
+ContextTitle="Open settings window"
+ContextAction=[!WriteKeyValue Variables Angle #Angle# "#@#Variables.inc"][!WriteKeyValue Variables Invert #Invert# "#@#Variables.inc"][!WriteKeyValue Variables Channel #Channel# "#@#Variables.inc"][!WriteKeyValue Variables Port #Port# "#@#Variables.inc"][!WriteKeyValue Variables ID "#ID#" "#@#Variables.inc"][!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!WriteKeyValue Variables ConfigPath "#CURRENTPATH##CURRENTFILE#" "#@#Variables.inc"][!ActivateConfig "#ROOTCONFIG#\SettingsWindow"]
+ContextTitle2="Edit variables"
+ContextAction2=["#@#Variables.inc"]
 
 [MeasureAudio]
 Measure=Plugin
-Group=Audio
 Plugin=AudioLevel
 Port=#Port#
 ID=#ID#
@@ -53,38 +41,9 @@ IfConditionMode=1
 IfCondition=(Standby > 0.000000000000000001)
 IfTrueAction=[!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!ShowMeterGroup Bars][!ShowMeter BoundingBox]
 
-[MeasureNowPlaying]
-Measure=Plugin
-Plugin=NowPlaying
-PlayerName=#PlayerName#
-PlayerType=POSITION
-UpdateDivider=62.5
-
-; Include audio bands and colors
 @Include=#@#Bands.inc
-@Include2=#@#SongSettings.inc
-@Include3=#@#ColorPlaylists.inc
-@Include4=#@#ColorHexPalette.inc
-
-[ScriptColorChanger]
-Measure=Script
-ScriptFile=#@#ColorChanger.lua
-Sub=Repeat
-Index=1
-Limit=(#Bands#-1)
-MeasureName=MeasureAudioRepeat
-MeterName=MeterBarRepeat
-OptionName=BarColor
-UpdateDivider=(1000/(16*#ColorUpdatesPerSecond#))
-
-; Validate the string for use in the script
-[CurrentConfig]
-Measure=String
-String=#CURRENTCONFIG#
-Substitute="\":"\\"
-
-; Include rotation measures
-@Include=#@#SkinRotation.inc
+@Include2=#@#SkinRotation.inc
+@Include3=#@#IndividualBarColors.inc
 
 [SetMeasureOptions]
 Measure=Calc
@@ -93,5 +52,54 @@ OnUpdateAction=[!SetOptionGroup Audio Channel #Channel#][!SetOptionGroup Audio A
 [SetMeterOptions]
 Measure=Script
 ScriptFile=#@#SetMeterOptions.lua
-Sub=Repeat
-MeterName=MeterBarRepeat
+
+[ScriptColorChanger]
+Measure=Script
+ScriptFile=#@#ColorChanger.lua
+MeasureBaseName=MeasureAudio
+MeterBaseName=MeterBar
+MeterOption=BarColor
+hLowerLimit=#FirstBandIndex#
+hUpperLimit=(#Bands#-1)
+hInvert=#Invert#
+hBlendingMultiplier=#hBlendingMultiplier#
+vBlendingMultiplier=#vBlendingMultiplier#
+TransitionTime=#TransitionTime#
+OpacityLower=#OpacityLower#
+OpacityUpper=#OpacityUpper#
+OpacityMultiplier=#OpacityMultiplier#
+UpdateDivider=1
+
+[EnableUpdateWhenZero]
+Measure=String
+String=#ModeKeyboard#
+IfMatch="1"
+IfMatchAction=[!CommandMeasure ScriptColorChanger "updateWhenZero = 1"]
+
+[EnableColorTransition]
+Measure=String
+String=#Colors#
+IfMatch="Random"
+IfMatchAction=[!CommandMeasure ScriptColorChanger "enableTransition = 1"]
+
+[SetColors]
+Measure=String
+String=#Colors#
+IfMatchMode=1
+IfMatch="Single"
+IfMatchAction=[!SetOption ScriptColorChanger UpdateDivider -1][!SetOptionGroup Bars BarColor #PaletteColor1#]
+IfMatch2="Random"
+IfMatchAction2=[!CommandMeasure ScriptColorChanger """for b = 1, 4 do for a = 1, 3 do hColorIdx[b+4][a] = random(0, 255) end; end"""]
+IfMatch3="Custom"
+IfMatchAction3=[!CommandMeasure ScriptColorChanger """for b = 1, 4 do local a = 1; for c in SKIN:GetVariable("PaletteColor" .. b):gmatch("[^,]+") do hColorIdx[b][a], hColorIdx[b+4][a], a = c, c, a + 1 end; end; HorizontalInterpolation()"""]
+IfMatch4="Individual"
+IfMatchAction4=[!CommandMeasure ScriptColorChanger """for i = hLowerLimit, hUpperLimit do local bar = SKIN:GetVariable(i-1); if bar ~= nil then local c = 1; for d in bar:gmatch("[^%|]+") do local a = 1; for e in d:gmatch("[^,]+") do colorIdx[i][c][a], a = e, a + 1 end; c = c + 1 end; else local a = 1; for c in string.gmatch("#PaletteColor1#", "[^,]+") do colorIdx[i][1][a], colorIdx[i][2][a], a = c, c, a + 1 end; end; end"""]
+
+[CurrentConfig]
+Measure=String
+String=#CURRENTCONFIG#
+Substitute="\":"\\"
+
+[MeasureFull]
+Measure=Calc
+Formula=1
