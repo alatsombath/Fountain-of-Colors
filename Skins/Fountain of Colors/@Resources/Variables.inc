@@ -39,7 +39,7 @@ FirstBandIndex=1
 ; Environment variables for settings window
 SkinGroup=FountainOfColors
 Config=Fountain of Colors
-ConfigPath=C:\Users\YourName\My Documents\Rainmeter\Skins\Fountain of Colors\Fountain of Colors.ini
+ConfigPath=#ROOTCONFIGPATH#\Fountain of Colors.ini
 WriteVariable=PaletteColor1
 Angle=0
 Invert=0

@@ -12,16 +12,20 @@ function Update()
   end
   
   if nearestAxis == 0 then
+    local iterator = 0
     SKIN:Bang("!SetOptionGroup", "Bars", "W", barWidth)
     SKIN:Bang("!SetOptionGroup", "Bars", "H", barHeight)
     for i = lowerLimit, upperLimit do
-      SKIN:Bang("!SetOption", meterName[i], "X", offset * (i-1))
+      SKIN:Bang("!SetOption", meterName[i], "X", offset * iterator)
+	  iterator = iterator + 1
     end  
   else
+    local iterator = 0
     SKIN:Bang("!SetOptionGroup", "Bars", "W", barHeight)
     SKIN:Bang("!SetOptionGroup", "Bars", "H", barWidth)
     for i = lowerLimit, upperLimit do
-      SKIN:Bang("!SetOption", meterName[i], "Y", offset * (i-1))
+      SKIN:Bang("!SetOption", meterName[i], "Y", offset * iterator)
+	  iterator = iterator + 1
     end
   end
       
