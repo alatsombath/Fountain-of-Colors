@@ -1,17 +1,17 @@
--- ColorChanger v3.0, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v3.0.1, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
   random, floor, concat = math.random, math.floor, table.concat
   parent, childTotal, child = 0, 0, {}
-  color, colorIdx, hColorIdx, hPosNorm = {}, {}, {}, {}
+  color, colorIdx, hColorIdx, hPosNorm, cacheColor = {}, {}, {}, {}, {}
   for b = 1, 8 do hColorIdx[b] = {} end
   measure, meterName, option = {}, {}, SELF:GetOption("MeterOption")
   hBlendingMultiplier, vBlendingMultiplier = SELF:GetNumberOption("hBlendingMultiplier"), SELF:GetNumberOption("vBlendingMultiplier")
   opacityMultiplier, opacityLower, opacityUpper = SELF:GetNumberOption("OpacityMultiplier"), SELF:GetNumberOption("OpacityLower"), SELF:GetNumberOption("OpacityUpper")
   hLowerLimit, hUpperLimit = SELF:GetNumberOption("hLowerLimit") + 1, SELF:GetNumberOption("hUpperLimit") + 1
   for i = hLowerLimit, hUpperLimit do
-    colorIdx[i], hPosNorm[i] = {}, SELF:GetNumberOption("hInvert") == 0 and (i / hUpperLimit) * hBlendingMultiplier or (1 - (i / hUpperLimit)) * hBlendingMultiplier
+    cacheColor[i], colorIdx[i], hPosNorm[i] = 0, {}, SELF:GetNumberOption("hInvert") == 0 and (i / hUpperLimit) * hBlendingMultiplier or (1 - (i / hUpperLimit)) * hBlendingMultiplier
 	measure[i], meterName[i] = SKIN:GetMeasure(SELF:GetOption("MeasureBaseName") .. i-1), SELF:GetOption("MeterBaseName") .. i-1
 	for c = 1, 4 do colorIdx[i][c] = {} end
   end
@@ -81,7 +81,11 @@ function Update()
       end
 	  if opacityValue > 1 then opacityValue = 1 end
       color[4] = floor(opacityLower * (1 - opacityValue) + opacityUpper *  opacityValue + 0.5)
-      SKIN:Bang("!SetOption", meterName[i], option, concat(color, ","))
+	  color = concat(color, ",")
+	  if color ~= cacheColor[i] then
+	    cacheColor[i] = color
+		SKIN:Bang("!SetOption", meterName[i], option, color)
+	  end
 	end
   end
 end

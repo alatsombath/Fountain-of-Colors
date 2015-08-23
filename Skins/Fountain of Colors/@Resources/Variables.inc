@@ -1,7 +1,7 @@
 [Variables]
 
 Bands=44
-; Number of bars - Activate the GenerateBands.ini file after changing this value
+; Number of bars - Activate Fountain of Colors\GenerateBands skin after changing this value
 
 BarGap=7
 BarWidth=16
@@ -13,7 +13,7 @@ AverageSize=4
 FFTSize=6144
 FFTOverlap=(#FFTSize#*0.5)
 FFTAttack=0
-FFTDecay=320
+FFTDecay=275
 FreqMin=20
 FreqMax=20000
 Sensitivity=30
@@ -26,7 +26,7 @@ PaletteColor2=0,255,0
 PaletteColor3=0,0,255
 PaletteColor4=0,0,0
 
-TransitionTime=6
+TransitionTime=8
 hBlendingMultiplier=0.3
 vBlendingMultiplier=0.2
 OpacityLower=153
@@ -39,7 +39,7 @@ FirstBandIndex=1
 ; Environment variables for settings window
 SkinGroup=FountainOfColors
 Config=Fountain of Colors
-ConfigPath=#ROOTCONFIGPATH#\Fountain of Colors.ini
+ConfigPath=#ROOTCONFIGPATH#Fountain of Colors.ini
 WriteVariable=PaletteColor1
 Angle=0
 Invert=0
