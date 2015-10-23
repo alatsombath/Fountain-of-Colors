@@ -41,7 +41,7 @@ function Update()
     SKIN:Bang("!SetOptionGroup", "Bars", "TransformationMatrix", "")
   end
   
-  SKIN:Bang("!SetOptionGroup","Bars","LeftMouseUpAction","[]")
+  SKIN:Bang("!SetOptionGroup","Bars","LeftMouseUpAction","#EnvSettingsWindow#[!ActivateConfig \"#ROOTCONFIG#\\SettingsWindow\"]")
   SKIN:Bang("!SetOptionGroup", "Bars", "UpdateDivider", 1)
   SKIN:Bang("!UpdateMeterGroup", "Bars")
 end

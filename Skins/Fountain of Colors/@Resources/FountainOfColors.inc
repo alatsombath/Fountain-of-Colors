@@ -4,11 +4,22 @@ DefaultUpdateDivider=-1
 Group=#SkinGroup#
 OnCloseAction=[!RefreshGroup #SkinGroup#]
 
-; Since each skin file has some specific settings, their config name and settings should be written to the global Variables file for access
 ContextTitle="Open settings window"
-ContextAction=[!WriteKeyValue Variables Angle #Angle# "#@#Variables.inc"][!WriteKeyValue Variables Invert #Invert# "#@#Variables.inc"][!WriteKeyValue Variables Channel #Channel# "#@#Variables.inc"][!WriteKeyValue Variables Port #Port# "#@#Variables.inc"][!WriteKeyValue Variables ID "#ID#" "#@#Variables.inc"][!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!WriteKeyValue Variables ConfigPath "#CURRENTPATH##CURRENTFILE#" "#@#Variables.inc"][!ActivateConfig "#ROOTCONFIG#\SettingsWindow"]
+ContextAction=#EnvSettingsWindow#[!ActivateConfig "#ROOTCONFIG#\SettingsWindow"]
 ContextTitle2="Edit variables"
 ContextAction2=["#@#Variables.inc"]
+
+[Variables]
+
+; Since each skin file has some specific settings, they should be written to the global Variables file for access
+EnvAngle=[!WriteKeyValue Variables Angle #Angle# "#@#Variables.inc"]
+EnvInvert=[!WriteKeyValue Variables Invert #Invert# "#@#Variables.inc"]
+EnvChannel=[!WriteKeyValue Variables Channel #Channel# "#@#Variables.inc"]
+EnvPort=[!WriteKeyValue Variables Port #Port# "#@#Variables.inc"]
+EnvID=[!WriteKeyValue Variables ID "#ID#" "#@#Variables.inc"]
+EnvConfig=[!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"]
+EnvConfigPath=[!WriteKeyValue Variables ConfigPath "#CURRENTPATH##CURRENTFILE#" "#@#Variables.inc"]
+EnvSettingsWindow=#EnvAngle##EnvInvert#EnvChannel##EnvPort##EnvID##EnvConfig##EnvConfigPath#
 
 [MeasureAudio]
 Measure=Plugin
@@ -26,8 +37,8 @@ Sensitivity=#Sensitivity#
 UpdateDivider=1
 
 ; Hide meters and disable measures when idle
-IfCondition=(MeasureAudio < 0.000000000000000001)
-IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!HideMeterGroup Bars][!HideMeter BoundingBox]
+IfCondition=(MeasureAudio < 0.00001)
+IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure DynamicFFTDecay][!HideMeterGroup Bars][!HideMeter BoundingBox]
 
 [Standby]
 Measure=Plugin
@@ -38,8 +49,27 @@ UpdateDivider=1
 IfConditionMode=1
 
 ; Show meters and enable measures when sound begins playing
-IfCondition=(Standby > 0.000000000000000001)
-IfTrueAction=[!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!ShowMeterGroup Bars][!ShowMeter BoundingBox]
+IfCondition=(Standby > 0.00001)
+IfTrueAction=[!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity][!EnableMeasure DynamicFFTDecay][!ShowMeterGroup Bars][!ShowMeter BoundingBox]
+
+[DynamicSensitivity]
+Measure=Calc
+Formula=(#Sensitivity# - (MeasureAudio * 100 - #Sensitivity#))
+IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1))
+IfTrueAction=[!SetOption MeasureAudio Sensitivity [DynamicSensitivity]]
+IfConditionMode=1
+UpdateDivider=1
+; Average over the past 0.5 seconds to prevent stuttering
+AverageSize=32
+
+[DynamicFFTDecay]
+Measure=Calc
+Formula=(#FFTDecay# + (MeasureAudio * 100 - #Sensitivity#) * 10)
+IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1))
+IfTrueAction=[!SetOption MeasureAudio FFTDecay [DynamicFFTDecay]]
+IfConditionMode=1
+UpdateDivider=1
+AverageSize=32
 
 @Include=#@#Bands.inc
 @Include2=#@#SkinRotation.inc
