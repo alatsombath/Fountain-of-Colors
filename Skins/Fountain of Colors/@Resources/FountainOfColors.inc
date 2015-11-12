@@ -5,7 +5,7 @@ Group=#SkinGroup#
 OnCloseAction=[!RefreshGroup #SkinGroup#]
 
 ContextTitle="Open settings window"
-ContextAction=#EnvSettingsWindow#[!ActivateConfig "#ROOTCONFIG#\SettingsWindow"]
+ContextAction=#OpenSettingsWindow#
 ContextTitle2="Edit variables"
 ContextAction2=["#@#Variables.inc"]
 
@@ -20,6 +20,7 @@ EnvID=[!WriteKeyValue Variables ID "#ID#" "#@#Variables.inc"]
 EnvConfig=[!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"]
 EnvConfigPath=[!WriteKeyValue Variables ConfigPath "#CURRENTPATH##CURRENTFILE#" "#@#Variables.inc"]
 EnvSettingsWindow=#EnvAngle##EnvInvert#EnvChannel##EnvPort##EnvID##EnvConfig##EnvConfigPath#
+OpenSettingsWindow=#EnvSettingsWindow#[!ActivateConfig "#ROOTCONFIG#\SettingsWindow"][!Refresh "#ROOTCONFIG#\SettingsWindow"]
 
 [MeasureAudio]
 Measure=Plugin
@@ -123,7 +124,7 @@ IfMatchAction2=[!CommandMeasure ScriptColorChanger """for b = 1, 4 do for a = 1,
 IfMatch3="Custom"
 IfMatchAction3=[!CommandMeasure ScriptColorChanger """for b = 1, 4 do local a = 1; for c in SKIN:GetVariable("PaletteColor" .. b):gmatch("[^,]+") do hColorIdx[b][a], hColorIdx[b+4][a], a = c, c, a + 1 end; end; HorizontalInterpolation()"""]
 IfMatch4="Individual"
-IfMatchAction4=[!CommandMeasure ScriptColorChanger """for i = hLowerLimit, hUpperLimit do local bar = SKIN:GetVariable(i-1); if bar ~= nil then local c = 1; for d in bar:gmatch("[^%|]+") do local a = 1; for e in d:gmatch("[^,]+") do colorIdx[i][c][a], a = e, a + 1 end; c = c + 1 end; else local a = 1; for c in string.gmatch("#PaletteColor1#", "[^,]+") do colorIdx[i][1][a], colorIdx[i][2][a], a = c, c, a + 1 end; end; end"""]
+IfMatchAction4=[!CommandMeasure ScriptColorChanger """for i = hLowerLimit, hUpperLimit do local a = 1; for c in string.gmatch("#PaletteColor1#", "[^,]+") do colorIdx[i][1][a], colorIdx[i][2][a], a = c, c, a + 1 end; end; for i = hLowerLimit, hUpperLimit do local bar = SKIN:GetVariable(i-1); if bar ~= nil then local c = 1; for d in bar:gmatch("[^%|]+") do local a = 1; for e in d:gmatch("[^,]+") do colorIdx[#Invert# == 0 and i or (hLowerLimit + hUpperLimit - i)][c][a], a = e, a + 1 end; c = c + 1 end; end; end"""]
 
 [CurrentConfig]
 Measure=String
