@@ -27,6 +27,12 @@ Measure=Plugin
 Plugin=AudioLevel
 Port=#Port#
 ID=#ID#
+RMSAttack=0
+RMSDecay=0
+RMSGain=1
+PeakAttack=0
+PeakDecay=0
+PeakGain=1
 FFTSize=#FFTSize#
 FFTOverlap=#FFTOverlap#
 FFTAttack=#FFTAttack#
@@ -37,21 +43,35 @@ FreqMax=#FreqMax#
 Sensitivity=#Sensitivity#
 UpdateDivider=1
 
-; Hide meters and disable measures when idle
-IfCondition=(MeasureAudio < 0.00001)
-IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure DynamicFFTDecay][!HideMeterGroup Bars][!HideMeter BoundingBox]
+[DisableProcessCheck]
+Measure=String
+String=#MusicPlayer#
+IfMatch="None"
+IfMatchAction=[!SetOption DisableProcessCheck String 1][!UpdateMeasure DisableProcessCheck]
+IfNotMatchAction=[!SetOption MeasureProcess UpdateDivider 62.5]
+
+[MeasureProcess]
+Measure=Plugin
+Plugin=Process
+ProcessName=#MusicPlayer#.exe
 
 [Standby]
 Measure=Plugin
 Plugin=AudioLevel
 Port=#Port#
 ID=#ID#
+RMSAttack=0
+RMSDecay=0
+RMSGain=1
+PeakAttack=0
+PeakDecay=0
+PeakGain=1
 UpdateDivider=1
-IfConditionMode=1
 
-; Show meters and enable measures when sound begins playing
-IfCondition=(Standby > 0.00001)
+; Toggle measures/meters based on idle audio and music player running status
+IfCondition=((Standby > 0.00001) && ((DisableProcessCheck = 1) || (MeasureProcess = 1)))
 IfTrueAction=[!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity][!EnableMeasure DynamicFFTDecay][!ShowMeterGroup Bars][!ShowMeter BoundingBox]
+IfFalseAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure DynamicFFTDecay][!HideMeterGroup Bars][!HideMeter BoundingBox]
 
 [DynamicSensitivity]
 Measure=Calc
@@ -60,8 +80,10 @@ IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1
 IfTrueAction=[!SetOption MeasureAudio Sensitivity [DynamicSensitivity]]
 IfConditionMode=1
 UpdateDivider=1
-; Average over the past 0.5 seconds to prevent stuttering
-AverageSize=32
+; Average over the past 0.7 seconds to prevent stuttering
+; AverageSize=40
+AverageSize=44
+; AverageSize=48
 
 [DynamicFFTDecay]
 Measure=Calc
@@ -70,7 +92,9 @@ IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1
 IfTrueAction=[!SetOption MeasureAudio FFTDecay [DynamicFFTDecay]]
 IfConditionMode=1
 UpdateDivider=1
-AverageSize=32
+; AverageSize=40
+AverageSize=44
+; AverageSize=48
 
 @Include=#@#Bands.inc
 @Include2=#@#SkinRotation.inc
@@ -110,8 +134,20 @@ IfMatchAction=[!CommandMeasure ScriptColorChanger "updateWhenZero = 1"]
 [EnableColorTransition]
 Measure=String
 String=#Colors#
-IfMatch="Random"
-IfMatchAction=[!CommandMeasure ScriptColorChanger "enableTransition = 1"]
+IfMatch="Random|Wallpaper"
+IfMatchAction=[!CommandMeasure ScriptColorChanger "enableTransition, enableHorizontalTransition = 1, 1"]
+IfMatch2="IndivRand|Taskbar"
+IfMatchAction2=[!CommandMeasure ScriptColorChanger "enableTransition = 1"]
+
+[EnablePluginColors]
+Measure=String
+String=#Colors#
+IfMatch="Wallpaper"
+IfMatchAction=[!SetOptionGroup Chameleon UpdateDivider 62.5][!SetOptionGroup Chameleon Format Dec]
+IfMatch2="Taskbar"
+IfMatchAction2=[!SetOption mWindowColor UpdateDivider 62.5]
+
+@Include=#@##ColorsPlugin#.inc
 
 [SetColors]
 Measure=String
@@ -125,6 +161,12 @@ IfMatch3="Custom"
 IfMatchAction3=[!CommandMeasure ScriptColorChanger """for b = 1, 4 do local a = 1; for c in SKIN:GetVariable("PaletteColor" .. b):gmatch("[^,]+") do hColorIdx[b][a], hColorIdx[b+4][a], a = c, c, a + 1 end; end; HorizontalInterpolation()"""]
 IfMatch4="Individual"
 IfMatchAction4=[!CommandMeasure ScriptColorChanger """for i = hLowerLimit, hUpperLimit do local a = 1; for c in string.gmatch("#PaletteColor1#", "[^,]+") do colorIdx[i][1][a], colorIdx[i][2][a], a = c, c, a + 1 end; end; for i = hLowerLimit, hUpperLimit do local bar = SKIN:GetVariable(i-1); if bar ~= nil then local c = 1; for d in bar:gmatch("[^%|]+") do local a = 1; for e in d:gmatch("[^,]+") do colorIdx[#Invert# == 0 and i or (hLowerLimit + hUpperLimit - i)][c][a], a = e, a + 1 end; c = c + 1 end; end; end"""]
+IfMatch5="IndivRand"
+IfMatchAction5=[!CommandMeasure ScriptColorChanger """for i = hLowerLimit, hUpperLimit do local idx = #Invert# == 0 and i or (hLowerLimit + hUpperLimit - i); for a = 1, 3 do colorIdx[idx][1][a], colorIdx[idx][2][a], colorIdx[idx][3][a], colorIdx[idx][4][a] = colorIdx[idx][3][a], colorIdx[idx][4][a], random(0, 255), random(0, 255) end; end]
+IfMatch6="Wallpaper"
+IfMatchAction6=[!CommandMeasure ScriptColorChanger """local wallpaperColors = {"[DesktopBG1]", "[DesktopFG1]", "[DesktopBG2]", "[DesktopFG2]"}; for b = 1, 4 do local a = 1; for c in wallpaperColors[b]:gmatch("[^,]+") do hColorIdx[b+4][a], a = c, a + 1 end; end"""]
+IfMatch7="Taskbar"
+IfMatchAction7=[!CommandMeasure ScriptColorChanger """local taskbarColor = "[mWindowColor]"; for i = hLowerLimit, hUpperLimit do local a = 1; for c in taskbarColor:gmatch("[^,]+") do colorIdx[i][1][a], colorIdx[i][2][a], colorIdx[i][3][a], colorIdx[i][4][a], a = colorIdx[i][3][a], colorIdx[i][4][a], c, c, a + 1 end; end]
 
 [CurrentConfig]
 Measure=String

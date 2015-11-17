@@ -8,9 +8,10 @@ BarWidth=15
 BarHeight=270
 
 AverageSize=0
-; "Smoothness" - Number of past measure values used to increase continuity
+; Average sound levels over time to provide continuity
 
 LoudnessEqualization=1
+; Increases visibility for quiet audio sources when applicable
 
 FFTSize=10240
 FFTOverlap="(#FFTSize#-512)"
@@ -18,18 +19,24 @@ FFTAttack=0
 FFTDecay=275
 FreqMin=20
 FreqMax=20000
-Sensitivity=23
+Sensitivity=20
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
+MusicPlayer=None
+; Music player process name
+
 Colors=Random
-; Single, Random, Custom, Individual
+; Single, Random, Custom, Individual, IndivRand, Wallpaper, Taskbar
+
+ColorsPlugin=None
+; None, Chameleon (Wallpaper), SysColor (Taskbar)
 
 PaletteColor1=255,0,0
 PaletteColor2=0,255,0
 PaletteColor3=0,0,255
 PaletteColor4=0,0,0
 
-TransitionTime=8
+TransitionTime=6
 hBlendingMultiplier=0.2
 vBlendingMultiplier=0.1
 OpacityLower=204

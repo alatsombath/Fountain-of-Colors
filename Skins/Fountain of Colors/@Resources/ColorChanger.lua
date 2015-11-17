@@ -1,4 +1,4 @@
--- ColorChanger v3.0.1, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v3.0.2, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
@@ -16,7 +16,7 @@ function Initialize()
 	for c = 1, 4 do colorIdx[i][c] = {} end
   end
   transitionTime = math.ceil(SELF:GetOption("TransitionTime") * 1000 / 16)
-  enableTransition, updateWhenZero = 0, 0
+  enableTransition, enableHorizontalTransition, updateWhenZero = 0, 0, 0
   counterNorm, counter = {}, transitionTime
   for i = 1, transitionTime do counterNorm[i] = i / transitionTime end
   SKIN:Bang("!UpdateMeasure", "SetColors")
@@ -38,24 +38,29 @@ function HorizontalInterpolation()
 end
 
 function Transition()
-  for b = 1, 4 do
-    for a = 1, 3 do
-	  hColorIdx[b][a] = hColorIdx[b+4][a]
-	  for k = 1, childTotal do
-	    SKIN:Bang("!CommandMeasure", "ScriptColorChanger", "hColorIdx[" .. b .. "][" .. a .. "] = " .. hColorIdx[b][a], child[k])
-      end
-	end
-  end
-  SKIN:Bang("!UpdateMeasure", "SetColors")
-  HorizontalInterpolation()
-  counter = 1
-  for k = 1, childTotal do
+  if enableHorizontalTransition ~= 0 then
     for b = 1, 4 do
       for a = 1, 3 do
-        SKIN:Bang("!CommandMeasure", "ScriptColorChanger", "hColorIdx[" .. b+4 .. "][" .. a .. "] = " .. hColorIdx[b+4][a], child[k])
-      end
+	    hColorIdx[b][a] = hColorIdx[b+4][a]
+	    for k = 1, childTotal do
+	      SKIN:Bang("!CommandMeasure", "ScriptColorChanger", "hColorIdx[" .. b .. "][" .. a .. "] = " .. hColorIdx[b][a], child[k])
+        end
+	  end
     end
-    SKIN:Bang("!CommandMeasure", "ScriptColorChanger", "HorizontalInterpolation(); counter = 1", child[k])
+    SKIN:Bang("!UpdateMeasure", "SetColors")
+    HorizontalInterpolation()
+    counter = 1
+    for k = 1, childTotal do
+      for b = 1, 4 do
+        for a = 1, 3 do
+          SKIN:Bang("!CommandMeasure", "ScriptColorChanger", "hColorIdx[" .. b+4 .. "][" .. a .. "] = " .. hColorIdx[b+4][a], child[k])
+        end
+      end
+      SKIN:Bang("!CommandMeasure", "ScriptColorChanger", "HorizontalInterpolation(); counter = 1", child[k])
+    end
+  else
+    SKIN:Bang("!UpdateMeasure", "SetColors")
+	counter = 1
   end
 end
 
