@@ -1,11 +1,11 @@
 [Variables]
 
-Bands=53
+Bands=45
 ; Number of bars - Activate Fountain of Colors\GenerateBands.ini skin after changing this value
 
 BarGap=6
-BarWidth=15
-BarHeight=270
+BarWidth=14
+BarHeight=250
 
 AverageSize=0
 ; Average sound levels over time to provide continuity
@@ -19,7 +19,7 @@ FFTAttack=0
 FFTDecay=275
 FreqMin=20
 FreqMax=20000
-Sensitivity=20
+Sensitivity=21
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
 MusicPlayer=None
@@ -51,6 +51,7 @@ SkinGroup=FountainOfColors
 Config=Fountain of Colors
 ConfigPath=#ROOTCONFIGPATH##Config#.ini
 WriteVariable=PaletteColor1
+Refresh=0
 Angle=0
 Invert=0
 Channel=Avg

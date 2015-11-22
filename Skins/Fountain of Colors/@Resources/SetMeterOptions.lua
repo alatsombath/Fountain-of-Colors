@@ -7,25 +7,22 @@ function Update()
   
   for i = lowerLimit, upperLimit do
     meterName[i] = "MeterBar" .. i-1
+	if SKIN:GetMeter(meterName[i]) == nil then return 0 end
     SKIN:Bang("!SetOption", meterName[i], "Group", "Bars")
     SKIN:Bang("!UpdateMeter", meterName[i])
   end
   
   if nearestAxis == 0 then
-    local iterator = 0
     SKIN:Bang("!SetOptionGroup", "Bars", "W", barWidth)
     SKIN:Bang("!SetOptionGroup", "Bars", "H", barHeight)
     for i = lowerLimit, upperLimit do
-      SKIN:Bang("!SetOption", meterName[i], "X", offset * iterator)
-	  iterator = iterator + 1
+      SKIN:Bang("!SetOption", meterName[i], "X", offset * (i - lowerLimit))
     end  
   else
-    local iterator = 0
     SKIN:Bang("!SetOptionGroup", "Bars", "W", barHeight)
     SKIN:Bang("!SetOptionGroup", "Bars", "H", barWidth)
     for i = lowerLimit, upperLimit do
-      SKIN:Bang("!SetOption", meterName[i], "Y", offset * iterator)
-	  iterator = iterator + 1
+      SKIN:Bang("!SetOption", meterName[i], "Y", offset * (i - lowerLimit))
     end
   end
       
