@@ -80,8 +80,8 @@ IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1
 IfTrueAction=[!SetOption MeasureAudio Sensitivity [DynamicSensitivity]]
 IfConditionMode=1
 UpdateDivider=1
-; Average over the past 1.15 seconds to prevent stuttering
-AverageSize=72
+; Average over the past 0.9 seconds to prevent stuttering
+AverageSize=56
 
 [DynamicFFTDecay]
 Measure=Calc
@@ -90,7 +90,7 @@ IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1
 IfTrueAction=[!SetOption MeasureAudio FFTDecay [DynamicFFTDecay]]
 IfConditionMode=1
 UpdateDivider=1
-AverageSize=72
+AverageSize=56
 
 @Include=#@#Bands.inc
 @Include2=#@#SkinRotation.inc
@@ -116,9 +116,10 @@ hInvert=#Invert#
 hBlendingMultiplier=#hBlendingMultiplier#
 vBlendingMultiplier=#vBlendingMultiplier#
 TransitionTime=#TransitionTime#
-OpacityLower=#OpacityLower#
-OpacityUpper=#OpacityUpper#
-OpacityMultiplier=#OpacityMultiplier#
+DecayEffect=#DecayEffect#
+DecayThreshold=#DecayThreshold#
+DecaySustain=#DecaySustain#
+DecayDuration=#DecayDuration#
 UpdateWhenZero=(#ModeKeyboard# = 1 ? 1 : 0)
 UpdateDivider=1
 
