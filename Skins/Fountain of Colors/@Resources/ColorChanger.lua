@@ -1,4 +1,4 @@
--- ColorChanger v3.1, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v3.1.1, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
@@ -122,17 +122,17 @@ function Update()
 	  
 	  if decayEffect ~= 0 then
 	    diff, oldMeasureValues[i] = measureValue - oldMeasureValues[i], measureValue
-	    if diff > decayThreshold or measureValue > 1 - diff then
+		if diff > decayThreshold then
 		  timeSinceDecay[i], color[4] = -1, 255
         else
           timeSinceDecay[i] = timeSinceDecay[i] + 1
 	      if timeSinceDecay[i] > decaySustain then
-	        if timeSinceDecay[i] > decayDuration then
-		      timeSinceDecay[i], color[4] = decayDuration, 0
+	        if (timeSinceDecay[i] - decaySustain) > decayDuration then
+		      timeSinceDecay[i], color[4] = decayDuration + decaySustain, 0
 		    else
 		      local decay = timeSinceDecay[i] - decaySustain
 		      if decay < 0 then decay = 0 end
-		      color[4] = 255 * (1 - (decay / decayDuration))
+		      color[4] = floor(255 * (1 - (decay / decayDuration)) + 0.5)
 		    end
 	      else
 		    color[4] = 255

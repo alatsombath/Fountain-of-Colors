@@ -156,7 +156,7 @@ IfMatchAction4=[!CommandMeasure ScriptColorChanger """local a = 1; for c in stri
 IfMatch5="IndivRand"
 IfMatchAction5=[!CommandMeasure ScriptColorChanger """for i = hLowerLimit, hUpperLimit do for a = 1, 3 do colorIdx[i][3][a], colorIdx[i][4][a] = random(0, 255), random(0, 255) end; end]
 IfMatch6="Wallpaper"
-IfMatchAction6=[!CommandMeasure ScriptColorChanger """local wallpaperColors = {"[DesktopAvg]", "[DesktopFG2]", "[DesktopFG1]", "[DesktopBG2]"}; for b = 1, 4 do local a = 1; for c in wallpaperColors[b]:gmatch("[^,]+") do hColorIdx[b+4][a], a = c, a + 1 end; end"""]
+IfMatchAction6=[!CommandMeasure ScriptColorChanger """local wallpaperColors = {"[Desktop#WallpaperColorSource#]", "[DesktopBG2]", "[DesktopFG2]", "[DesktopBG1]"}; for b = 1, 4 do local a = 1; for c in wallpaperColors[b]:gmatch("[^,]+") do hColorIdx[b+4][a], a = c, a + 1 end; end"""]
 IfMatch7="Taskbar"
 IfMatchAction7=[!CommandMeasure ScriptColorChanger """local taskbarColor = "[mWindowColor]"; local a = 1; for c in taskbarColor:gmatch("[^,]+") do for b = 1, 4 do hColorIdx[b+4][a] = c end; a = a + 1 end]
 

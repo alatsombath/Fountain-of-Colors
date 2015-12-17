@@ -30,7 +30,7 @@ Measure=Plugin
 Group=Chameleon
 Plugin=Chameleon
 Parent=ChameleonDesktop
-Color=Foreground1
+Color=Foreground2
 
 [DesktopBG2]
 Measure=Plugin
