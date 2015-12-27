@@ -1,10 +1,10 @@
--- ColorChanger v3.1.1, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v3.1.2, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
   random, floor, concat = math.random, math.floor, table.concat
   parent, childTotal, child, childhInvert = 0, 0, {}, {}
-  color, colorIdx, hColorIdx, hPosNorm, cacheColor = {}, {}, {}, {}, {}
+  color, colorIdx, hColorIdx, hPosNorm, cacheColor, hidden = {}, {}, {}, {}, {}, {}
   for b = 1, 8 do hColorIdx[b] = {} end
   measure, meterName, option = {}, {}, SELF:GetOption("MeterOption")
   oldMeasureValues, timeSinceDecay, decayEffect = {}, {}, SELF:GetNumberOption("DecayEffect")
@@ -16,7 +16,7 @@ function Initialize()
   hLowerLimit, hUpperLimit = SELF:GetNumberOption("hLowerLimit") + 1, SELF:GetNumberOption("hUpperLimit") + 1
   
   for i = hLowerLimit, hUpperLimit do
-    oldMeasureValues[i], timeSinceDecay[i] = 0, 0
+    hidden[i], oldMeasureValues[i], timeSinceDecay[i] = 0, 0, 0
 	cacheColor[i], colorIdx[i], hPosNorm[i] = "", {}, hInvert == 0 and (i / hUpperLimit) * hBlendingMultiplier or (1 - (i / hUpperLimit)) * hBlendingMultiplier
 	measure[i], meterName[i] = SKIN:GetMeasure(SELF:GetOption("MeasureBaseName") .. i-1), SELF:GetOption("MeterBaseName") .. i-1
 	for c = 1, 4 do colorIdx[i][c] = {} end
@@ -139,11 +139,21 @@ function Update()
 	      end
 	    end
 	  end
-
-	  color = concat(color, ",")
-	  if color ~= cacheColor[i] then
-	    cacheColor[i] = color
-	    SKIN:Bang("!SetOption", meterName[i], option, color)
+	  
+	  if color[4] ~= 0 then
+	    hidden[i] = 0
+      elseif hidden[i] == 0 then
+	    hidden[i] = 1
+	  elseif hidden[i] ~= 2 then
+	    hidden[i] = 2
+	  end
+      
+	  if hidden[i] ~= 2 then
+	    color = concat(color, ",")
+	    if color ~= cacheColor[i] then
+	      cacheColor[i] = color
+	      SKIN:Bang("!SetOption", meterName[i], option, color)
+	    end
 	  end
 	  
 	else

@@ -38,7 +38,7 @@ function Update()
     SKIN:Bang("!SetOptionGroup", "Bars", "TransformationMatrix", "")
   end
   
-  SKIN:Bang("!SetOptionGroup","Bars","LeftMouseUpAction","#OpenSettingsWindow#")
+  SKIN:Bang("!SetOptionGroup", "Bars", "LeftMouseUpAction", "#OpenSettingsWindow#")
   SKIN:Bang("!SetOptionGroup", "Bars", "UpdateDivider", 1)
   SKIN:Bang("!UpdateMeterGroup", "Bars")
 end

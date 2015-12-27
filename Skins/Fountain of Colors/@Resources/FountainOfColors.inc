@@ -80,8 +80,8 @@ IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1
 IfTrueAction=[!SetOption MeasureAudio Sensitivity [DynamicSensitivity]]
 IfConditionMode=1
 UpdateDivider=1
-; Average over the past 0.9 seconds to prevent stuttering
-AverageSize=56
+; Average over the past 3 seconds to prevent stuttering
+AverageSize=188
 
 [DynamicFFTDecay]
 Measure=Calc
@@ -90,7 +90,7 @@ IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1
 IfTrueAction=[!SetOption MeasureAudio FFTDecay [DynamicFFTDecay]]
 IfConditionMode=1
 UpdateDivider=1
-AverageSize=56
+AverageSize=188
 
 @Include=#@#Bands.inc
 @Include2=#@#SkinRotation.inc
