@@ -15,10 +15,10 @@ LoudnessEqualization=1
 
 FFTSize=10240
 FFTOverlap="(#FFTSize#-256)"
-FFTAttack=10
-FFTDecay=400
-FreqMin=20
-FreqMax=20000
+FFTAttack=75
+FFTDecay=425
+FreqMin=32
+FreqMax=17500
 Sensitivity=17
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
@@ -40,13 +40,13 @@ PaletteColor3=0,0,255
 PaletteColor4=0,0,0
 
 TransitionTime=6
-hBlendingMultiplier=0.4
+hBlendingMultiplier=0.3
 vBlendingMultiplier=0.1
 
 DecayEffect=1
-DecayThreshold=17
-DecaySustain=40
-DecayDuration=370
+DecayThreshold=40
+DecaySustain=250
+DecayDuration=450
 
 ModeKeyboard=0
 FirstBandIndex=1
