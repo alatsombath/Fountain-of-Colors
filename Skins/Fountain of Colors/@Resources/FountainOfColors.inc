@@ -55,6 +55,13 @@ Measure=Plugin
 Plugin=Process
 ProcessName=#MusicPlayer#.exe
 
+[IdleAudioTimeout]
+Measure=Calc
+Formula=(IdleAudioTimeout + 1)
+IfCondition=(IdleAudioTimeout = (Floor(62.5 * #IdleAudioTimeout#)))
+IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure DynamicFFTDecay][!DisableMeasure IdleAudioTimeout]
+UpdateDivider=1
+
 [Standby]
 Measure=Plugin
 Plugin=AudioLevel
@@ -70,8 +77,8 @@ UpdateDivider=1
 
 ; Toggle measures/meters based on idle audio and music player running status
 IfCondition=((Standby > 0.00001) && ((DisableProcessCheck = 1) || (MeasureProcess = 1)))
-IfTrueAction=[!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity][!EnableMeasure DynamicFFTDecay][!ShowFade]
-IfFalseAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure DynamicFFTDecay][!HideFade]
+IfTrueAction=[!DisableMeasure IdleAudioTimeout][!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity][!EnableMeasure DynamicFFTDecay]
+IfFalseAction=[!EnableMeasure IdleAudioTimeout]
 
 [DynamicSensitivity]
 Measure=Calc
@@ -146,7 +153,7 @@ Measure=String
 String=#Colors#
 IfMatchMode=1
 IfMatch="Single"
-IfMatchAction=[!SetOption ScriptColorChanger UpdateDivider -1][!SetOptionGroup Bars BarColor #PaletteColor1#]
+IfMatchAction=[!CommandMeasure ScriptColorChanger """local a = 1; for c in string.gmatch("#PaletteColor1#", "[^,]+") do for i = hLowerLimit, hUpperLimit do colorIdx[i][1][a], colorIdx[i][2][a] = c, c end; a = a + 1 end"""]
 IfMatch2="Random"
 IfMatchAction2=[!CommandMeasure ScriptColorChanger """for b = 1, 4 do for a = 1, 3 do hColorIdx[b+4][a] = random(0, 255) end; end"""]
 IfMatch3="Custom"

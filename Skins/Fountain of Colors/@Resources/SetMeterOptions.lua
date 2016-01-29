@@ -1,3 +1,5 @@
+-- Meter options are set explicitly/conservatively to prevent re-parsing on each dynamic update
+
 function Update()
   local barHeight = SKIN:ParseFormula(SKIN:GetVariable("BarHeight"))
   local barWidth, barGap = SKIN:ParseFormula(SKIN:GetVariable("BarWidth")), SKIN:ParseFormula(SKIN:GetVariable("BarGap"))
