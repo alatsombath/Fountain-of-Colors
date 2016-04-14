@@ -1,4 +1,4 @@
--- Meter options are set explicitly/conservatively to prevent re-parsing on each dynamic update
+-- Meter options are set explicitly and conditionally to prevent re-parsing on each dynamic update
 
 function Update()
   local barHeight = SKIN:ParseFormula(SKIN:GetVariable("BarHeight"))

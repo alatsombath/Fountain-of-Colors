@@ -11,7 +11,7 @@ ContextAction2=["#@#Variables.inc"]
 
 [Variables]
 
-; Since each skin file has some specific settings, they should be written to the global Variables file for access
+; Since each skin file has some specific settings, they should be temporarily written to the global Variables file for access
 EnvAngle=[!WriteKeyValue Variables Angle #Angle# "#@#Variables.inc"]
 EnvInvert=[!WriteKeyValue Variables Invert #Invert# "#@#Variables.inc"]
 EnvChannel=[!WriteKeyValue Variables Channel #Channel# "#@#Variables.inc"]
@@ -59,7 +59,7 @@ ProcessName=#MusicPlayer#.exe
 Measure=Calc
 Formula=(IdleAudioTimeout + 1)
 IfCondition=(IdleAudioTimeout = (Floor(62.5 * #IdleAudioTimeout#)))
-IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure DynamicFFTDecay][!DisableMeasure IdleAudioTimeout]
+IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure IdleAudioTimeout]
 UpdateDivider=1
 
 [Standby]
@@ -77,27 +77,25 @@ UpdateDivider=1
 
 ; Toggle measures/meters based on idle audio and music player running status
 IfCondition=((Standby > 0.00001) && ((DisableProcessCheck = 1) || (MeasureProcess = 1)))
-IfTrueAction=[!DisableMeasure IdleAudioTimeout][!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity][!EnableMeasure DynamicFFTDecay]
+IfTrueAction=[!DisableMeasure IdleAudioTimeout][!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity]
 IfFalseAction=[!EnableMeasure IdleAudioTimeout]
 
 [DynamicSensitivity]
 Measure=Calc
-Formula=(#Sensitivity# - (MeasureAudio * 100 - #Sensitivity#))
-IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1))
+Formula=(Max(#Sensitivity#, Min(Abs(20 * Log(MeasureAudio)) + Abs(20 * Log(0.5)), 0.5 * Abs(20 * Log(1/65535)))))
+IfCondition=(#LoudnessEqualization# = 1)
 IfTrueAction=[!SetOption MeasureAudio Sensitivity [DynamicSensitivity]]
 IfConditionMode=1
 UpdateDivider=1
-; Average over the past 3 seconds to prevent stuttering
-AverageSize=188
+; Average over the past 2 seconds to prevent stuttering
+AverageSize=125
 
-[DynamicFFTDecay]
-Measure=Calc
-Formula=(#FFTDecay# + (MeasureAudio * 100 - #Sensitivity#) * 10)
-IfCondition=((DynamicSensitivity > #Sensitivity#) && (#LoudnessEqualization# = 1))
-IfTrueAction=[!SetOption MeasureAudio FFTDecay [DynamicFFTDecay]]
-IfConditionMode=1
-UpdateDivider=1
-AverageSize=188
+[MeasureAudioFormat]
+Measure=Plugin
+Group=Audio
+Plugin=AudioLevel
+Parent=MeasureAudio
+Type=Format
 
 @Include=#@#Bands.inc
 @Include2=#@#SkinRotation.inc
@@ -127,7 +125,7 @@ DecayEffect=#DecayEffect#
 DecayThreshold=#DecayThreshold#
 DecaySustain=#DecaySustain#
 DecayDuration=#DecayDuration#
-UpdateWhenZero=(#ModeKeyboard# = 1 ? 1 : 0)
+UpdateWhenZero=(#ModeKeyboard# = 1 || #MinBarHeight# <> 0 ? 1 : 0)
 UpdateDivider=1
 
 [EnableColorTransition]

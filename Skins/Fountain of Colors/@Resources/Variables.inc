@@ -1,11 +1,13 @@
 [Variables]
 
-Bands=35
+Bands=42
 ; Number of bars - Activate Fountain of Colors\GenerateBands.ini skin after changing this value
 
-BarGap=3
+BarGap=4
 BarWidth=13
-BarHeight=210
+BarHeight=240
+
+MinBarHeight=0
 
 AverageSize=0
 ; Average sound levels over time to provide continuity
@@ -13,19 +15,19 @@ AverageSize=0
 LoudnessEqualization=1
 ; Increases visibility for quiet audio sources when applicable
 
-FFTSize=9216
-FFTOverlap="(#FFTSize#-256)"
+FFTSize=6144
+FFTOverlap="(#FFTSize#-128)"
 FFTAttack=0
-FFTDecay=315
-FreqMin=32
-FreqMax=17500
-Sensitivity=18
+FFTDecay=240
+FreqMin=30
+FreqMax=10000
+Sensitivity=24
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
 MusicPlayer=None
 ; Music player process name, such as "VLC" (not "VLC.exe")
 
-Colors=Single
+Colors=Random
 ; Single, Random, Custom, Individual, IndivRand, Wallpaper, Taskbar
 
 ColorsPlugin=None
@@ -40,13 +42,13 @@ PaletteColor3=255,160,160
 PaletteColor4=240,240,240
 
 TransitionTime=6
-hBlendingMultiplier=0.1
-vBlendingMultiplier=0.1
+hBlendingMultiplier=0
+vBlendingMultiplier=0
 
 DecayEffect=0
 DecayThreshold=55
-DecaySustain=315
-DecayDuration=685
+DecaySustain=365
+DecayDuration=635
 
 ModeKeyboard=0
 ; Requires DecayEffect=1
