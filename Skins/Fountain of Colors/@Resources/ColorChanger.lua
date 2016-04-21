@@ -1,4 +1,4 @@
--- ColorChanger v3.1.2, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v3.1.3, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
@@ -10,6 +10,7 @@ function Initialize()
   oldMeasureValues, timeSinceDecay, decayEffect = {}, {}, SELF:GetNumberOption("DecayEffect")
   decayThreshold = 0.001 * SELF:GetNumberOption("DecayThreshold")
   decaySustain, decayDuration = 0.001 * 62.5 * SELF:GetNumberOption("DecaySustain"), 0.001 * 62.5 * SELF:GetNumberOption("DecayDuration")
+  decayOpacityMin, decayOpacityMax = SELF:GetNumberOption("DecayOpacityMin"), SELF:GetNumberOption("DecayOpacityMax")
   hInvert = SELF:GetNumberOption("hInvert")
   hBlendingMultiplier, vBlendingMultiplier = SELF:GetNumberOption("hBlendingMultiplier"), SELF:GetNumberOption("vBlendingMultiplier")
   opacityMultiplier, opacityLower, opacityUpper = SELF:GetNumberOption("OpacityMultiplier"), SELF:GetNumberOption("OpacityLower"), SELF:GetNumberOption("OpacityUpper")
@@ -120,22 +121,27 @@ function Update()
 	    end
       end
 	  
+	  local opacityValue = opacityMultiplier * measureValue
+	  if opacityValue > 1 then opacityValue = 1 end
+	  color[4] = floor(opacityLower * (1 - opacityValue) + opacityUpper *  opacityValue + 0.5)
+	  
 	  if decayEffect ~= 0 then
 	    diff, oldMeasureValues[i] = measureValue - oldMeasureValues[i], measureValue
 		if diff > decayThreshold then
-		  timeSinceDecay[i], color[4] = -1, 255
+		  timeSinceDecay[i], color[4] = -1, decayOpacityMax
         else
           timeSinceDecay[i] = timeSinceDecay[i] + 1
 	      if timeSinceDecay[i] > decaySustain then
 	        if (timeSinceDecay[i] - decaySustain) > decayDuration then
-		      timeSinceDecay[i], color[4] = decayDuration + decaySustain, 0
+		      timeSinceDecay[i], color[4] = decayDuration + decaySustain, decayOpacityMin
 		    else
 		      local decay = timeSinceDecay[i] - decaySustain
 		      if decay < 0 then decay = 0 end
-		      color[4] = floor(255 * (1 - (decay / decayDuration)) + 0.5)
+		      color[4] = floor(decayOpacityMax * (1 - (decay / decayDuration)) + 0.5)
+			  if color[4] < decayOpacityMin then color[4] = decayOpacityMin end
 		    end
 	      else
-		    color[4] = 255
+		    color[4] = decayOpacityMax
 	      end
 	    end
 	  end

@@ -44,11 +44,16 @@ PaletteColor4=240,240,240
 TransitionTime=6
 hBlendingMultiplier=0
 vBlendingMultiplier=0
+OpacityLower=255
+OpacityUpper=255
+OpacityMultiplier=1
 
 DecayEffect=0
 DecayThreshold=55
 DecaySustain=365
 DecayDuration=635
+DecayOpacityMin=0
+DecayOpacityMax=255
 
 ModeKeyboard=0
 ; Requires DecayEffect=1

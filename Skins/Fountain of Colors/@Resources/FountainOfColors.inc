@@ -22,6 +22,57 @@ EnvConfigPath=[!WriteKeyValue Variables ConfigPath "#CURRENTPATH##CURRENTFILE#" 
 EnvSettingsWindow=#EnvAngle##EnvInvert#EnvChannel##EnvPort##EnvID##EnvConfig##EnvConfigPath#
 OpenSettingsWindow=#EnvSettingsWindow#[!ActivateConfig "#ROOTCONFIG#\SettingsWindow"][!Refresh "#ROOTCONFIG#\SettingsWindow"]
 
+[DisableProcessCheck]
+Measure=String
+String=#MusicPlayer#
+IfMatch="None"
+IfMatchAction=[!SetOption DisableProcessCheck String 1][!UpdateMeasure DisableProcessCheck]
+IfNotMatchAction=[!SetOption MeasureProcess UpdateDivider 62.5]
+
+[MeasureProcess]
+Measure=Plugin
+Plugin=Process
+ProcessName=#MusicPlayer#.exe
+
+[IdleAudioTimeout]
+Measure=Calc
+Formula=(IdleAudioTimeout + 1)
+IfCondition=(IdleAudioTimeout = (Floor(62.5 * #IdleAudioTimeout#)))
+IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasureGroup Audio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure IdleAudioTimeout]
+UpdateDivider=1
+
+[Standby]
+Measure=Plugin
+Plugin=AudioLevel
+Port=#Port#
+ID=#ID#
+RMSAttack=0
+RMSDecay=0
+RMSGain=1
+PeakAttack=0
+PeakDecay=0
+PeakGain=1
+UpdateDivider=1
+
+; Toggle measures/meters based on idle audio and music player running status
+IfCondition=((Standby > 0.00001) && ((DisableProcessCheck = 1) || (MeasureProcess = 1)))
+IfTrueAction=[!DisableMeasure IdleAudioTimeout][!EnableMeasure MeasureAudio][!EnableMeasureGroup Audio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity]
+IfFalseAction=[!EnableMeasure IdleAudioTimeout]
+
+[SamplingRate]
+Measure=Plugin
+Plugin=AudioLevel
+Parent=Standby
+Type=Format
+Substitute="\D+":"","\d{3}$":""
+RegExpSubstitute=1
+
+[SamplingRateNum]
+Measure=Calc
+Formula=[SamplingRate]
+IfCondition=(SamplingRateNum > 96000)
+IfTrueAction=[!DisableMeasure MeasureAudio][!DeactivateConfig][!Log "Sampling rate is too high ([SamplingRate] Hz) " Error][!About]
+
 [MeasureAudio]
 Measure=Plugin
 Plugin=AudioLevel
@@ -43,43 +94,6 @@ FreqMax=#FreqMax#
 Sensitivity=#Sensitivity#
 UpdateDivider=1
 
-[DisableProcessCheck]
-Measure=String
-String=#MusicPlayer#
-IfMatch="None"
-IfMatchAction=[!SetOption DisableProcessCheck String 1][!UpdateMeasure DisableProcessCheck]
-IfNotMatchAction=[!SetOption MeasureProcess UpdateDivider 62.5]
-
-[MeasureProcess]
-Measure=Plugin
-Plugin=Process
-ProcessName=#MusicPlayer#.exe
-
-[IdleAudioTimeout]
-Measure=Calc
-Formula=(IdleAudioTimeout + 1)
-IfCondition=(IdleAudioTimeout = (Floor(62.5 * #IdleAudioTimeout#)))
-IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure IdleAudioTimeout]
-UpdateDivider=1
-
-[Standby]
-Measure=Plugin
-Plugin=AudioLevel
-Port=#Port#
-ID=#ID#
-RMSAttack=0
-RMSDecay=0
-RMSGain=1
-PeakAttack=0
-PeakDecay=0
-PeakGain=1
-UpdateDivider=1
-
-; Toggle measures/meters based on idle audio and music player running status
-IfCondition=((Standby > 0.00001) && ((DisableProcessCheck = 1) || (MeasureProcess = 1)))
-IfTrueAction=[!DisableMeasure IdleAudioTimeout][!EnableMeasure MeasureAudio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity]
-IfFalseAction=[!EnableMeasure IdleAudioTimeout]
-
 [DynamicSensitivity]
 Measure=Calc
 Formula=(Max(#Sensitivity#, Min(Abs(20 * Log(MeasureAudio)) + Abs(20 * Log(0.5)), 0.5 * Abs(20 * Log(1/65535)))))
@@ -89,13 +103,6 @@ IfConditionMode=1
 UpdateDivider=1
 ; Average over the past 2 seconds to prevent stuttering
 AverageSize=125
-
-[MeasureAudioFormat]
-Measure=Plugin
-Group=Audio
-Plugin=AudioLevel
-Parent=MeasureAudio
-Type=Format
 
 @Include=#@#Bands.inc
 @Include2=#@#SkinRotation.inc
@@ -120,11 +127,16 @@ hUpperLimit=(#Bands#-1)
 hInvert=#Invert#
 hBlendingMultiplier=#hBlendingMultiplier#
 vBlendingMultiplier=#vBlendingMultiplier#
+OpacityLower=#OpacityLower#
+OpacityUpper=#OpacityUpper#
+OpacityMultiplier=#OpacityMultiplier#
 TransitionTime=#TransitionTime#
 DecayEffect=#DecayEffect#
 DecayThreshold=#DecayThreshold#
 DecaySustain=#DecaySustain#
 DecayDuration=#DecayDuration#
+DecayOpacityMin=#DecayOpacityMin#
+DecayOpacityMax=#DecayOpacityMax#
 UpdateWhenZero=(#ModeKeyboard# = 1 || #MinBarHeight# <> 0 ? 1 : 0)
 UpdateDivider=1
 
