@@ -59,20 +59,6 @@ IfCondition=((Standby > 0.00001) && ((DisableProcessCheck = 1) || (MeasureProces
 IfTrueAction=[!DisableMeasure IdleAudioTimeout][!EnableMeasure MeasureAudio][!EnableMeasureGroup Audio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity]
 IfFalseAction=[!EnableMeasure IdleAudioTimeout]
 
-[SamplingRate]
-Measure=Plugin
-Plugin=AudioLevel
-Parent=Standby
-Type=Format
-Substitute="\D+":"","\d{3}$":""
-RegExpSubstitute=1
-
-[SamplingRateNum]
-Measure=Calc
-Formula=[SamplingRate]
-IfCondition=(SamplingRateNum > 96000)
-IfTrueAction=[!DisableMeasure MeasureAudio][!DeactivateConfig][!Log "Sampling rate is too high ([SamplingRate] Hz) " Error][!About]
-
 [MeasureAudio]
 Measure=Plugin
 Plugin=AudioLevel
@@ -85,7 +71,7 @@ PeakAttack=0
 PeakDecay=0
 PeakGain=1
 FFTSize=#FFTSize#
-FFTOverlap=#FFTOverlap#
+FFTOverlap=(Min(#FFTOverlap#, (#FFTSize#-512)))
 FFTAttack=#FFTAttack#
 FFTDecay=#FFTDecay#
 Bands=#Bands#
@@ -101,8 +87,8 @@ IfCondition=(#LoudnessEqualization# = 1)
 IfTrueAction=[!SetOption MeasureAudio Sensitivity [DynamicSensitivity]]
 IfConditionMode=1
 UpdateDivider=1
-; Average over the past 2 seconds to prevent stuttering
-AverageSize=125
+; Average over the past 0.5 seconds to prevent stuttering
+AverageSize=31
 
 @Include=#@#Bands.inc
 @Include2=#@#SkinRotation.inc

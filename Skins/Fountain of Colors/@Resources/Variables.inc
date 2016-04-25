@@ -16,7 +16,7 @@ LoudnessEqualization=1
 ; Increases visibility for quiet audio sources when applicable
 
 FFTSize=6144
-FFTOverlap="(#FFTSize#-128)"
+FFTOverlap="(#FFTSize#-512)"
 FFTAttack=0
 FFTDecay=240
 FreqMin=30
