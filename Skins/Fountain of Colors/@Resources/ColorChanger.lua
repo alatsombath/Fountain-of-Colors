@@ -1,7 +1,8 @@
--- ColorChanger v3.1.3, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v3.1.4, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
+  InitRandom()
   random, floor, concat = math.random, math.floor, table.concat
   parent, childTotal, child, childhInvert = 0, 0, {}, {}
   color, colorIdx, hColorIdx, hPosNorm, cacheColor, hidden = {}, {}, {}, {}, {}, {}
@@ -30,6 +31,13 @@ function Initialize()
   for i = 1, transitionTime do counterNorm[i] = i / transitionTime end
   SKIN:Bang("!UpdateMeasure", "EnableColorTransition")
   SKIN:Bang("!UpdateMeasure", "SetColors")
+end
+
+function InitRandom()
+  math.randomseed(os.time())
+  math.random()
+  math.random()
+  math.random()
 end
 
 function SetParent() parent = 1 end

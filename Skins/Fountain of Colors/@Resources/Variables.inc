@@ -1,11 +1,11 @@
 [Variables]
 
-Bands=42
+Bands=44
 ; Number of bars - Activate Fountain of Colors\GenerateBands.ini skin after changing this value
 
 BarGap=4
 BarWidth=13
-BarHeight=240
+BarHeight=260
 
 MinBarHeight=0
 
@@ -15,13 +15,13 @@ AverageSize=0
 LoudnessEqualization=1
 ; Increases visibility for quiet audio sources when applicable
 
-FFTSize=6144
+FFTSize=5120
 FFTOverlap="(#FFTSize#-512)"
 FFTAttack=0
-FFTDecay=240
+FFTDecay=205
 FreqMin=30
 FreqMax=10000
-Sensitivity=24
+Sensitivity=30
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
 MusicPlayer=None
@@ -33,15 +33,15 @@ Colors=Random
 ColorsPlugin=None
 ; None, Chameleon (Wallpaper), SysColor (Taskbar)
 
-WallpaperColorSource=Avg
-; Avg, FG1, BG1, FG2, BG2
+WallpaperColorSource=Cycle
+; Avg, FG1, BG1, FG2, BG2, Cycle
 
 PaletteColor1=255,128,255
 PaletteColor2=96,160,224
 PaletteColor3=255,160,160
 PaletteColor4=240,240,240
 
-TransitionTime=6
+TransitionTime=12
 hBlendingMultiplier=0
 vBlendingMultiplier=0
 OpacityLower=255

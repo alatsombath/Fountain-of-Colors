@@ -1,4 +1,4 @@
--- RepeatSection v1.2
+-- RepeatSection v1.2.1
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
@@ -6,7 +6,10 @@ function Initialize()
   local substitution, lowerLimit, upperLimit = SELF:GetOption("Substitution"), SELF:GetNumberOption("LowerLimit") + 1, SELF:GetNumberOption("UpperLimit") + 1
   
   for i = lowerLimit, upperLimit do
-    section[index], index = gsub(readFile, substitution, i-1), index + 1
+	section[index] = gsub(readFile, substitution, i-1)
+	section[index] = gsub(section[index], i-1 .. "D1", i-2)
+	section[index] = gsub(section[index], i-1 .. "I1", i)
+	index = index + 1
   end
   
   local file = io.open(SKIN:ReplaceVariables(SELF:GetOption("WriteFile")), "w")
