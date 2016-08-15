@@ -5,7 +5,7 @@ Bands=44
 
 BarGap=4
 BarWidth=13
-BarHeight=260
+BarHeight=270
 
 MinBarHeight=0
 
@@ -16,7 +16,7 @@ LoudnessEqualization=1
 ; Increases visibility for quiet audio sources when applicable
 
 FFTSize=5120
-FFTOverlap="(#FFTSize#-512)"
+FFTOverlap="(#FFTSize#-(#FFTSize#/2**5))"
 FFTAttack=0
 FFTDecay=205
 FreqMin=30
@@ -54,6 +54,11 @@ DecaySustain=365
 DecayDuration=635
 DecayOpacityMin=0
 DecayOpacityMax=255
+
+ColorsExclude=
+; Exclude ranges of random generated colors (in HSV)
+; Format: "Min H - Max H, Min S - Max S, Min V - Max V|H,S,V|..."
+; Example "52-74,15-100,15-100|74-84,15-80,15-95|0-52,15-80,15-95|330-360,0-0,15-95" roughly excludes yellow and brown
 
 ModeKeyboard=0
 ; Requires DecayEffect=1

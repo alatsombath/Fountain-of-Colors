@@ -1,9 +1,9 @@
--- ColorChanger v3.1.4, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v3.1.5, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
   InitRandom()
-  random, floor, concat = math.random, math.floor, table.concat
+  random, min, max, floor, concat = math.random, math.min, math.max, math.floor, table.concat
   parent, childTotal, child, childhInvert = 0, 0, {}, {}
   color, colorIdx, hColorIdx, hPosNorm, cacheColor, hidden = {}, {}, {}, {}, {}, {}
   for b = 1, 8 do hColorIdx[b] = {} end
@@ -24,6 +24,22 @@ function Initialize()
 	for c = 1, 4 do colorIdx[i][c] = {} end
   end
   
+  hsvTemp, colorsExclude, colorsExcludeStr = {}, {}, SELF:GetOption("ColorsExclude")
+  local a = 1
+  for b in string.gmatch(colorsExcludeStr, "[^|]+") do
+    colorsExclude[a] = {}
+	local c = 1
+    for d in string.gmatch(b, "[^,]+") do
+	  colorsExclude[a][c] = {}
+	  local e = 1
+	  for f in string.gmatch(d, "[^-]+") do
+	    colorsExclude[a][c][e], e = tonumber(f), e + 1
+      end
+	  c = c + 1
+	end
+	a = a + 1
+  end
+  
   updateWhenZero = SELF:GetNumberOption("UpdateWhenZero")
   transitionTime = math.ceil(SELF:GetOption("TransitionTime") * 1000 / 16)
   enableTransition, enableHorizontalTransition = 0, 0
@@ -42,6 +58,46 @@ end
 
 function SetParent() parent = 1 end
 function AddChild(name, hInvert) child[childTotal + 1], childhInvert[childTotal + 1], childTotal, counter = name, hInvert, childTotal + 1, transitionTime end
+
+-- https://www.cs.rit.edu/~ncs/color/t_convert.html
+function RGBtoHSV(color)
+  local r, g, b = color[1] / 255, color[2] / 255, color[3] / 255
+  local lMax = max(r, g, b)
+  local delta = lMax - min(r, g, b)
+  hsvTemp[3] = lMax * 100
+
+  if max ~= 0 then
+    hsvTemp[2] = delta / lMax * 100
+  else
+  	hsvTemp[2], hsvTemp[1] = 0, -1
+	return
+  end
+  
+  if r == lMax then
+    hsvTemp[1] = (g - b) / delta
+  elseif g == lMax then
+    hsvTemp[1] = 2 + (b - r) / delta
+  else
+    hsvTemp[1] = 4 + (r - g) / delta
+  end
+  
+  hsvTemp[1] = hsvTemp[1] * 60
+  hsvTemp[1] = hsvTemp[1] < 0 and hsvTemp[1] + 360 or hsvTemp[1]
+end
+
+function Validate(color)
+  RGBtoHSV(color)
+  for a = 1, #colorsExclude do
+    if not
+	  (hsvTemp[1] < colorsExclude[a][1][1] or hsvTemp[1] > colorsExclude[a][1][2] or
+	   hsvTemp[2] < colorsExclude[a][2][1] or hsvTemp[2] > colorsExclude[a][2][2] or
+	   hsvTemp[3] < colorsExclude[a][3][1] or hsvTemp[3] > colorsExclude[a][3][2])
+	then
+	  return -1
+	end
+  end
+  return 0
+end
 
 function HorizontalInterpolation()
   for i = hLowerLimit, hUpperLimit do
