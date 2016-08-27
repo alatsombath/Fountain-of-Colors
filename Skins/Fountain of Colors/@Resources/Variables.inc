@@ -12,16 +12,16 @@ MinBarHeight=0
 AverageSize=0
 ; Average sound levels over time to provide continuity
 
-LoudnessEqualization=1
+LoudnessEqualization=0
 ; Increases visibility for quiet audio sources when applicable
 
-FFTSize=5120
+FFTSize=4800
 FFTOverlap="(#FFTSize#-(#FFTSize#/2**5))"
 FFTAttack=0
 FFTDecay=205
 FreqMin=30
 FreqMax=10000
-Sensitivity=30
+Sensitivity=31
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
 MusicPlayer=None
@@ -74,6 +74,8 @@ SkinGroup=FountainOfColors
 Config=Fountain of Colors
 ConfigPath=#ROOTCONFIGPATH##Config#.ini
 WriteVariable=PaletteColor1
+
+; Don't change these here, edit the skin file instead
 Angle=0
 Invert=0
 Channel=Avg
