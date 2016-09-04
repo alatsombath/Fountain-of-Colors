@@ -64,7 +64,15 @@ Measure=Plugin
 Plugin=AudioLevel
 Parent=Standby
 Type=Format
-Substitute="\D+":"","\d{3}$":""
+Substitute="Hz(.*)":""
+RegExpSubstitute=1
+
+[NumChannels]
+Measure=Plugin
+Plugin=AudioLevel
+Parent=Standby
+Type=Format
+Substitute="(.*)b ":"","ch":""
 RegExpSubstitute=1
 
 [MeasureAudio]
@@ -78,8 +86,8 @@ RMSGain=1
 PeakAttack=0
 PeakDecay=0
 PeakGain=1
-FFTSize=(#FFTSize# * (Max(48000, [SamplingRate]) / 48000))
-FFTOverlap=((#FFTSize# - ((#FFTSize# - #FFTOverlap#) * (Max(48000, [SamplingRate]) / 48000))) * (Max(48000, [SamplingRate]) / 48000))
+FFTSize=(#FFTSize# * Max(48000, [SamplingRate]) / 48000)
+FFTOverlap=((#FFTSize# - (#FFTSize# - #FFTOverlap#) * 0.5 * [NumChannels] * Max(48000, [SamplingRate]) / 48000) * Max(48000, [SamplingRate]) / 48000)
 FFTAttack=#FFTAttack#
 FFTDecay=#FFTDecay#
 Bands=#Bands#

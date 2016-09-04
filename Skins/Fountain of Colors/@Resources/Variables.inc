@@ -5,7 +5,7 @@ Bands=44
 
 BarGap=4
 BarWidth=13
-BarHeight=270
+BarHeight=280
 
 MinBarHeight=0
 
@@ -16,12 +16,12 @@ LoudnessEqualization=0
 ; Increases visibility for quiet audio sources when applicable
 
 FFTSize=4800
-FFTOverlap="(#FFTSize#-(#FFTSize#/2**5))"
+FFTOverlap="(#FFTSize#-(#FFTSize#/32))"
 FFTAttack=0
-FFTDecay=205
+FFTDecay=200
 FreqMin=30
 FreqMax=10000
-Sensitivity=31
+Sensitivity=32
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
 MusicPlayer=None
