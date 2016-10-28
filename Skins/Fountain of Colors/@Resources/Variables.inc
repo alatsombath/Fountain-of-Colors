@@ -1,9 +1,9 @@
 [Variables]
 
-Bands=44
+Bands=43
 ; Number of bars - Activate Fountain of Colors\GenerateBands.ini skin after changing this value
 
-BarGap=4
+BarGap=3
 BarWidth=13
 BarHeight=280
 
@@ -15,13 +15,13 @@ AverageSize=0
 LoudnessEqualization=0
 ; Increases visibility for quiet audio sources when applicable
 
-FFTSize=4800
+FFTSize=4096
 FFTOverlap="(#FFTSize#-(#FFTSize#/32))"
 FFTAttack=0
-FFTDecay=200
+FFTDecay=175
 FreqMin=30
 FreqMax=10000
-Sensitivity=32
+Sensitivity=34
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
 MusicPlayer=None
