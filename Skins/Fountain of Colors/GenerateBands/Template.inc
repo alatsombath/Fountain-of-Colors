@@ -5,11 +5,12 @@ Plugin=AudioLevel
 Parent=MeasureAudio
 Type=Band
 BandIdx=(Abs((#Invert# = 1 ? (#FirstBandIndex# + #Bands# - 1) : 0) - Repeat))
-[MeasureAudioMinRepeat]
+[MeasureAudioCalcRepeat]
 Measure=Calc
-; Formula=(Max(#MinBarHeight# / #BarHeight#, (MeasureAudioRepeatD1 + MeasureAudioRepeat + MeasureAudioRepeatI1) / 3))
-Formula=(Max(#MinBarHeight# / #BarHeight#, MeasureAudioRepeat))
+Group=AudioCalc
+; Formula=(Max(0.00001 + SetMinValue + ((SetMaxValue - SetMinValue) * (#MinBarHeight# / #BarHeight#)), (MeasureAudioRepeatD1 + MeasureAudioRepeat + MeasureAudioRepeatI1) / 3))
+Formula=(Max(0.00001 + SetMinValue + ((SetMaxValue - SetMinValue) * (#MinBarHeight# / #BarHeight#)), MeasureAudioRepeat))
 UpdateDivider=1
 [MeterBarRepeat]
 Meter=Bar
-MeasureName=MeasureAudioMinRepeat
+MeasureName=MeasureAudioCalcRepeat

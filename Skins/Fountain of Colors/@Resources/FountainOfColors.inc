@@ -38,7 +38,7 @@ ProcessName=#MusicPlayer#.exe
 Measure=Calc
 Formula=(IdleAudioTimeout + 1)
 IfCondition=(IdleAudioTimeout = (Floor(62.5 * #IdleAudioTimeout#)))
-IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasureGroup Audio][!DisableMeasure ScriptColorChanger][!DisableMeasure DynamicSensitivity][!DisableMeasure IdleAudioTimeout]
+IfTrueAction=[!DisableMeasure MeasureAudio][!DisableMeasureGroup Audio][!DisableMeasure ScriptColorChanger][!DisableMeasure IdleAudioTimeout]
 UpdateDivider=1
 
 [Standby]
@@ -56,7 +56,7 @@ UpdateDivider=1
 
 ; Toggle measures/meters based on idle audio and music player running status
 IfCondition=((Standby > 0.00001) && ((DisableProcessCheck = 1) || (MeasureProcess = 1)))
-IfTrueAction=[!DisableMeasure IdleAudioTimeout][!EnableMeasure MeasureAudio][!EnableMeasureGroup Audio][!EnableMeasure ScriptColorChanger][!EnableMeasure DynamicSensitivity]
+IfTrueAction=[!DisableMeasure IdleAudioTimeout][!EnableMeasure MeasureAudio][!EnableMeasureGroup Audio][!EnableMeasure ScriptColorChanger]
 IfFalseAction=[!EnableMeasure IdleAudioTimeout]
 
 [SamplingRate]
@@ -96,15 +96,15 @@ FreqMax=#FreqMax#
 Sensitivity=#Sensitivity#
 UpdateDivider=1
 
-[DynamicSensitivity]
+[SetMaxValue]
 Measure=Calc
-Formula=(Max(#Sensitivity#, Min(Abs(20 * Log(MeasureAudio)) + Abs(20 * Log(0.5)), 0.5 * Abs(20 * Log(1/65535)))))
-IfCondition=(#LoudnessEqualization# = 1)
-IfTrueAction=[!SetOption MeasureAudio Sensitivity [DynamicSensitivity]]
-IfConditionMode=1
-UpdateDivider=1
-; Average over the past 0.5 seconds to prevent stuttering
-AverageSize=31.25
+Formula=(10 ** (-#ClipOffset# / 20))
+OnUpdateAction=[!SetOptionGroup AudioCalc MaxValue [#CURRENTSECTION#]]
+
+[SetMinValue]
+Measure=Calc
+Formula=(0.5 * (1 - SetMaxValue))
+OnUpdateAction=[!SetOptionGroup AudioCalc MinValue [#CURRENTSECTION#]]
 
 @Include=#@#Bands.inc
 @Include2=#@#SkinRotation.inc
@@ -121,7 +121,7 @@ ScriptFile=#@#SetMeterOptions.lua
 [ScriptColorChanger]
 Measure=Script
 ScriptFile=#@#ColorChanger.lua
-MeasureBaseName=MeasureAudio
+MeasureBaseName=MeasureAudioCalc
 MeterBaseName=MeterBar
 MeterOption=BarColor
 hLowerLimit=#FirstBandIndex#
