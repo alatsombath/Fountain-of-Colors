@@ -5,22 +5,22 @@ Bands=46
 
 BarGap=3
 BarWidth=13
-BarHeight=270
+BarHeight=260
 
 MinBarHeight=0
 
-AverageSize=0
+AverageSize=1
 ; Average sound levels over time to provide continuity
 
-ClipOffset=0.652
+ClipOffset=0.651
 ; Increase precision by narrowing (in dB) the range of displayed values
 
 FFTSize=4096
 FFTOverlap="(#FFTSize#-(#FFTSize#/32))"
-FFTAttack=0
-FFTDecay=133
+FFTAttack=108
+FFTDecay=142
 FreqMin=31
-FreqMax=9662
+FreqMax=17750
 Sensitivity=37
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
