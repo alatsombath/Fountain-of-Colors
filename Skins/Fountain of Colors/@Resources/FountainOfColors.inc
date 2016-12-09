@@ -1,5 +1,5 @@
 [Rainmeter]
-Update=16
+Update=0
 DefaultUpdateDivider=-1
 Group=#SkinGroup#
 OnCloseAction=[!RefreshGroup #SkinGroup#]
@@ -98,12 +98,12 @@ UpdateDivider=1
 
 [SetMaxValue]
 Measure=Calc
-Formula=(10 ** (-#ClipOffset# / 20))
+Formula=(Min(10 ** (-#ClipOffset# / 20), 1))
 OnUpdateAction=[!SetOptionGroup AudioCalc MaxValue [#CURRENTSECTION#]]
 
 [SetMinValue]
 Measure=Calc
-Formula=(0.5 * (1 - SetMaxValue))
+Formula=(Max(0, 0.5 * (1 - SetMaxValue)))
 OnUpdateAction=[!SetOptionGroup AudioCalc MinValue [#CURRENTSECTION#]]
 
 @Include=#@#Bands.inc

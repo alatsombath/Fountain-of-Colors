@@ -34,12 +34,12 @@ function Update()
     if nearestAxis == 1 then
       SKIN:Bang("!SetOptionGroup", "Bars", "BarOrientation", "Horizontal")
     end
-    SKIN:Bang("!SetOptionGroup", "Bars", "AntiAlias", 1)
     SKIN:Bang("!SetOptionGroup", "Bars", "TransformationMatrix", SKIN:GetMeasure("Matrix"):GetStringValue())
     SKIN:Bang("!UpdateMeterGroup", "Bars")
     SKIN:Bang("!SetOptionGroup", "Bars", "TransformationMatrix", "")
   end
   
+  SKIN:Bang("!SetOptionGroup", "Bars", "AntiAlias", 1)
   SKIN:Bang("!SetOptionGroup", "Bars", "LeftMouseUpAction", "#OpenSettingsWindow#")
   SKIN:Bang("!SetOptionGroup", "Bars", "UpdateDivider", 1)
   SKIN:Bang("!UpdateMeterGroup", "Bars")
