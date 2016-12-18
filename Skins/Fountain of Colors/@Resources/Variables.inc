@@ -1,33 +1,28 @@
 [Variables]
 
-Bands=49
-; Number of bars - Activate Fountain of Colors\GenerateBands.ini skin after changing this value
-
+Bands=54
 BarGap=3
-BarWidth=13
-BarHeight=270
-
+BarWidth=4
+BarHeight=102
 MinBarHeight=0
+PaletteColor1=0,250,154
 
-AverageSize="0"
-; Average sound levels over time to provide continuity
-
-ClipOffset="(10*Log(1/65535)-20*Log(1/#BarHeight#))"
-; Increase precision by narrowing (in dB) the range of displayed values
-
-FFTSize="4096"
-FFTOverlap="(#FFTSize#-(#FFTSize#/32))"
-FFTAttack="0"
-FFTDecay="(#FFTOverlap#/60)"
-FreqMin="32.100669807974071"
-FreqMax="9640.0898376102760"
-Sensitivity="(-20*Log(1/#BarHeight#))"
+FFTSize=4096
+FFTOverlap="(#FFTSize#-(#FFTSize#/8))"
+FFTAttack=2
+FFTDecay=43
+FreqMin=33
+FreqMax=14000
+Sensitivity=48.16473
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
-MusicPlayer=None
-; Music player process name, such as "VLC" (not "VLC.exe")
+AverageSize=0
+; Average sound levels over time to provide continuity
 
-Colors=Random
+ClipOffset=0
+; Increase precision by narrowing (in dB) the range of displayed values
+
+Colors=Single
 ; Single, Random, Custom, Individual, IndivRand, Wallpaper, Taskbar
 
 ColorsPlugin=None
@@ -36,7 +31,6 @@ ColorsPlugin=None
 WallpaperColorSource=Cycle
 ; Avg, FG1, BG1, FG2, BG2, Cycle
 
-PaletteColor1=255,128,255
 PaletteColor2=96,160,224
 PaletteColor3=255,160,160
 PaletteColor4=240,240,240
@@ -66,14 +60,12 @@ ModeKeyboard=0
 FirstBandIndex=1
 ; "0" band should be skipped for aesthetic purpose
 
-IdleAudioTimeout=1
-; How long before hiding the visualizer when no sound is playing
-
-; Environment variables for settings window
+; Environment variables for settings window/skin
 SkinGroup=FountainOfColors
 Config=Fountain of Colors
 ConfigPath=#ROOTCONFIGPATH##Config#.ini
 WriteVariable=PaletteColor1
+SetCloneColorState=
 
 ; Don't change these here, edit the skin file instead
 Angle=0

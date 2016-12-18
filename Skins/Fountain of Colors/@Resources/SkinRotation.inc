@@ -52,6 +52,7 @@ DynamicVariables=1
 [NearestAxis]
 Measure=Calc
 Formula=((((#Angle# > 45) && (#Angle# <= 135)) || ((#Angle# > 225) && (#Angle# <= 315))) ? 1 : 0)
+OnUpdateAction=
 
 ; Only antialias and set the matrix when the angle has changed
 [CheckRotation]
@@ -67,6 +68,7 @@ Formula=(NearestAxis = 0 ? #Angle# : (#Angle# + 90))
 Measure=String
 String="(Cos([Angle]*PI/180));(-Sin([Angle]*PI/180));(Sin([Angle]*PI/180));(Cos([Angle]*PI/180));[MoveX];[MoveY]"
 DynamicVariables=1
+OnUpdateAction=
 
 ; Reveal the transformation by expanding the skin window through an invisible meter
 [BoundingBox]
