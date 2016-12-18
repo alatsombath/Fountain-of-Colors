@@ -77,6 +77,9 @@ function Initialize()
   SKIN:Bang("!WriteKeyValue", "Rainmeter", "@Include", "#@#Variables.inc", "#ROOTCONFIGPATH#\\#ROOTCONFIG#.ini")
   SKIN:Bang("!WriteKeyValue", "Variables", "@Include", "#@##SkinGroup#.inc", "#ROOTCONFIGPATH#\\#ROOTCONFIG#.ini")
   
+  SKIN:Bang("!WriteKeyValue", "Rainmeter", "Group", "#SkinGroup#", "#@##SkinGroup#.inc")
+  SKIN:Bang("!WriteKeyValue", "Rainmeter", "LeftMouseUpAction", '[!ActivateConfig "#ROOTCONFIG#\\SettingsWindow"]', "#@##SkinGroup#.inc")
+  
   SKIN:Bang("!WriteKeyValue", "Rainmeter", "OnRefreshAction", "", "#@##SkinGroup#.inc")
   
   SKIN:Bang("!ActivateConfig", "#ROOTCONFIG#\\GenerateBands")
@@ -143,9 +146,7 @@ function Initialize()
     SKIN:Bang("!SetOptionGroup", "Audio", "Channel", SKIN:GetVariable("Channel"), config)
   end
   
-  if SKIN:ParseFormula(SKIN:GetVariable("AverageSize")) ~= 0 then
-    SKIN:Bang("!SetOptionGroup", "Audio", "AverageSize", SKIN:ParseFormula(SKIN:GetVariable("AverageSize")), config)
-  end
+  SKIN:Bang("!SetOptionGroup", "Audio", "AverageSize", SKIN:ParseFormula(SKIN:GetVariable("AverageSize")), config)
   
   SKIN:Bang("!SetOptionGroup", "Audio", "UpdateDivider", 1, config)
   SKIN:Bang("!UpdateMeasureGroup", "Audio", config)
@@ -162,7 +163,7 @@ function Initialize()
   local envConfig = '[!WriteKeyValue Variables Config "#*CURRENTCONFIG*#" "#*@*#Variables.inc"]'
   local envConfigPath = '[!WriteKeyValue Variables ConfigPath "#*CURRENTPATH*##*CURRENTFILE*#" "#*@*#Variables.inc"]'
   local envVariables = envAngle .. envInvert .. envChannel .. envPort .. envID .. envConfig .. envConfigPath
-  local envInitialize = envVariables .. '[!ActivateConfig "#ROOTCONFIG#\\Initialize"]'
+  local envInitialize = envVariables .. '[!ActivateConfig "#*ROOTCONFIG*#\\Initialize"]'
   
   -- For the next skin initialization
   SKIN:Bang("!WriteKeyValue", "Rainmeter", "OnRefreshAction", envInitialize, "#@##SkinGroup#.inc")
