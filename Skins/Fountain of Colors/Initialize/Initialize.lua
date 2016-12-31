@@ -74,8 +74,8 @@ function Initialize()
   SKIN:Bang("!WriteKeyValue", "NearestAxis", "OnUpdateAction", '[!CommandMeasure ScriptInitialize "nearestAxis = [NearestAxis]" "#ROOTCONFIG#\\Initialize"]', "#@#SkinRotation.inc")
   SKIN:Bang("!WriteKeyValue", "Matrix", "OnUpdateAction", '[!CommandMeasure ScriptInitialize """matrix = "[Matrix]"""" "#ROOTCONFIG#\\Initialize"]', "#@#SkinRotation.inc")
   
-  SKIN:Bang("!WriteKeyValue", "Rainmeter", "@Include", "#@#Variables.inc", "#ROOTCONFIGPATH#\\#ROOTCONFIG#.ini")
-  SKIN:Bang("!WriteKeyValue", "Variables", "@Include", "#@##SkinGroup#.inc", "#ROOTCONFIGPATH#\\#ROOTCONFIG#.ini")
+  SKIN:Bang("!WriteKeyValue", "Rainmeter", "@Include", "#@#Variables.inc", "#ROOTCONFIGPATH#\\Fountain of Colors.ini")
+  SKIN:Bang("!WriteKeyValue", "Variables", "@Include", "#@##SkinGroup#.inc", "#ROOTCONFIGPATH#\\Fountain of Colors.ini")
   
   SKIN:Bang("!WriteKeyValue", "Rainmeter", "Group", "#SkinGroup#", "#@##SkinGroup#.inc")
   SKIN:Bang("!WriteKeyValue", "Rainmeter", "LeftMouseUpAction", '[!ActivateConfig "#ROOTCONFIG#\\SettingsWindow"]', "#@##SkinGroup#.inc")
