@@ -20,11 +20,11 @@ PeakGain=1
 FFTSize=4096
 FFTOverlap=3584
 FFTAttack=0
-FFTDecay=22
-Bands=56
+FFTDecay=14
+Bands=60
 FreqMin=33
-FreqMax=14000
-Sensitivity=48.1645
+FreqMax=20000
+Sensitivity=48
 UpdateDivider=1
 
 [Include]
