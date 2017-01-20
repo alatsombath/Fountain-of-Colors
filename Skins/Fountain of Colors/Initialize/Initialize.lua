@@ -78,7 +78,8 @@ function Initialize()
   SKIN:Bang("!WriteKeyValue", "Variables", "@Include", "#@##SkinGroup#.inc", "#ROOTCONFIGPATH#\\Fountain of Colors.ini")
   
   SKIN:Bang("!WriteKeyValue", "Rainmeter", "Group", "#SkinGroup#", "#@##SkinGroup#.inc")
-  SKIN:Bang("!WriteKeyValue", "Rainmeter", "LeftMouseUpAction", '[!ActivateConfig "#ROOTCONFIG#\\SettingsWindow"]', "#@##SkinGroup#.inc")
+  SKIN:Bang("!WriteKeyValue", "Rainmeter", "ContextAction", '[!ActivateConfig "#ROOTCONFIG#\\SettingsWindow"]', "#@##SkinGroup#.inc")
+  SKIN:Bang("!WriteKeyValue", "Rainmeter", "ContextAction2", '["#@#Variables.inc"]', "#@##SkinGroup#.inc")
   
   SKIN:Bang("!WriteKeyValue", "Rainmeter", "OnRefreshAction", "", "#@##SkinGroup#.inc")
   
@@ -138,6 +139,8 @@ function Initialize()
     SKIN:Bang("!SetOptionGroup", "AudioCalc", "MaxValue", maxValue, config)
 	SKIN:Bang("!SetOptionGroup", "AudioCalc", "MinValue", minValue, config)
   end
+  
+  SKIN:Bang("!SetOptionGroup", "Bars", "LeftMouseUpAction", '[!ActivateConfig "#ROOTCONFIG#\\SettingsWindow"]', config)
   
   SKIN:Bang("!SetOptionGroup", "Bars", "UpdateDivider", 1, config)
   SKIN:Bang("!UpdateMeterGroup", "Bars", config)
