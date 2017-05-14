@@ -1,5 +1,6 @@
 function Initialize()
   config = SKIN:GetVariable("Config")
+  includeVariables = 0
 
   -- Measure/meter options should be absolute (non-referenced/calculated)
   local max, fftSize, samplingRate = math.max, SKIN:ParseFormula(SKIN:GetVariable("FFTSize")), SKIN:GetMeasure("SamplingRate"):GetStringValue()
@@ -10,8 +11,8 @@ function Initialize()
   SKIN:Bang("!WriteKeyValue", "MeasureAudio", "FFTOverlap",
     ((fftSize - (fftSize - SKIN:ParseFormula(SKIN:GetVariable("FFTOverlap"))) * 0.5 * SKIN:GetMeasure("NumChannels"):GetStringValue() * max(48000, samplingRate) / 48000) * max(48000, samplingRate) / 48000)
     , "#@##SkinGroup#.inc")
-  SKIN:Bang("!WriteKeyValue", "MeasureAudio", "FFTAttack", SKIN:ParseFormula(SKIN:GetVariable("FFTAttack")) ~= 0 and SKIN:ParseFormula(SKIN:GetVariable("FFTAttack")) or '', "#@##SkinGroup#.inc")
-  SKIN:Bang("!WriteKeyValue", "MeasureAudio", "FFTDecay", SKIN:ParseFormula(SKIN:GetVariable("FFTDecay")) ~= 0 and SKIN:ParseFormula(SKIN:GetVariable("FFTDecay")) or '', "#@##SkinGroup#.inc")
+  SKIN:Bang("!WriteKeyValue", "MeasureAudio", "FFTAttack", SKIN:ParseFormula(SKIN:GetVariable("FFTAttack")) ~= 0 and SKIN:ParseFormula(SKIN:GetVariable("FFTAttack")) or 0, "#@##SkinGroup#.inc")
+  SKIN:Bang("!WriteKeyValue", "MeasureAudio", "FFTDecay", SKIN:ParseFormula(SKIN:GetVariable("FFTDecay")) ~= 0 and SKIN:ParseFormula(SKIN:GetVariable("FFTDecay")) or 0, "#@##SkinGroup#.inc")
   SKIN:Bang("!WriteKeyValue", "MeasureAudio", "Bands", SKIN:ParseFormula(SKIN:GetVariable("Bands")), "#@##SkinGroup#.inc")
   SKIN:Bang("!WriteKeyValue", "MeasureAudio", "FreqMin", SKIN:ParseFormula(SKIN:GetVariable("FreqMin")) ~= 0 and SKIN:ParseFormula(SKIN:GetVariable("FreqMin")) or '', "#@##SkinGroup#.inc")
   SKIN:Bang("!WriteKeyValue", "MeasureAudio", "FreqMax", SKIN:ParseFormula(SKIN:GetVariable("FreqMax")) ~= 0 and SKIN:ParseFormula(SKIN:GetVariable("FreqMax")) or '', "#@##SkinGroup#.inc")
@@ -27,6 +28,7 @@ function Initialize()
   
   -- "Conditional" including measures/meters
   if SKIN:ParseFormula(SKIN:GetVariable("Angle")) ~= 0 then
+    includeVariables = 1
     SKIN:Bang("!WriteKeyValue", "Include", "@Include2", "#@#SkinRotation.inc", "#@##SkinGroup#.inc")
   else
     SKIN:Bang("!WriteKeyValue", "Include", "@Include2", "", "#@##SkinGroup#.inc")
@@ -39,6 +41,7 @@ function Initialize()
   end
   
   if SKIN:GetVariable("Colors") ~= "Single" and true or (SKIN:ParseFormula(SKIN:GetVariable("DecayEffect")) ~= 0 and true or false) then
+    includeVariables = 1
     SKIN:Bang("!WriteKeyValue", "Include", "@Include4", "#@#ColorChanger.inc", "#@##SkinGroup#.inc")
     -- Also let ColorChanger know which skins are active
     SKIN:Bang("!WriteKeyValue", "Variables", "SetCloneColorState", '[!CommandMeasure ScriptColorChanger """AddChild("[CurrentConfig]", #Invert#)""" "#ROOTCONFIG#"]', "#@#Variables.inc")
@@ -52,7 +55,7 @@ function Initialize()
 	SKIN:Bang("!WriteKeyValue", "Variables", "SetCloneColorState", "", "#@#Variables.inc")
   end
   
-  if SKIN:ParseFormula(SKIN:GetVariable("ClipOffset")) ~= 0 and true or (SKIN:ParseFormula(SKIN:GetVariable("MinBarHeight")) ~= 0 and true or false) then
+  if SKIN:ParseFormula(SKIN:GetVariable("MinBarHeight")) ~= 0 and true or (SKIN:ParseFormula(SKIN:GetVariable("ModeKeyboard")) ~= 0 and true or (SKIN:ParseFormula(SKIN:GetVariable("ClipOffset")) ~= 0 and true or false)) then
     SKIN:Bang("!WriteKeyValue", "Include", "@Include5", "#@#CalcMeasures.inc", "#@##SkinGroup#.inc")
 	SKIN:Bang("!WriteKeyValue", "MeterBarRepeat", "MeasureName", "MeasureAudioCalcRepeat", "#ROOTCONFIGPATH#GenerateBands\\Template.inc")
 	
@@ -61,12 +64,12 @@ function Initialize()
 	SKIN:Bang("!WriteKeyValue", "MeasureAudioCalcRepeat", "Formula",
 	  "'(Max(" .. 0.00001 + minValue + ((maxValue - minValue) * (SKIN:ParseFormula(SKIN:GetVariable("MinBarHeight")) / SKIN:ParseFormula(SKIN:GetVariable("BarHeight"))))
 	  .. ", MeasureAudioRepeat))'", "#ROOTCONFIGPATH#GenerateBands\\TemplateCalcMeasures.inc")
-  else
-    if SKIN:ParseFormula(SKIN:GetVariable("ModeKeyboard")) ~= 0 then
-	  SKIN:Bang("!WriteKeyValue", "MeterBarRepeat", "MeasureName", "MeasureFull", "#ROOTCONFIGPATH#GenerateBands\\Template.inc")
-	else
-	  SKIN:Bang("!WriteKeyValue", "MeterBarRepeat", "MeasureName", "MeasureAudioRepeat", "#ROOTCONFIGPATH#GenerateBands\\Template.inc")
+	  
+	if SKIN:ParseFormula(SKIN:GetVariable("ModeKeyboard")) ~= 0 then
+	  SKIN:Bang("!WriteKeyValue", "MeasureAudioCalcRepeat", "Formula", "'(Max(1, MeasureAudioRepeat))'", "#ROOTCONFIGPATH#GenerateBands\\TemplateCalcMeasures.inc")
 	end
+  else
+    SKIN:Bang("!WriteKeyValue", "MeterBarRepeat", "MeasureName", "MeasureAudioRepeat", "#ROOTCONFIGPATH#GenerateBands\\Template.inc")
     SKIN:Bang("!WriteKeyValue", "Include", "@Include5", "", "#@##SkinGroup#.inc")
   end
   
@@ -74,7 +77,12 @@ function Initialize()
   SKIN:Bang("!WriteKeyValue", "NearestAxis", "OnUpdateAction", '[!CommandMeasure ScriptInitialize "nearestAxis = [NearestAxis]" "#ROOTCONFIG#\\Initialize"]', "#@#SkinRotation.inc")
   SKIN:Bang("!WriteKeyValue", "Matrix", "OnUpdateAction", '[!CommandMeasure ScriptInitialize """matrix = "[Matrix]"""" "#ROOTCONFIG#\\Initialize"]', "#@#SkinRotation.inc")
   
-  SKIN:Bang("!WriteKeyValue", "Rainmeter", "@Include", "#@#Variables.inc", "#ROOTCONFIGPATH#Fountain of Colors.ini")
+  if includeVariables ~= 0 then
+    SKIN:Bang("!WriteKeyValue", "Rainmeter", "@Include", "#@#Variables.inc", "#ROOTCONFIGPATH#Fountain of Colors.ini")
+  else
+    SKIN:Bang("!WriteKeyValue", "Rainmeter", "@Include", "", "#ROOTCONFIGPATH#Fountain of Colors.ini")
+  end
+  
   SKIN:Bang("!WriteKeyValue", "Variables", "@Include", "#@##SkinGroup#.inc", "#ROOTCONFIGPATH#Fountain of Colors.ini")
   
   SKIN:Bang("!WriteKeyValue", "Rainmeter", "Group", "#SkinGroup#", "#@##SkinGroup#.inc")

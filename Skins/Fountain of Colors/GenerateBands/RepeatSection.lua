@@ -1,4 +1,4 @@
--- RepeatSection v1.2.1
+-- RepeatSection v1.2.2
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
@@ -13,6 +13,6 @@ function Initialize()
   end
   
   local file = io.open(SKIN:ReplaceVariables(SELF:GetOption("WriteFile")), "w")
-  file:write(table.concat(section, "\n\n"))
+  file:write(table.concat(section))
   file:close()
 end
