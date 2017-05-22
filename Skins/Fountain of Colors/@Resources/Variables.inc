@@ -3,17 +3,17 @@
 Bands=51
 BarGap=6
 BarWidth=10
-BarHeight=265
+BarHeight=249
 MinBarHeight=0
 PaletteColor1=0,250,154
 
 FFTSize=2048
 FFTOverlap="(#FFTSize#-(#FFTSize#/4))"
-FFTAttack=20
-FFTDecay=-1
+FFTAttack=-1
+FFTDecay=9
 FreqMin=
 FreqMax=
-Sensitivity=
+Sensitivity=36.5
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
 AverageSize=0
