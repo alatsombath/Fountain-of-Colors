@@ -12,7 +12,7 @@ FFTOverlap="(#FFTSize#-(#FFTSize#/8))"
 FFTAttack=-1
 FFTDecay=-1
 FreqMin=12
-FreqMax=23000
+FreqMax=23700
 Sensitivity=41
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
