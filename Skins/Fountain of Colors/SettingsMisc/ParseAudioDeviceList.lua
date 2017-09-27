@@ -6,7 +6,7 @@ function Initialize()
 	  if b ~= 1 then
 	    SKIN:Bang("!SetOption", "Rainmeter", "ContextTitle" .. a, j)
 	  else
-	    SKIN:Bang("!SetOption", "Rainmeter", "ContextAction" .. a, "[!WriteKeyValue Variables ID " .. j .. " \"#ConfigPath#\" ][!RefreshGroup #SkinGroup#][!DeactivateConfig]")
+	    SKIN:Bang("!SetOption", "Rainmeter", "ContextAction" .. a, "[!WriteKeyValue Variables ID " .. j .. " \"#ConfigPath#\" ][!RefreshGroup #SkinGroup#][!RefreshGroup SettingsWindow][!DeactivateConfig]")
 	  end
 	  b = b + 1
 	end

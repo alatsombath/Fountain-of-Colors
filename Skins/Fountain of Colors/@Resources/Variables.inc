@@ -1,22 +1,22 @@
 [Variables]
 
 Bands=60
-BarGap=6
-BarWidth=11
-BarHeight=239
+BarGap=7
+BarWidth=16
+BarHeight=356
 MinBarHeight=0
 PaletteColor1=0,250,154
 
 FFTSize=4096
-FFTOverlap="(#FFTSize#-(#FFTSize#/8))"
+FFTOverlap="(Round(#FFTSize#-(#FFTSize#/8))-14)"
 FFTAttack=-1
-FFTDecay=-1
-FreqMin=12
-FreqMax=23700
-Sensitivity=41
+FFTDecay=0
+FreqMin=16.352
+FreqMax=16744.036
+Sensitivity=36
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
-AverageSize=0
+AverageSize=1
 ; Average sound levels over time to provide continuity
 
 ClipOffset=0
