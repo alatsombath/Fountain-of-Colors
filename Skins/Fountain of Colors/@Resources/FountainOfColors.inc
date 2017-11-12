@@ -14,13 +14,13 @@ Plugin=AudioLevel
 Port=Output
 ID=
 FFTSize=4096
-FFTOverlap=3570
+FFTOverlap=2490
 FFTAttack=-1
-FFTDecay=0
+FFTDecay=-1
 Bands=60
 FreqMin=16.352
 FreqMax=16744.036 
-Sensitivity=36
+Sensitivity=39
 UpdateDivider=1
 
 [Include]

@@ -1,22 +1,22 @@
 [Variables]
 
 Bands=60
-BarGap=7
-BarWidth=16
-BarHeight=356
+BarGap=8
+BarWidth=17
+BarHeight=358
 MinBarHeight=0
 PaletteColor1=0,250,154
 
 FFTSize=4096
-FFTOverlap="(Round(#FFTSize#-(#FFTSize#/8))-14)"
+FFTOverlap="(Round(#FFTSize#-(#FFTSize#/2.5))+32)"
 FFTAttack=-1
-FFTDecay=0
+FFTDecay=-1
 FreqMin=16.352
 FreqMax=16744.036
-Sensitivity=36
+Sensitivity=39
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
-AverageSize=1
+AverageSize=2
 ; Average sound levels over time to provide continuity
 
 ClipOffset=0
@@ -70,6 +70,6 @@ SetCloneColorState=
 ; Don't change these here, edit the skin file instead
 Angle=0
 Invert=0
-Channel=Avg
+Channel=FL
 Port=Output
 ID=
