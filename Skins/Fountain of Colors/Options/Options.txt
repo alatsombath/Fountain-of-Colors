@@ -1,0 +1,265 @@
+Add-Type -AssemblyName System.Windows.Forms
+
+$form = New-Object Windows.Forms.Form
+$form.AutoSize = $True
+$form.AutoSizeMode = "GrowAndShrink"
+$form.ShowIcon = $False
+$form.ShowInTaskbar = $False
+$form.MinimizeBox = $False
+$form.MaximizeBox = $False
+$form.SizeGripStyle = "Hide"
+$form.Text = "#ROOTCONFIG#"
+
+$table = New-Object Windows.Forms.TableLayoutPanel
+$table.SuspendLayout()
+$table.AutoSize = $True
+$table.AutoSizeMode = "GrowAndShrink"
+
+$rmPath = (Get-Process Rainmeter).Path
+
+
+$labels = "Bands","Bar width (px)","Gap (px)","Height (px)","Min. height (px)","Angle (degrees)","Invert"
+foreach ($item in $labels) {
+  $label = New-Object Windows.Forms.Label
+  $label.TextAlign = "MiddleLeft"
+  $label.Text = $item
+  $null = $table.Controls.Add($label, 0, $i)
+  $i++
+}
+
+
+$vars = [ordered]@{ 'Bands'=#Bands#; 'BarWidth'=#BarWidth#; 'BarGap'=#BarGap#; 'BarHeight'=#BarHeight#; 'MinBarHeight'=#MinBarHeight#; 'Angle'=#Angle# }
+foreach ($key in $vars.Keys) {
+  $numUpDown = New-Object Windows.Forms.NumericUpDown
+  $numUpDown.AutoSize = $True
+  $numUpDown.TextAlign = "Center"
+  $numUpDown.Maximum = 999
+  $numUpDown.Name, $numUpDown.Value = $key, $vars[$key]
+  switch ($key) {
+    "Bands" { $numUpDown.Minimum = 2 ; break }
+    "Angle" { $numUpDown.Maximum = 360; $numUpDown.DecimalPlaces = 1; break }
+  }
+
+  $numUpDown.Add_ValueChanged({
+    $name, $value = $this.Name, $this.Value
+
+    & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"]`"`"`" "#Config#"][!UpdateMeasure Audio "#Config#"]
+
+    switch ($name) {
+      "Bands"        { & $rmPath [!ActivateConfig "#ROOTCONFIG#\GenerateBands"] ; break }
+      "MinBarHeight" { & $rmPath [!ActivateConfig "#ROOTCONFIG#\GenerateBands"] ; break }
+      "Angle"        { & $rmPath [!SetOption Audio OnUpdateAction "[!WriteKeyValue Variables $name $value][!RefreshGroup #SkinGroup#]" "#Config#"] ; break }
+      default        { & $rmPath [!RefreshGroup #SkinGroup#] ; break }
+    }
+  })
+  $null = $table.Controls.Add($numUpDown, 1, $j)
+  $j++
+}
+
+
+$invertCheckBox = New-Object Windows.Forms.Checkbox
+$invertCheckBox.AutoSize = $True
+$invertCheckBox.CheckAlign = "TopCenter"
+$invertCheckBox.Checked = #Invert#
+$invertCheckBox.Add_Click({
+  switch ($this.Checked) {
+    $True  { $checked = 1 ; break }
+    $False { $checked = 0 ; break }
+  }
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Invert $checked][!WriteKeyValue Variables Invert $checked `"#*@*#Variables.inc`"][!ActivateConfig `"#ROOTCONFIG#\GenerateBands`"]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($invertCheckBox, 1, $j)
+$j++
+
+
+$colorModes = "Single","Random","IndivRand","Wallpaper","Window"
+$colorModeComboBox = New-Object Windows.Forms.ComboBox
+foreach ($item in $colorModes) {
+  $null = $colorModeComboBox.Items.Add($item)
+}
+$colorModeComboBox.DropDownStyle = "DropDownList"
+$colorModeComboBox.SelectedItem = "#Colors#"
+$colorModeComboBox.Add_SelectionChangeCommitted({
+  $selectedItem = $this.SelectedItem
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Colors $selectedItem `"#*@*#Variables.inc`"]`"`"`" "#Config#"][!UpdateMeasure Audio "#Config#"]
+
+  switch ($selectedItem) { "Wallpaper" {break} "Window" {break} default { $selectedItem = ""; break } }
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables GetColors `"$selectedItem`" `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($colorModeComboBox, 0, $i)
+$i++
+ 
+
+$color = New-Object Windows.Forms.Button
+$color.Size = "32,22"
+$color.BackColor = [Drawing.Color]::FromArgb(#PaletteColor1#)
+$color.Add_Click({
+  $colorDialog = New-Object Windows.Forms.ColorDialog
+  $colorDialog.FullOpen = $True
+  $colorDialog.Color = $color.BackColor
+  $colorDialog.ShowDialog()
+
+  $color.BackColor = $colorDialog.Color
+  $rgb = -join($color.BackColor.R, ",", $color.BackColor.G, ",", $color.BackColor.B)
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables PaletteColor1 $rgb `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($color, 1, $j)
+$j++
+
+
+$labels = "Left-right blending","Up-down blending","Transition (ms)","Opacity multiplier","Lower opacity","Upper opacity"
+foreach ($item in $labels) {
+  $label = New-Object Windows.Forms.Label
+  $label.TextAlign = "MiddleLeft"
+  $label.Text = $item
+  $null = $table.Controls.Add($label, 0, $i)
+  $i++
+}
+
+
+$vars = [ordered]@{ 'hBlendingMultiplier'=#hBlendingMultiplier#; 'vBlendingMultiplier'=#vBlendingMultiplier#; 'TransitionTime'=#TransitionTime#; 'OpacityMultiplier'=#OpacityMultiplier#; 'OpacityLower'=#OpacityLower#; 'OpacityUpper'=#OpacityUpper# }
+foreach ($key in $vars.Keys) {
+  $numUpDown = New-Object Windows.Forms.NumericUpDown
+  $numUpDown.AutoSize = $True
+  $numUpDown.TextAlign = "Center"
+  $numUpDown.Increment = 0.1
+  $numUpDown.DecimalPlaces = 1
+  switch -Wildcard ($key){
+    "Opacity*"       { $numUpDown.Maximum = 255 ; break }
+    "TransitionTime" { $numUpDown.Maximum = 360 ; break }
+    default          { $numUpDown.Maximum = 2 ; break }
+  }
+  $numUpDown.Name, $numUpDown.Value = $key, $vars[$key]
+
+  $numUpDown.Add_ValueChanged({
+    $name, $value = $this.Name, $this.Value
+    & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+  })
+  $null = $table.Controls.Add($numUpDown, 1, $j)
+  $j++
+}
+
+
+$labels = "Sensitivity (dB)","Continuity (values)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Channel","Port"
+foreach ($item in $labels) {
+  $label = New-Object Windows.Forms.Label
+  $label.TextAlign = "MiddleLeft"
+  $label.Text = $item
+  $null = $table.Controls.Add($label, 2, $k)
+  $k++
+}
+
+$vars = [ordered]@{ 'Sensitivity'=#Sensitivity#; 'AverageSize'=#AverageSize#; 'FFTAttack'=#FFTAttack#; 'FFTDecay'=#FFTDecay# }
+foreach ($key in $vars.Keys) {
+  $numUpDown = New-Object Windows.Forms.NumericUpDown
+  $numUpDown.AutoSize = $True
+  $numUpDown.TextAlign = "Center"
+  $numUpDown.Maximum = 999
+  $numUpDown.Name, $numUpDown.Value = $key, $vars[$key]
+
+  $numUpDown.Add_ValueChanged({
+    $name, $value = $this.Name, $this.Value
+    & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+  })
+  $null = $table.Controls.Add($numUpDown, 3, $l)
+  $l++
+}
+
+
+$minFreqDomain = New-Object Windows.Forms.DomainUpDown
+for ($m=-33; $m -gt -58; $m--) {
+  
+  # http://members.efn.org/~qehn/global/building/cents.htm
+  $null = $minFreqDomain.Items.Add([Math]::Round([Math]::Pow([Math]::Pow(2, 1/12), $m) * 220, 3))
+}
+$minFreqDomain.AutoSize = $True
+$minFreqDomain.SelectedItem = #FreqMin#
+$minFreqDomain.Add_TextChanged({
+  $selectedItem = $this.SelectedItem
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables FreqMin $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($minFreqDomain, 3, $l)
+$l++
+
+
+$maxFreqDomain = New-Object Windows.Forms.DomainUpDown
+for ($m=87; $m -gt 62; $m--) {
+  $null = $maxFreqDomain.Items.Add([Math]::Round([Math]::Pow([Math]::Pow(2, 1/12), $m) * 220, 3))
+}
+$maxFreqDomain.AutoSize = $True
+$maxFreqDomain.SelectedItem = #FreqMax#
+$maxFreqDomain.Add_TextChanged({
+  $selectedItem = $this.SelectedItem
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables FreqMax $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($maxFreqDomain, 3, $l)
+$l++
+
+
+$fftSizeDomain = New-Object Windows.Forms.DomainUpDown
+for ($m=16; $m -gt 0; $m--) {
+  $null = $fftSizeDomain.Items.Add($m * 512)
+}
+$fftSizeDomain.AutoSize = $True
+$fftSizeDomain.SelectedItem = #FFTSize#
+$fftSizeDomain.Add_TextChanged({
+  $selectedItem = $this.SelectedItem
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables FFTSize $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($fftSizeDomain, 3, $l)
+$l++
+
+
+$channels = "Avg","FL","FR","C","LFE","BL","BR","SL","SR"
+$channelComboBox = New-Object Windows.Forms.ComboBox
+foreach ($item in $channels) {
+  $null = $channelComboBox.Items.Add($item)
+}
+$channelComboBox.Width = 76
+$channelComboBox.DropDownStyle = "DropDownList"
+$channelComboBox.SelectedItem = "#Channel#"
+$channelComboBox.Add_SelectionChangeCommitted({
+  $selectedItem = $this.SelectedItem
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Channel $selectedItem][!WriteKeyValue Variables Channel $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($channelComboBox, 3, $l)
+$l++
+
+
+$ports = "Output","Input"
+$portComboBox = New-Object Windows.Forms.ComboBox
+foreach ($item in $ports) {
+  $null = $portComboBox.Items.Add($item)
+}
+$portComboBox.Width = 76
+$portComboBox.DropDownStyle = "DropDownList"
+$portComboBox.SelectedItem = "#Port#"
+$portComboBox.Add_SelectionChangeCommitted({
+  $selectedItem = $this.SelectedItem
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Port $selectedItem][!WriteKeyValue Variables Port $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($portComboBox, 3, $l)
+$l++
+
+
+$deviceName = New-Object Windows.Forms.Button
+$deviceName.Text = "Devices..."
+$deviceName.Add_Click({
+  & $rmPath [!ActivateConfig "#ROOTCONFIG#\SettingsMisc" "AudioDeviceList.ini"]
+})
+$null = $table.Controls.Add($deviceName, 3, $l)
+$l+=2
+
+
+$copyButton = New-Object Windows.Forms.Button
+$copyButton.Text = "Copy skin"
+$copyButton.Add_Click({
+  & $rmPath [!ActivateConfig "#ROOTCONFIG#\SettingsMisc" "MakeSkinCopy.ini"]
+})
+$null = $table.Controls.Add($copyButton, 3, $l)
+$l++
+
+
+$table.ResumeLayout()
+$null = $form.Controls.Add($table)
+$null = $form.ShowDialog()

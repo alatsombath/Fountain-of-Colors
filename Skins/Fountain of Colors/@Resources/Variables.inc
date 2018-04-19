@@ -1,46 +1,39 @@
 [Variables]
 
-Bands=60
-BarGap=8
-BarWidth=17
-BarHeight=358
+Bands=80
+BarGap=5
+BarWidth=11
+BarHeight=267
 MinBarHeight=0
 PaletteColor1=0,250,154
 
-FFTSize=4096
-FFTOverlap="(Round(#FFTSize#-(#FFTSize#/2.5))+32)"
-FFTAttack=-1
-FFTDecay=-1
+FFTSize=5120
+FFTOverlap="(Ceil((2/3)*#FFTSize#))"
+FFTAttack=0
+FFTDecay=0
 FreqMin=16.352
 FreqMax=16744.036
-Sensitivity=39
+Sensitivity=42
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
-AverageSize=2
+AverageSize=3
 ; Average sound levels over time to provide continuity
 
-ClipOffset=0
-; Increase precision by narrowing (in dB) the range of displayed values
-
 Colors=Single
-; Single, Random, Custom, Individual, IndivRand, Wallpaper, Taskbar
-
-ColorsPlugin=None
-; None, Chameleon (Wallpaper), SysColor (Taskbar)
-
-WallpaperColorSource=Cycle
-; Avg, FG1, BG1, FG2, BG2, Cycle
+; Single, Random, Custom, Individual, IndivRand, Wallpaper, Window
+GetColors=
+; "", Wallpaper, Window
 
 PaletteColor2=96,160,224
 PaletteColor3=255,160,160
 PaletteColor4=240,240,240
 
-TransitionTime=12
-hBlendingMultiplier=0
-vBlendingMultiplier=0
+TransitionTime=12.0
+hBlendingMultiplier=0.0
+vBlendingMultiplier=0.0
 OpacityLower=255
 OpacityUpper=255
-OpacityMultiplier=1
+OpacityMultiplier=1.0
 
 DecayEffect=0
 DecayThreshold=55
@@ -60,16 +53,11 @@ ModeKeyboard=0
 FirstBandIndex=1
 ; "0" band should be skipped for aesthetic purpose
 
-; Environment variables for settings window/skin
+; !!! Do not change (environment variables)
 SkinGroup=FountainOfColors
 Config=Fountain of Colors
-ConfigPath=#ROOTCONFIGPATH##Config#.ini
-WriteVariable=PaletteColor1
 SetCloneColorState=
-
-; Don't change these here, edit the skin file instead
 Angle=0
 Invert=0
-Channel=FL
+Channel=Avg
 Port=Output
-ID=

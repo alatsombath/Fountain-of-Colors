@@ -1,0 +1,46 @@
+[MeasureRun]
+Measure=Plugin
+Plugin=RunCommand
+Parameter=powershell -Command - < "#@#GetWallpaperColor.ps1"
+OutputType=ANSI
+FinishAction=[!SetOptionGroup PaletteColor OnChangeAction "[!SetVariable #*CURRENTSECTION*# [#*CURRENTSECTION*#]]"][!UpdateMeasureGroup PaletteColor][!UpdateMeasure SetColors]
+
+[WallpaperPath]
+Measure=Registry
+RegHKey=HKEY_CURRENT_USER
+RegKey=Control Panel\Desktop
+RegValue=Wallpaper
+OnChangeAction=[!CommandMeasure MeasureRun "Run"]
+UpdateDivider=400
+
+[PaletteColor1]
+Measure=String
+Group=PaletteColor
+String=[MeasureRun]
+DynamicVariables=1
+RegExpSubstitute=1 
+Substitute="(.*)\|(.*)\|(.*)\|(.*)":"\1"
+
+[PaletteColor2]
+Measure=String
+Group=PaletteColor
+String=[MeasureRun]
+DynamicVariables=1
+RegExpSubstitute=1 
+Substitute="(.*)\|(.*)\|(.*)\|(.*)":"\2"
+
+[PaletteColor3]
+Measure=String
+Group=PaletteColor
+String=[MeasureRun]
+DynamicVariables=1
+RegExpSubstitute=1 
+Substitute="(.*)\|(.*)\|(.*)\|(.*)":"\3"
+
+[PaletteColor4]
+Measure=String
+Group=PaletteColor
+String=[MeasureRun]
+DynamicVariables=1
+RegExpSubstitute=1 
+Substitute="(.*)\|(.*)\|(.*)\|(.*)":"\4"

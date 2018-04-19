@@ -1,0 +1,2 @@
+[MeterDummy]
+Meter=Image

@@ -1,7 +1,4 @@
--- RepeatSection v1.2.2
--- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
-
-function Initialize()
+function Update()
   local index, section, gsub, readFile = 1, {}, string.gsub, io.input(SKIN:ReplaceVariables(SELF:GetOption("ReadFile"))):read("*all")
   local substitution, lowerLimit, upperLimit = SELF:GetOption("Substitution"), SELF:GetNumberOption("LowerLimit") + 1, SELF:GetNumberOption("UpperLimit") + 1
   

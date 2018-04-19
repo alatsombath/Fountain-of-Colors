@@ -1,10 +1,9 @@
-[MeasureAudioRepeat]
+[AudioRepeat]
 Measure=Plugin
-Group=Audio
 Plugin=AudioLevel
-Parent=MeasureAudio
+Parent=Audio
 Type=Band
 BandIdx=Repeat
-[MeterBarRepeat]
+[Repeat]
 Meter=Bar
-MeasureName=MeasureAudioRepeat
+MeasureName=AudioRepeat
