@@ -10,21 +10,20 @@ OnRefreshAction=
 
 [Audio]
 Measure=Plugin
-Plugin=AudioLevel
-Port=Output
+Plugin=AudioLevelBeta
+Port=
 ID=
 FFTSize=5120
-FFTOverlap=3414
+FFTOverlap=3206
 FFTAttack=0
 FFTDecay=0
 Bands=80
 FreqMin=16.352
 FreqMax=16744.036 
-Sensitivity=42
+Sensitivity=37
 UpdateDivider=0
 
 [Include]
-@Include=#@#Bands.inc
 
 @Include2=
 @Include3=

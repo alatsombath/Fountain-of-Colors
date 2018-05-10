@@ -1,0 +1,26 @@
+function Initialize()
+  if SKIN:GetVariable("Invert") ~= "" and SKIN:GetVariable("Invert") ~= "0" then
+    SKIN:Bang("!WriteKeyValue", "AudioRepeat", "BandIdx", "'(Abs(-#FirstBandIndex# + Max(2,#Bands#-1) - Repeat))'", "#ROOTCONFIGPATH#GenerateBands\\Template")
+  else
+    SKIN:Bang("!WriteKeyValue", "AudioRepeat", "BandIdx", "Repeat", "#ROOTCONFIGPATH#GenerateBands\\Template")
+  end
+
+  if SKIN:GetVariable("MinBarHeight") ~= "0" and true or (SKIN:GetVariable("ModeKeyboard") ~= "0" and true or false) then
+
+    SKIN:Bang("!WriteKeyValue", "Repeat", "MeasureName", "AudioCalcRepeat", "#ROOTCONFIGPATH#GenerateBands\\Template")
+    SKIN:Bang("!WriteKeyValue", "Include", "@Include5", "#*@*#CalcMeasures", "#@##SkinGroup#")
+  
+    if SKIN:GetVariable("ModeKeyboard") ~= "0" then
+      SKIN:Bang("!WriteKeyValue", "AudioCalcRepeat", "Formula", "'(Max(AudioRepeat, 1))'", "#ROOTCONFIGPATH#GenerateBands\\TemplateCalcMeasures")
+    else
+      SKIN:Bang("!WriteKeyValue", "AudioCalcRepeat", "Formula",
+        "'(Max(" .. 0.00001 + (SKIN:GetVariable("MinBarHeight") / SKIN:GetVariable("BarHeight"))
+        .. ", AudioRepeat))'", "#ROOTCONFIGPATH#GenerateBands\\TemplateCalcMeasures")
+    end
+
+  else
+    SKIN:Bang("!DisableMeasure", "GenerateCalcMeasures")
+    SKIN:Bang("!WriteKeyValue", "Repeat", "MeasureName", "AudioRepeat", "#ROOTCONFIGPATH#GenerateBands\\Template")
+    SKIN:Bang("!WriteKeyValue", "Include", "@Include5", "", "#@##SkinGroup#")
+  end
+end

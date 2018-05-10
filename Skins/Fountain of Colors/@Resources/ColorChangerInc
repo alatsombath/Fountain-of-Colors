@@ -1,6 +1,6 @@
 [ScriptColorChanger]
 Measure=Script
-ScriptFile=#@#ColorChanger.lua
+ScriptFile=#@#ColorChanger
 MeasureBaseName=Audio
 MeterBaseName=
 MeterOption=BarColor
@@ -31,7 +31,7 @@ IfMatchAction=[!CommandMeasure ScriptColorChanger "enableTransition, enableHoriz
 IfMatch2="IndivRand"
 IfMatchAction2=[!CommandMeasure ScriptColorChanger "enableTransition = 1"]
 
-@Include=#@#Get#GetColors#Color.inc
+@Include=#@#Get#GetColors#Color
 
 [SetColors]
 Measure=String

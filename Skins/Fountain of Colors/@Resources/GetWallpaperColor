@@ -1,7 +1,7 @@
 [MeasureRun]
 Measure=Plugin
 Plugin=RunCommand
-Parameter=powershell -Command - < "#@#GetWallpaperColor.ps1"
+Parameter=powershell -Command - < "#@#GetWallpaperColorPS1"
 OutputType=ANSI
 FinishAction=[!SetOptionGroup PaletteColor OnChangeAction "[!SetVariable #*CURRENTSECTION*# [#*CURRENTSECTION*#]]"][!UpdateMeasureGroup PaletteColor][!UpdateMeasure SetColors]
 

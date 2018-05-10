@@ -1,6 +1,6 @@
 [AudioRepeat]
 Measure=Plugin
-Plugin=AudioLevel
+Plugin=AudioLevelBeta
 Parent=Audio
 Type=Band
 BandIdx=Repeat

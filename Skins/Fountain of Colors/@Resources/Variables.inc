@@ -8,15 +8,15 @@ MinBarHeight=0
 PaletteColor1=0,250,154
 
 FFTSize=5120
-FFTOverlap="(Ceil((2/3)*#FFTSize#))"
+FFTOverlapPercent=62.61
 FFTAttack=0
 FFTDecay=0
 FreqMin=16.352
 FreqMax=16744.036
-Sensitivity=42
+Sensitivity=37
 ; http://docs.rainmeter.net/manual-beta/plugins/audiolevel
 
-AverageSize=3
+AverageSize=2
 ; Average sound levels over time to provide continuity
 
 Colors=Single
@@ -28,7 +28,7 @@ PaletteColor2=96,160,224
 PaletteColor3=255,160,160
 PaletteColor4=240,240,240
 
-TransitionTime=12.0
+TransitionTime=12
 hBlendingMultiplier=0.0
 vBlendingMultiplier=0.0
 OpacityLower=255
@@ -57,7 +57,8 @@ FirstBandIndex=1
 SkinGroup=FountainOfColors
 Config=Fountain of Colors
 SetCloneColorState=
-Angle=0
-Invert=0
-Channel=Avg
-Port=Output
+FFTOverlap=
+Angle=
+Invert=
+Channel=
+Port=

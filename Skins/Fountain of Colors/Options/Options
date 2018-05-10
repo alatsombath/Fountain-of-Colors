@@ -28,7 +28,7 @@ foreach ($item in $labels) {
 }
 
 
-$vars = [ordered]@{ 'Bands'=#Bands#; 'BarWidth'=#BarWidth#; 'BarGap'=#BarGap#; 'BarHeight'=#BarHeight#; 'MinBarHeight'=#MinBarHeight#; 'Angle'=#Angle# }
+$vars = [ordered]@{ 'Bands'=#Bands#; 'BarWidth'=#BarWidth#; 'BarGap'=#BarGap#; 'BarHeight'=#BarHeight#; 'MinBarHeight'=#MinBarHeight#; 'Angle'="#Angle#" }
 foreach ($key in $vars.Keys) {
   $numUpDown = New-Object Windows.Forms.NumericUpDown
   $numUpDown.AutoSize = $True
@@ -43,12 +43,14 @@ foreach ($key in $vars.Keys) {
   $numUpDown.Add_ValueChanged({
     $name, $value = $this.Name, $this.Value
 
+    switch ($name) { "Angle" { switch ($value) { 0 { $value = '""'; break } } ; break } }
+    
     & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"]`"`"`" "#Config#"][!UpdateMeasure Audio "#Config#"]
 
     switch ($name) {
       "Bands"        { & $rmPath [!ActivateConfig "#ROOTCONFIG#\GenerateBands"] ; break }
       "MinBarHeight" { & $rmPath [!ActivateConfig "#ROOTCONFIG#\GenerateBands"] ; break }
-      "Angle"        { & $rmPath [!SetOption Audio OnUpdateAction "[!WriteKeyValue Variables $name $value][!RefreshGroup #SkinGroup#]" "#Config#"] ; break }
+      "Angle"        { & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value][!DisableMeasure Audio][!ActivateConfig `"#ROOTCONFIG#\Initialize`"]`"`"`" "#Config#"] ; break }
       default        { & $rmPath [!RefreshGroup #SkinGroup#] ; break }
     }
   })
@@ -60,11 +62,14 @@ foreach ($key in $vars.Keys) {
 $invertCheckBox = New-Object Windows.Forms.Checkbox
 $invertCheckBox.AutoSize = $True
 $invertCheckBox.CheckAlign = "TopCenter"
-$invertCheckBox.Checked = #Invert#
+switch (#Invert#) {
+  1       { $invertCheckBox.Checked = $True ; break }
+  default { $invertCheckBox.Checked = $False ; break }
+}
 $invertCheckBox.Add_Click({
   switch ($this.Checked) {
     $True  { $checked = 1 ; break }
-    $False { $checked = 0 ; break }
+    $False { $checked = '""' ; break }
   }
   & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Invert $checked][!WriteKeyValue Variables Invert $checked `"#*@*#Variables.inc`"][!ActivateConfig `"#ROOTCONFIG#\GenerateBands`"]`"`"`" "#Config#"]
 })
@@ -124,9 +129,9 @@ foreach ($key in $vars.Keys) {
   $numUpDown.TextAlign = "Center"
   $numUpDown.Increment = 0.1
   $numUpDown.DecimalPlaces = 1
-  switch -Wildcard ($key){
+  switch -Wildcard ($key) {
     "Opacity*"       { $numUpDown.Maximum = 255 ; break }
-    "TransitionTime" { $numUpDown.Maximum = 360 ; break }
+    "TransitionTime" { $numUpDown.Maximum = 360 ; $numUpDown.Minimum = 0.01 ; break }
     default          { $numUpDown.Maximum = 2 ; break }
   }
   $numUpDown.Name, $numUpDown.Value = $key, $vars[$key]
@@ -140,7 +145,7 @@ foreach ($key in $vars.Keys) {
 }
 
 
-$labels = "Sensitivity (dB)","Continuity (values)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Channel","Port"
+$labels = "Sensitivity (dB)","Continuity (values)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Overlap %","Channel","Port"
 foreach ($item in $labels) {
   $label = New-Object Windows.Forms.Label
   $label.TextAlign = "MiddleLeft"
@@ -210,6 +215,21 @@ $null = $table.Controls.Add($fftSizeDomain, 3, $l)
 $l++
 
 
+$overlapNumUpDown = New-Object Windows.Forms.NumericUpDown
+$overlapNumUpDown.AutoSize = $True
+$overlapNumUpDown.TextAlign = "Center"
+$overlapNumUpDown.Increment = 0.01
+  $overlapNumUpDown.DecimalPlaces = 2
+$overlapNumUpDown.Name, $overlapNumUpDown.Value = "FFTOverlapPercent", #FFTOverlapPercent#
+
+$overlapNumUpDown.Add_ValueChanged({
+  $name, $value = $this.Name, $this.Value
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"][!WriteKeyValue Variables FFTOverlap `"`" `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($overlapNumUpDown, 3, $l)
+$l++
+
+
 $channels = "Avg","FL","FR","C","LFE","BL","BR","SL","SR"
 $channelComboBox = New-Object Windows.Forms.ComboBox
 foreach ($item in $channels) {
@@ -219,23 +239,30 @@ $channelComboBox.Width = 76
 $channelComboBox.DropDownStyle = "DropDownList"
 $channelComboBox.SelectedItem = "#Channel#"
 $channelComboBox.Add_SelectionChangeCommitted({
-  $selectedItem = $this.SelectedItem
+  switch ($this.selectedItem) {
+    "Avg"   { $selectedItem = '""' ; break }
+    default { $selectedItem = $this.selectedItem ; break }
+  }
   & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Channel $selectedItem][!WriteKeyValue Variables Channel $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
 })
 $null = $table.Controls.Add($channelComboBox, 3, $l)
 $l++
 
 
-$ports = "Output","Input"
 $portComboBox = New-Object Windows.Forms.ComboBox
-foreach ($item in $ports) {
-  $null = $portComboBox.Items.Add($item)
-}
+$null = $portComboBox.Items.Add("Output")
+$null = $portComboBox.Items.Add("Input")
 $portComboBox.Width = 76
 $portComboBox.DropDownStyle = "DropDownList"
-$portComboBox.SelectedItem = "#Port#"
+switch ("#Port#") {
+    "Input" { $portComboBox.SelectedItem = "Input" ; break }
+    default { $portComboBox.SelectedItem = "Output" ; break }
+}
 $portComboBox.Add_SelectionChangeCommitted({
-  $selectedItem = $this.SelectedItem
+  switch ($this.selectedItem) {
+    "Input" { $selectedItem = "Input" ; break }
+    default { $selectedItem = '""' ; break }
+  }
   & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Port $selectedItem][!WriteKeyValue Variables Port $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
 })
 $null = $table.Controls.Add($portComboBox, 3, $l)
