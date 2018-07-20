@@ -1,4 +1,0 @@
-[AudioCalcRepeat]
-Measure=Calc
-Formula='(Max(0.0037413432835821, AudioRepeat))'
-UpdateDivider=0

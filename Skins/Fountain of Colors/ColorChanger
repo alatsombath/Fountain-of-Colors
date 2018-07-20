@@ -1,4 +1,4 @@
--- ColorChanger v3.1.5, A modification of ColorChanger v1.3 by Smurfier
+-- ColorChanger v3.1.6, A modification of ColorChanger v1.3 by Smurfier
 -- LICENSE: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
 
 function Initialize()
@@ -10,7 +10,7 @@ function Initialize()
   measure, meterName, option = {}, {}, SELF:GetOption("MeterOption")
   oldMeasureValues, timeSinceDecay, decayEffect = {}, {}, SELF:GetNumberOption("DecayEffect")
   decayThreshold = 0.001 * SELF:GetNumberOption("DecayThreshold")
-  decaySustain, decayDuration = 0.001 * 62.5 * SELF:GetNumberOption("DecaySustain"), 0.001 * 62.5 * SELF:GetNumberOption("DecayDuration")
+  decaySustain, decayDuration = 0.001 * 250 * SELF:GetNumberOption("DecaySustain"), 0.001 * 250 * SELF:GetNumberOption("DecayDuration")
   decayOpacityMin, decayOpacityMax = SELF:GetNumberOption("DecayOpacityMin"), SELF:GetNumberOption("DecayOpacityMax")
   hInvert = SELF:GetNumberOption("hInvert")
   hBlendingMultiplier, vBlendingMultiplier = SELF:GetNumberOption("hBlendingMultiplier"), SELF:GetNumberOption("vBlendingMultiplier")
@@ -41,7 +41,7 @@ function Initialize()
   end
   
   updateWhenZero = SELF:GetNumberOption("UpdateWhenZero")
-  transitionTime = math.ceil(SELF:GetOption("TransitionTime") * 1000 / 16)
+  transitionTime = math.ceil(SELF:GetOption("TransitionTime") * 1000 / 4)
   enableTransition, enableHorizontalTransition = 0, 0
   counterNorm, counter = {}, transitionTime
   for i = 1, transitionTime do counterNorm[i] = i / transitionTime end

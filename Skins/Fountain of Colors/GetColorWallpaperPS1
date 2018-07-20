@@ -5,7 +5,7 @@ $ms = New-Object IO.MemoryStream
 $image.Save($ms, $image.RawFormat)
 $image = [Convert]::ToBase64String($ms.ToArray())
 
-$script = Get-Content (-join((Get-Item -Path ".\").FullName, '\@Resources\color-thief'))
+$script = Get-Content (-join((Get-Item -Path ".\").FullName, '\color-thief'))
 $js = @"
   $script;
   var colorThief = new ColorThief(), img = new Image();

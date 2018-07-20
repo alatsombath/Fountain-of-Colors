@@ -1,0 +1,4 @@
+[AudioCalcNUM]
+Measure=Calc
+Formula='(Max(0.0037553183520599, AudioNUM))'
+UpdateDivider=0

@@ -48,9 +48,9 @@ foreach ($key in $vars.Keys) {
     & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"]`"`"`" "#Config#"][!UpdateMeasure Audio "#Config#"]
 
     switch ($name) {
-      "Bands"        { & $rmPath [!ActivateConfig "#ROOTCONFIG#\GenerateBands"] ; break }
-      "MinBarHeight" { & $rmPath [!ActivateConfig "#ROOTCONFIG#\GenerateBands"] ; break }
-      "Angle"        { & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value][!DisableMeasure Audio][!ActivateConfig `"#ROOTCONFIG#\Initialize`"]`"`"`" "#Config#"] ; break }
+      "Bands"        { & $rmPath [!ActivateConfig "#ROOTCONFIG#" "GenerateBands.ini"] ; break }
+      "MinBarHeight" { & $rmPath [!ActivateConfig "#ROOTCONFIG#" "GenerateBands.ini"] ; break }
+      "Angle"        { & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value][!Refresh]`"`"`" "#Config#"] ; break }
       default        { & $rmPath [!RefreshGroup #SkinGroup#] ; break }
     }
   })
@@ -71,7 +71,7 @@ $invertCheckBox.Add_Click({
     $True  { $checked = 1 ; break }
     $False { $checked = '""' ; break }
   }
-  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Invert $checked][!WriteKeyValue Variables Invert $checked `"#*@*#Variables.inc`"][!ActivateConfig `"#ROOTCONFIG#\GenerateBands`"]`"`"`" "#Config#"]
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Invert $checked][!WriteKeyValue Variables Invert $checked `"#*@*#Variables.inc`"][!Refresh]`"`"`" "#Config#"]
 })
 $null = $table.Controls.Add($invertCheckBox, 1, $j)
 $j++
@@ -86,10 +86,7 @@ $colorModeComboBox.DropDownStyle = "DropDownList"
 $colorModeComboBox.SelectedItem = "#Colors#"
 $colorModeComboBox.Add_SelectionChangeCommitted({
   $selectedItem = $this.SelectedItem
-  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Colors $selectedItem `"#*@*#Variables.inc`"]`"`"`" "#Config#"][!UpdateMeasure Audio "#Config#"]
-
-  switch ($selectedItem) { "Wallpaper" {break} "Window" {break} default { $selectedItem = ""; break } }
-  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables GetColors `"$selectedItem`" `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Colors $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
 })
 $null = $table.Controls.Add($colorModeComboBox, 0, $i)
 $i++
@@ -145,7 +142,7 @@ foreach ($key in $vars.Keys) {
 }
 
 
-$labels = "Sensitivity (dB)","Continuity (values)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Overlap %","Channel","Port"
+$labels = "Sensitivity (dB)","Continuity (values)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Channel","Port"
 foreach ($item in $labels) {
   $label = New-Object Windows.Forms.Label
   $label.TextAlign = "MiddleLeft"
@@ -215,21 +212,6 @@ $null = $table.Controls.Add($fftSizeDomain, 3, $l)
 $l++
 
 
-$overlapNumUpDown = New-Object Windows.Forms.NumericUpDown
-$overlapNumUpDown.AutoSize = $True
-$overlapNumUpDown.TextAlign = "Center"
-$overlapNumUpDown.Increment = 0.01
-  $overlapNumUpDown.DecimalPlaces = 2
-$overlapNumUpDown.Name, $overlapNumUpDown.Value = "FFTOverlapPercent", #FFTOverlapPercent#
-
-$overlapNumUpDown.Add_ValueChanged({
-  $name, $value = $this.Name, $this.Value
-  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"][!WriteKeyValue Variables FFTOverlap `"`" `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
-})
-$null = $table.Controls.Add($overlapNumUpDown, 3, $l)
-$l++
-
-
 $channels = "Avg","FL","FR","C","LFE","BL","BR","SL","SR"
 $channelComboBox = New-Object Windows.Forms.ComboBox
 foreach ($item in $channels) {
@@ -243,7 +225,7 @@ $channelComboBox.Add_SelectionChangeCommitted({
     "Avg"   { $selectedItem = '""' ; break }
     default { $selectedItem = $this.selectedItem ; break }
   }
-  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Channel $selectedItem][!WriteKeyValue Variables Channel $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Channel $selectedItem][!WriteKeyValue Variables Channel $selectedItem `"#*@*#Variables.inc`"][!Refresh]`"`"`" "#Config#"]
 })
 $null = $table.Controls.Add($channelComboBox, 3, $l)
 $l++
@@ -263,7 +245,7 @@ $portComboBox.Add_SelectionChangeCommitted({
     "Input" { $selectedItem = "Input" ; break }
     default { $selectedItem = '""' ; break }
   }
-  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Port $selectedItem][!WriteKeyValue Variables Port $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Port $selectedItem][!WriteKeyValue Variables Port $selectedItem `"#*@*#Variables.inc`"][!Refresh]`"`"`" "#Config#"]
 })
 $null = $table.Controls.Add($portComboBox, 3, $l)
 $l++
