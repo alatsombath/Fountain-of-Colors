@@ -3,7 +3,7 @@ function Initialize()
   local cfg = SKIN:GetVariable("Config")
   local includeVariables, max = 0, math.max
   local colors, angle = SKIN:GetVariable("Colors"), SKIN:GetVariable("Angle")
-  local bands, fftSize = SKIN:GetVariable("Bands"), SKIN:GetVariable("FFTSize")
+  local bands = SKIN:GetVariable("Bands") 
   
   local rootCfgPath = SKIN:GetVariable("ROOTCONFIGPATH")
   local sharedPath = rootCfgPath..SKIN:GetVariable("SkinGroup")
@@ -13,16 +13,17 @@ function Initialize()
   local incl = "Include"
   
   -- Measure/meter options should be absolute (not referenced or calculated by the skin parser)
-  SKIN:Bang(wKV,"Audio","Port",       SKIN:GetVariable("Port"),sharedPath)
-  SKIN:Bang(wKV,"Audio","ID",         SKIN:GetVariable("ID"),sharedPath)
-  SKIN:Bang(wKV,"Audio","FFTSize",    fftSize,sharedPath)
-  SKIN:Bang(wKV,"Audio","FFTOverlap", fftSize-SKIN:GetMeasure("AudioSamplingRate"):GetStringValue()/1000*10,sharedPath)
-  SKIN:Bang(wKV,"Audio","FFTAttack",  SKIN:GetVariable("FFTAttack"),sharedPath)
-  SKIN:Bang(wKV,"Audio","FFTDecay",   SKIN:GetVariable("FFTDecay"),sharedPath)
-  SKIN:Bang(wKV,"Audio","Bands",      max(2,bands),sharedPath)
-  SKIN:Bang(wKV,"Audio","FreqMin",    SKIN:GetVariable("FreqMin"),sharedPath)
-  SKIN:Bang(wKV,"Audio","FreqMax",    SKIN:GetVariable("FreqMax"),sharedPath)
-  SKIN:Bang(wKV,"Audio","Sensitivity",SKIN:GetVariable("Sensitivity"),sharedPath)
+  SKIN:Bang(wKV,"Audio","Port",         SKIN:GetVariable("Port"),sharedPath)
+  SKIN:Bang(wKV,"Audio","ID",           SKIN:GetVariable("ID"),sharedPath)
+  SKIN:Bang(wKV,"Audio","Channel",      SKIN:GetVariable("Channel"),sharedPath)
+  SKIN:Bang(wKV,"Audio","FFTSize",      SKIN:GetVariable("FFTSize"),sharedPath)
+  SKIN:Bang(wKV,"Audio","FFTBufferSize",SKIN:GetVariable("FFTBufferSize"),sharedPath)
+  SKIN:Bang(wKV,"Audio","FFTAttack",    SKIN:GetVariable("FFTAttack"),sharedPath)
+  SKIN:Bang(wKV,"Audio","FFTDecay",     SKIN:GetVariable("FFTDecay"),sharedPath)
+  SKIN:Bang(wKV,"Audio","Bands",        max(2,bands),sharedPath)
+  SKIN:Bang(wKV,"Audio","FreqMin",      SKIN:GetVariable("FreqMin"),sharedPath)
+  SKIN:Bang(wKV,"Audio","FreqMax",      SKIN:GetVariable("FreqMax"),sharedPath)
+  SKIN:Bang(wKV,"Audio","Sensitivity",  SKIN:GetVariable("Sensitivity"),sharedPath)
 
   -- Conditional inclusion of measures/meters
   if angle ~= "" and angle ~= "0" then
@@ -38,10 +39,14 @@ function Initialize()
     SKIN:Bang(wKV,incl,"@Include3","IndividualBarColors.inc",sharedPath)
   end
   
-  if colors ~= "Single" and true or (SKIN:GetVariable("DecayEffect") ~= "0" and true or false) then
+  if colors ~= "Single" and true or
+    (SKIN:GetVariable("DecayEffect") ~= "0" and true or
+    (SKIN:GetVariable("OpacityMin") ~= SKIN:GetVariable("OpacityMax") and true or
+    false)) then
+
     includeVariables = 1
     SKIN:Bang(wKV,incl,"@Include4","ColorChangerInc",sharedPath)
-    SKIN:Bang(wKV,"Timer",2,"[!UpdateMeasure ScriptColorChanger][!Redraw]",sharedPath)
+    SKIN:Bang(wKV,"Audio","IfAboveAction","[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!UpdateMeasure ScriptColorChanger][!Redraw]",sharedPath)
 
     if colors == "Wallpaper" and true or (colors == "Window" and true or false) then
       SKIN:Bang(wKV,"EnableColorTransition","@Include","#*ROOTCONFIGPATH*#GetColor"..colors,"#ROOTCONFIGPATH#ColorChangerInc")
@@ -61,7 +66,7 @@ function Initialize()
     mainColorState = ""
     SKIN:Bang(wKV,incl,"@Include4","",sharedPath)
     SKIN:Bang(wKV,"Variables","SetCloneColorState","","#@#Variables.inc")
-    SKIN:Bang(wKV,"Timer",2,"[!Redraw]",sharedPath)
+    SKIN:Bang(wKV,"Audio","IfAboveAction","[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw]",sharedPath)
     SKIN:Bang(wKV,"Rainmeter","Update",-1,sharedPath)
   end
   
@@ -89,8 +94,6 @@ function Initialize()
   local barHeight = SKIN:GetVariable("BarHeight")
   local barWidth, barGap = SKIN:GetVariable("BarWidth"), SKIN:GetVariable("BarGap")
   local offset = barWidth + barGap
-
-  local channel = SKIN:GetVariable("Channel")
   local invert  = SKIN:GetVariable("Invert")
 
   local lowerLimit, upperLimit = SKIN:GetVariable("FirstBandIndex") + 1, max(2, bands-1) + 1
@@ -126,9 +129,6 @@ function Initialize()
 
     local measureName = "Audio"..i-1
 
-    if channel ~= "" and channel ~= "Avg" then
-      SKIN:Bang(setO,measureName,"Channel",channel,cfg)
-    end
     if invert ~= "" and invert ~= "0" then
       SKIN:Bang(setO,measureName,"BandIdx",lowerLimit + upperLimit - i-1,cfg)
     end
@@ -137,7 +137,7 @@ function Initialize()
     SKIN:Bang("!UpdateMeasure",measureName,cfg)
   end
 
-  SKIN:Bang('[!CommandMeasure Timer "Execute 1" "#Config#"][!CommandMeasure Timer "Execute 2" "#Config#"]')
+  SKIN:Bang('[!CommandMeasure Timer "Execute 1" "#Config#"]')
 
   if colors == "Wallpaper" then SKIN:Bang('[!CommandMeasure MeasureRun Run "#Config#"]') end
 

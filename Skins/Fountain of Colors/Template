@@ -1,9 +1,0 @@
-[AudioNUM]
-Measure=Plugin
-Plugin=AudioLevelBeta
-Parent=Audio
-Type=Band
-BandIdx=NUM
-[NUM]
-Meter=Bar
-MeasureName=AudioNUM

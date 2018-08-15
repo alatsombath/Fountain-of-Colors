@@ -6,6 +6,7 @@ BarHeight=270
 MinBarHeight=0
 PaletteColor1=0,250,154
 FFTSize=5120
+FFTBufferSize=10240
 FFTAttack=0
 FFTDecay=0
 FreqMin=16.352

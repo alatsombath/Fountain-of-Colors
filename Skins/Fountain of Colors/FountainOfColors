@@ -3,36 +3,35 @@ Update=-1
 Group=FountainOfColors
 ContextTitle="Options..."
 ContextAction=[!ActivateConfig "Fountain of Colors\Options"]
-OnRefreshAction=[!WriteKeyValue Variables Angle "#Angle#" "#@#Variables.inc"][!WriteKeyValue Variables Invert "#Invert#" "#@#Variables.inc"][!WriteKeyValue Variables Channel "#Channel#" "#@#Variables.inc"][!WriteKeyValue Variables Port "#Port#" "#@#Variables.inc"][!WriteKeyValue Variables ID "#ID#" "#@#Variables.inc"][!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!ActivateConfig "#ROOTCONFIG#\Initialize"]
+OnRefreshAction=
 
 [Audio]
 Measure=Plugin
 Plugin=AudioLevelBeta
 Port=
 ID=
+Channel=
 FFTSize=5120
-FFTOverlap=4640
+FFTBufferSize=10240
 FFTAttack=0
 FFTDecay=0
 Bands=80
 FreqMin=16.352
 FreqMax=16744.036 
 Sensitivity=37
-Type=DeviceStatus
+Type=BufferStatus
+IfAboveValue=0
+IfAboveAction=[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw]
 
 [Include]
 @Include2=
 @Include3=
 @Include4=
-@Include5=
 
 [Timer]
 Measure=Plugin
 Plugin=ActionTimer
 IgnoreWarnings=0
-ActionList1=Repeat 1,1,10000|3
-ActionList2=Repeat 2,4,2500|4
-1=[!UpdateMeasure Audio][!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars]
-2=[!Redraw]
-3=[!CommandMeasure Timer "Execute 1"]
-4=[!CommandMeasure Timer "Execute 2"]
+ActionList1=Repeat 1,1,10000|2
+1=[!UpdateMeasure Audio]
+2=[!CommandMeasure Timer "Execute 1"]

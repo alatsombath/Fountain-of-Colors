@@ -18,7 +18,7 @@ $table.AutoSizeMode = "GrowAndShrink"
 $rmPath = (Get-Process Rainmeter).Path
 
 
-$labels = "Bands","Bar width (px)","Gap (px)","Height (px)","Min. height (px)","Angle (degrees)","Invert"
+$labels = "Bands","Bar width (px)","Gap (px)","Height (px)","Min. height (px)","Angle (degrees)","Invert","Decay effect"
 foreach ($item in $labels) {
   $label = New-Object Windows.Forms.Label
   $label.TextAlign = "MiddleLeft"
@@ -74,6 +74,24 @@ $invertCheckBox.Add_Click({
   & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Invert $checked][!WriteKeyValue Variables Invert $checked `"#*@*#Variables.inc`"][!Refresh]`"`"`" "#Config#"]
 })
 $null = $table.Controls.Add($invertCheckBox, 1, $j)
+$j++
+
+
+$effectCheckBox = New-Object Windows.Forms.Checkbox
+$effectCheckBox.AutoSize = $True
+$effectCheckBox.CheckAlign = "TopCenter"
+switch (#DecayEffect#) {
+  1       { $effectCheckBox.Checked = $True ; break }
+  default { $effectCheckBox.Checked = $False ; break }
+}
+$effectCheckBox.Add_Click({
+  switch ($this.Checked) {
+    $True  { $checked = 1 ; break }
+    $False { $checked = 0 ; break }
+  }
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables DecayEffect $checked `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($effectCheckBox, 1, $j)
 $j++
 
 
@@ -142,7 +160,7 @@ foreach ($key in $vars.Keys) {
 }
 
 
-$labels = "Sensitivity (dB)","Continuity (values)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Channel","Port"
+$labels = "Sensitivity (dB)","Synthetic (values)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Buffer","Channel","Port"
 foreach ($item in $labels) {
   $label = New-Object Windows.Forms.Label
   $label.TextAlign = "MiddleLeft"
@@ -209,6 +227,20 @@ $fftSizeDomain.Add_TextChanged({
   & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables FFTSize $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
 })
 $null = $table.Controls.Add($fftSizeDomain, 3, $l)
+$l++
+
+
+$bufferDomain = New-Object Windows.Forms.DomainUpDown
+for ($m=32; $m -gt 0; $m--) {
+  $null = $bufferDomain.Items.Add($m * 512)
+}
+$bufferDomain.AutoSize = $True
+$bufferDomain.SelectedItem = #FFTBufferSize#
+$bufferDomain.Add_TextChanged({
+  $selectedItem = $this.SelectedItem
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables FFTBufferSize $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($bufferDomain, 3, $l)
 $l++
 
 
