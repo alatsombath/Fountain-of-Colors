@@ -14,6 +14,7 @@ $js = @"
 "@
 
 $ie = New-Object -COM InternetExplorer.Application
+$ie.Silent = $True
 $ie.Navigate("about:blank")
 $ie.document.parentWindow.execScript("$js", "javascript")
 $ie.document.body.innerHTML

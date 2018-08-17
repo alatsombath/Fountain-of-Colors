@@ -289,6 +289,15 @@ $deviceName.Add_Click({
   & $rmPath [!ActivateConfig "#ROOTCONFIG#\SettingsMisc" "AudioDeviceList.ini"]
 })
 $null = $table.Controls.Add($deviceName, 3, $l)
+$l++
+
+
+$autoSensButton = New-Object Windows.Forms.Button
+$autoSensButton.Text = "Auto-sens."
+$autoSensButton.Add_Click({
+  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables Sensitivity `"`" `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+})
+$null = $table.Controls.Add($autoSensButton, 3, $l)
 $l+=2
 
 
