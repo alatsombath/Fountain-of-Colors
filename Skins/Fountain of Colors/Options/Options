@@ -160,7 +160,7 @@ foreach ($key in $vars.Keys) {
 }
 
 
-$labels = "Sensitivity (dB)","Synthetic (values)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Buffer","Channel","Port"
+$labels = "Sensitivity (dB)","Smoothness (avg)","Attack speed (ms)","Decay speed (ms)","Min. freq. (Hz)","Max. freq. (Hz)","FFT","Interpolation","Channel","Port"
 foreach ($item in $labels) {
   $label = New-Object Windows.Forms.Label
   $label.TextAlign = "MiddleLeft"
@@ -216,31 +216,33 @@ $null = $table.Controls.Add($maxFreqDomain, 3, $l)
 $l++
 
 
-$fftSizeDomain = New-Object Windows.Forms.DomainUpDown
-for ($m=16; $m -gt 0; $m--) {
-  $null = $fftSizeDomain.Items.Add($m * 512)
-}
-$fftSizeDomain.AutoSize = $True
-$fftSizeDomain.SelectedItem = #FFTSize#
-$fftSizeDomain.Add_TextChanged({
-  $selectedItem = $this.SelectedItem
-  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables FFTSize $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
-})
-$null = $table.Controls.Add($fftSizeDomain, 3, $l)
+$fftNumUpDown = New-Object Windows.Forms.NumericUpDown
+$fftNumUpDown.AutoSize = $True
+$fftNumUpDown.TextAlign = "Center"
+$fftNumUpDown.Maximum = 16384
+$fftNumUpDown.Increment = 2
+$fftNumUpDown.Name, $fftNumUpDown.Value = "FFTSize", #FFTSize#
+
+  $fftNumUpDown.Add_ValueChanged({
+    $name, $value = $this.Name, $this.Value
+    & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+  })
+$null = $table.Controls.Add($fftNumUpDown, 3, $l)
 $l++
 
 
-$bufferDomain = New-Object Windows.Forms.DomainUpDown
-for ($m=32; $m -gt 0; $m--) {
-  $null = $bufferDomain.Items.Add($m * 512)
-}
-$bufferDomain.AutoSize = $True
-$bufferDomain.SelectedItem = #FFTBufferSize#
-$bufferDomain.Add_TextChanged({
-  $selectedItem = $this.SelectedItem
-  & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables FFTBufferSize $selectedItem `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
-})
-$null = $table.Controls.Add($bufferDomain, 3, $l)
+$bufferNumUpDown = New-Object Windows.Forms.NumericUpDown
+$bufferNumUpDown.AutoSize = $True
+$bufferNumUpDown.TextAlign = "Center"
+$bufferNumUpDown.Maximum = 16384
+$bufferNumUpDown.Increment = 512
+$bufferNumUpDown.Name, $bufferNumUpDown.Value = "FFTBufferSize", #FFTBufferSize#
+
+  $bufferNumUpDown.Add_ValueChanged({
+    $name, $value = $this.Name, $this.Value
+    & $rmPath [!SetOption Audio OnUpdateAction `"`"`"[!WriteKeyValue Variables $name $value `"#*@*#Variables.inc`"][!RefreshGroup #SkinGroup#]`"`"`" "#Config#"]
+  })
+$null = $table.Controls.Add($bufferNumUpDown, 3, $l)
 $l++
 
 

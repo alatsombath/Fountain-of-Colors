@@ -3,7 +3,7 @@ Update=-1
 Group=FountainOfColors
 ContextTitle="Options..."
 ContextAction=[!ActivateConfig "Fountain of Colors\Options"]
-OnRefreshAction=
+OnRefreshAction=[!ActivateConfig "Fountain of Colors" "GenerateBands.ini"]
 
 [Audio]
 Measure=Plugin
@@ -11,27 +11,18 @@ Plugin=AudioLevelBeta
 Port=
 ID=
 Channel=
-FFTSize=4608
-FFTBufferSize=16384
+FFTSize=4284
+FFTBufferSize=8192
 FFTAttack=0
 FFTDecay=0
 Bands=80
-FreqMin=16.352
-FreqMax=16744.036 
+FreqMin=29.135
+FreqMax=23679.643 
 Sensitivity=
 Type=BufferStatus
-IfAboveValue=0
-IfAboveAction=[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw]
+OnUpdateAction=[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw]
 
 [Include]
 @Include2=
 @Include3=
 @Include4=
-
-[Timer]
-Measure=Plugin
-Plugin=ActionTimer
-IgnoreWarnings=0
-ActionList1=Repeat 1,1,10000|2
-1=[!UpdateMeasure Audio]
-2=[!CommandMeasure Timer "Execute 1"]
