@@ -1,7 +1,0 @@
-function Initialize()
-  if SKIN:GetVariable("Sensitivity") == "" then SKIN:Bang("!SetVariable","Sensitivity",37) end		-- Non-empty default
-
-  local file = io.open(SKIN:ReplaceVariables(SELF:GetOption("OutputPath")), "w")
-  file:write(SKIN:ReplaceVariables(io.input(SKIN:ReplaceVariables(SELF:GetOption("InputPath"))):read("*all")))
-  file:close()
-end

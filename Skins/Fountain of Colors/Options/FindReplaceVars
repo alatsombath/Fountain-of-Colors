@@ -1,0 +1,16 @@
+function Initialize()
+  local file =
+    io.open(
+    SKIN:ReplaceVariables(
+    SELF:GetOption("OutputPath")
+  ), "w")
+
+  file:write(
+    SKIN:ReplaceVariables(
+    io.input(
+    SKIN:ReplaceVariables(
+    SELF:GetOption("InputPath")
+  )):read("*all")))
+
+  file:close()
+end

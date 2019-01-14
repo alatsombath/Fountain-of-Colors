@@ -6,15 +6,12 @@ function Initialize()
 Measure=Plugin
 Plugin=AudioLevelBeta
 Parent=Audio
-Type=Band
-BandIdx=NUM]=]
+Type=Band]=]
 
-  local calcMeasure = [=[
+  local measureCalc = [=[
 
-[AudioCalcNUM]
+[CalcNUM]
 Measure=Calc
-Group=Audio
-UpdateDivider=0
 ]=]
 
   local meter = [=[
@@ -23,28 +20,29 @@ UpdateDivider=0
 Meter=Bar
 MeasureName=]=]
 
-  if SKIN:GetVariable("MinBarHeight") ~= "0" and true or (SKIN:GetVariable("ModeKeyboard") ~= "0" and true or false) then
+  if SKIN:GetVariable('MinBarHeight') ~= '0' and true or
+    (SKIN:GetVariable('ModeKeyboard') ~= '0' and true or
+  false) then
     
-    if SKIN:GetVariable("ModeKeyboard") ~= "0" then
-      formula = "Formula='(Max(AudioNUM, 1))'"
+    if SKIN:GetVariable('ModeKeyboard') ~= '0' then
+      formula = 'Formula=(Max(AudioNUM, 1))'
     else
-      formula = "Formula='(Max("..  0.00001 + (SKIN:GetVariable("MinBarHeight") / SKIN:GetVariable("BarHeight"))  ..", AudioNUM))'"
+      formula = 'Formula=(Max('..  0.00001 + (SKIN:GetVariable('MinBarHeight') / SKIN:GetVariable('BarHeight'))  ..', AudioNUM))'
     end
 
-    template = measure..calcMeasure..formula..meter.."AudioCalcNUM"
+    template = measure..measureCalc..formula..meter..'CalcNUM'
   else
-    template = measure..meter.."AudioNUM"
+    template = measure..meter..'AudioNUM'
   end
 
-  local index, section = 1, {}
-  local lowerLimit, upperLimit = SELF:GetNumberOption("LowerLimit") + 1, SELF:GetNumberOption("UpperLimit") + 1
-
+  local index, section, gsub = 1, {}, string.gsub
+  local lowerLimit, upperLimit = 1 + SELF:GetNumberOption('LowerLimit'), 1 + SELF:GetNumberOption('UpperLimit')
   for i = lowerLimit, upperLimit do
-    section[index] = string.gsub(template, "NUM", i-1)
-    index = index + 1
+    section[index] = gsub(template,'NUM',i-1)
+    index = index+1
   end
 
-  local file = io.open(SKIN:ReplaceVariables(SELF:GetOption("WriteFile")), "w")
+  local file = io.open(SKIN:ReplaceVariables(SELF:GetOption('WriteFile')), 'w')
   file:write(table.concat(section))
   file:close()
 end
