@@ -1,9 +1,9 @@
 [MeasureRun]
 Measure=Plugin
 Plugin=RunCommand
-Parameter=powershell -Command - < "#ROOTCONFIGPATH#GetColorWallpaperPS1"
+Parameter=powershell -Version 2 -Sta -Command - < "#ROOTCONFIGPATH#GetColorWallpaperPS1"
 OutputType=ANSI
-FinishAction=[!SetOptionGroup PaletteColor OnChangeAction "[!SetVariable #*CURRENTSECTION*# [#*CURRENTSECTION*#]]"][!UpdateMeasureGroup PaletteColor][!UpdateMeasure SetColors]
+FinishAction=[!Log [MeasureRun]][!SetOptionGroup PaletteColor OnChangeAction "[!SetVariable #*CURRENTSECTION*# [#*CURRENTSECTION*#]]"][!UpdateMeasureGroup PaletteColor][!UpdateMeasure SetColors]
 
 [WallpaperPath]
 Measure=Registry

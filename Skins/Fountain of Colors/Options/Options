@@ -11,7 +11,7 @@ $form = New-Object Windows.Forms.Form -Property @{
   MaximizeBox   = $False
   SizeGripStyle = "Hide"
   StartPosition = "CenterScreen"
-  Font          = [Drawing.Font]::New("Tahoma", 8)
+  Font          = New-Object System.Drawing.Font("Tahoma", 8)
 }
 $form.SuspendLayout()
 
@@ -296,7 +296,6 @@ foreach ($param in $trackBarParams) {
     TickFrequency = $param[4]
     Margin        = 0
 #AutoSize=$False
-    Value         = $param[1]
     Name          = $i
     Tag           = $param
     Add_Scroll = {
@@ -308,6 +307,7 @@ foreach ($param in $trackBarParams) {
       }
     }
   }
+  $trackBars[$i].Value = $param[1]
   $toolTips[$i++] = New-Object Windows.Forms.ToolTip -Property @{
     ShowAlways = $True
   }
@@ -337,14 +337,13 @@ $inputParams = @(
 $i=0
 $inputs = @(0) * $inputParams.Count
 foreach ($param in $inputParams) { 
-  $inputs[$i++] = New-Object Windows.Forms.NumericUpDown -Property @{
+  $inputs[$i] = New-Object Windows.Forms.NumericUpDown -Property @{
     Anchor    = "Left"
     TextAlign = "Right"
     AutoSize  = $True
     Minimum   = $param[2]
     Maximum   = $param[3]
     Increment = $param[4]
-    Value     = $param[1]
     Name      = $param[0]
     TabIndex  = $i
 #Tag=$i
@@ -363,6 +362,7 @@ foreach ($param in $inputParams) {
       SetKeyVal $this.Name $result
     }
   }
+  $inputs[$i++].Value = $param[1]
 }
 
 
