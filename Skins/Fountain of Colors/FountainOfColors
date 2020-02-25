@@ -3,7 +3,7 @@ Update=-1
 Group=FountainOfColors
 ContextTitle="Options..."
 ContextAction=[!ActivateConfig "Fountain of Colors\Options"]
-OnRefreshAction=[!ActivateConfig "Fountain of Colors" "GenerateBands.ini"]
+OnRefreshAction=[!WriteKeyValue Variables Angle "#Angle#" "#@#Variables.inc"][!WriteKeyValue Variables Invert "#Invert#" "#@#Variables.inc"][!WriteKeyValue Variables Channel "#Channel#" "#@#Variables.inc"][!WriteKeyValue Variables Port "#Port#" "#@#Variables.inc"][!WriteKeyValue Variables ID "#ID#" "#@#Variables.inc"][!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!ActivateConfig "Fountain of Colors\Initialize"]
 
 [Audio]
 Measure=Plugin
@@ -11,18 +11,19 @@ Plugin=AudioLevelBeta
 Port=
 ID=
 Channel=
-FFTSize=3000
+FFTSize=2048
 FFTBufferSize=8192
 FFTAttack=0
 FFTDecay=0
 Bands=80
-FreqMin=29.135235094880619775450195611027
-FreqMax=24000 
-Sensitivity=35.460025441274753128801446487143
+FreqMin=27.5
+FreqMax=16744.036179238312619382399585489 
+Sensitivity=31.6579130241587
 Type=BufferStatus
-OnUpdateAction=[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw]
+OnUpdateAction=[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw][!UpdateMeasure lua_Ghost]
 
 [Include]
 @Include2=
 @Include3=
 @Include4=
+@Include5=ghost.inc

@@ -40,7 +40,8 @@ function Initialize()
     '',
     'SkinRotation',
     'IndividualBarColors.inc',
-    'ColorChangerInc'
+    'ColorChangerInc',
+	"ghost.inc"
   }
   local actions = {
     '[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw]',
@@ -62,9 +63,11 @@ function Initialize()
     lColor = '#*ROOTCONFIGPATH*#GetColor'..v.Colors
   end
 
-  if v.Colors      ~= 'Single'      and true or (
-     v.DecayEffect ~= '0'           and true or (
-     v.OpacityMin  ~= v.OpacityMax  and true or false))
+	v.DecayEffect = "0"
+
+  if v.Colors       ~= 'Single'        and true or (
+     v.DecayEffect  ~= '0'             and true or (
+     v.OpacityLower ~= v.OpacityUpper  and true or false))
   then
     actions[1] = actions[1]..'[!UpdateMeasure ScriptColorChanger]'
 
@@ -74,7 +77,11 @@ function Initialize()
   else
     includes[4], actions[2], actions[3] = '','',''
   end
-
+	if v.bFXGhost ~= "0" then
+		actions[1] = actions[1] .."[!UpdateMeasure lua_Ghost]"
+	else
+		includes[4] = ""
+	end
 
   for i=2,#includes do
     SetFileKV('Include','@Include'..i,includes[i],lCommon)
@@ -120,12 +127,27 @@ function Initialize()
     SKIN:Bang('!UpdateMeasure','Audio'..i-1,v.Config)
   end
 
+	for iBand = 1, v.Bands - 1 do
+		if v.bFXGhost ~= "0" then
+			SetLiveKV( "ms_calcGhost" .. iBand, "Group", "Audio" )
+			SetLiveKV( "ms_calcGhost" .. iBand, "DynamicVariables", 1 )
+			SetLiveKV( "mt_barGhost" .. iBand, "Group", "Bars" )
+			SetLiveKV( "mt_barGhost" .. iBand,
+				NearestAxis == 0 and "X" or "Y", ( v.BarWidth + v.BarGap ) * iBand )
+			
+			SKIN:Bang( "!UpdateMeasure", "ms_calcGhost" .. iBand, v.Config )
+			SKIN:Bang( "!UpdateMeter", "mt_barGhost" .. iBand, v.Config )
+		end
+	end
+
   local kvBar = {
     W        = NearestAxis == 0 and v.BarWidth  or v.BarHeight, 
     H        = NearestAxis == 0 and v.BarHeight or v.BarWidth,
     BarColor = v.PaletteColor1
   }
-  for key,val in pairs(kvBar) do SetLiveGroupKV('Bars',key,val) end
+  for key,val in pairs(kvBar) do
+	SetLiveGroupKV('Bars',key,val)
+ end
 
   if v.Angle ~= '' then
     local kvBarAngle = {

@@ -1,24 +1,37 @@
 function Initialize()
 
-  local measure = [=[
+local measure = [=[
 
 [AudioNUM]
 Measure=Plugin
 Plugin=AudioLevelBeta
 Parent=Audio
-Type=Band]=]
+Type=Band
+]=]
 
-  local measureCalc = [=[
-
+local measureCalc = [=[
 [CalcNUM]
 Measure=Calc
 ]=]
 
-  local meter = [=[
+local meter = [=[
 
 [NUM]
 Meter=Bar
 MeasureName=]=]
+
+local ms_calcGhost = [=[
+
+[ms_calcGhostNUM]
+Measure=Calc
+Formula=[&lua_Ghost:GetValue( NUM )]
+]=]
+
+local mt_barGhost = [=[
+[mt_barGhostNUM]
+Meter=Bar
+MeasureName=ms_calcGhostNUM
+]=]
 
   if SKIN:GetVariable('MinBarHeight') ~= '0' and true or
     (SKIN:GetVariable('ModeKeyboard') ~= '0' and true or
@@ -34,6 +47,9 @@ MeasureName=]=]
   else
     template = measure..meter..'AudioNUM'
   end
+	if SKIN:GetVariable( "bFXGhost" ) ~= "0" then
+		template = template .. ms_calcGhost .. mt_barGhost
+	end
 
   local index, section, gsub = 1, {}, string.gsub
   local lowerLimit, upperLimit = 1 + SELF:GetNumberOption('LowerLimit'), 1 + SELF:GetNumberOption('UpperLimit')
