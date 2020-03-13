@@ -2,7 +2,10 @@
 Update=-1
 Group=FountainOfColors
 ContextTitle="Options..."
-ContextAction=[!ActivateConfig "Fountain of Colors\Options"]
+ContextAction=[!ToggleConfig "Fountain of Colors\Options" "Options.ini"]
+LeftMouseUpAction=[!ToggleConfig "Fountain of Colors\Options" "Options.ini"]
+BackgroundMode=2
+SolidColor=0,0,0,1
 OnRefreshAction=[!WriteKeyValue Variables Angle "#Angle#" "#@#Variables.inc"][!WriteKeyValue Variables Invert "#Invert#" "#@#Variables.inc"][!WriteKeyValue Variables Channel "#Channel#" "#@#Variables.inc"][!WriteKeyValue Variables Port "#Port#" "#@#Variables.inc"][!WriteKeyValue Variables ID "#ID#" "#@#Variables.inc"][!WriteKeyValue Variables Config "#CURRENTCONFIG#" "#@#Variables.inc"][!ActivateConfig "Fountain of Colors\Initialize"]
 
 [Audio]
@@ -17,8 +20,8 @@ FFTAttack=0
 FFTDecay=0
 Bands=80
 FreqMin=27.5
-FreqMax=16744.036179238312619382399585489 
-Sensitivity=31.6579130241587
+FreqMax=16744.03618 
+Sensitivity=31.65791
 Type=BufferStatus
 OnUpdateAction=[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw][!UpdateMeasure lua_Ghost]
 

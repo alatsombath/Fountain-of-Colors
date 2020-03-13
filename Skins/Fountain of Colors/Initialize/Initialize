@@ -49,11 +49,13 @@ function Initialize()
     '[!CommandMeasure ScriptColorChanger """AddChild("[CurrentConfig]","#Invert#"~=1 and 0 or 1)""" "#ROOTCONFIG#"]',
     '[!CommandMeasure Initialize "NearestAxis = [NearestAxis]" "#ROOTCONFIG#\\Initialize"]',
     '[!CommandMeasure Initialize """Matrix = "[Matrix]"""" "#ROOTCONFIG#\\Initialize"]',
-    '[!ActivateConfig "#ROOTCONFIG#\\Options"]'
+    '[!ToggleConfig "#ROOTCONFIG#\\Options" "Options.ini"]'
   }
   local timer = -1
 
-  if v.Angle  == ''           then includes[2] = '' end
+	if v.Angle == '' then v.Angle = '0' end
+
+  if v.Angle  == '0'           then includes[2] = '' end
   if v.Colors ~= 'Individual' then includes[3] = '' end
   
   if v.Colors == 'Wallpaper'  and true or (
@@ -85,7 +87,7 @@ function Initialize()
 
   for i=2,#includes do
     SetFileKV('Include','@Include'..i,includes[i],lCommon)
-    if includes[i] ~= '' then includes[1] = '#*@*#Variables.inc' end
+	    if includes[i] ~= '' then includes[1] = '#*@*#Variables.inc' end
   end
 
   SetFileKV('\\',       '@Include3',      includes[1],'#ROOTCONFIGPATH#Fountain of Colors.ini')
@@ -106,6 +108,8 @@ function Initialize()
   SKIN:Bang('!ActivateConfig',v.Config)
   SKIN:Bang(actions[2])
 
+	if v.Invert == '' then v.Invert = '0' end
+
   local lowerLimit = 1 + v.FirstBandIndex
   local upperLimit = 1 + max(2, v.Bands-1)
   for i=lowerLimit,upperLimit do
@@ -121,7 +125,7 @@ function Initialize()
     end
 
     SetLiveKV(i-1, NearestAxis == 0 and 'X' or 'Y' , (v.BarWidth + v.BarGap) * (i-lowerLimit) )
-    SetLiveKV('Audio'..i-1,'BandIdx', v.Invert == '' and i-1 or lowerLimit + upperLimit - i-1 )
+    SetLiveKV('Audio'..i-1,'BandIdx', v.Invert == '0' and i-1 or lowerLimit + upperLimit - i-1 )
 
     SKIN:Bang('!UpdateMeter',  i-1,         v.Config)
     SKIN:Bang('!UpdateMeasure','Audio'..i-1,v.Config)
@@ -133,7 +137,7 @@ function Initialize()
 			SetLiveKV( "ms_calcGhost" .. iBand, "DynamicVariables", 1 )
 			SetLiveKV( "mt_barGhost" .. iBand, "Group", "Bars" )
 			SetLiveKV( "mt_barGhost" .. iBand,
-				NearestAxis == 0 and "X" or "Y", ( v.BarWidth + v.BarGap ) * iBand )
+				NearestAxis == 0 and "X" or "Y", ( v.BarWidth + v.BarGap ) * (iBand) )
 			
 			SKIN:Bang( "!UpdateMeasure", "ms_calcGhost" .. iBand, v.Config )
 			SKIN:Bang( "!UpdateMeter", "mt_barGhost" .. iBand, v.Config )
@@ -149,7 +153,7 @@ function Initialize()
 	SetLiveGroupKV('Bars',key,val)
  end
 
-  if v.Angle ~= '' then
+  if v.Angle ~= '0' then
     local kvBarAngle = {
       AntiAlias            = 1,
       TransformationMatrix = Matrix,
@@ -158,7 +162,7 @@ function Initialize()
     for key,val in pairs(kvBarAngle) do SetLiveGroupKV('Bars',key,val) end
   end
   
-  if v.AverageSize ~= ''          then SetLiveGroupKV('Audio','AverageSize',v.AverageSize) end
+  if v.AverageSize ~= '0'          then SetLiveGroupKV('Audio','AverageSize',v.AverageSize) end
   if v.Colors      == 'Wallpaper' then SKIN:Bang('!CommandMeasure','MeasureRun','Run',v.Config) end
 
 
