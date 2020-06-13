@@ -49,7 +49,7 @@ function Initialize()
     '[!CommandMeasure ScriptColorChanger """AddChild("[CurrentConfig]","#Invert#"~=1 and 0 or 1)""" "#ROOTCONFIG#"]',
     '[!CommandMeasure Initialize "NearestAxis = [NearestAxis]" "#ROOTCONFIG#\\Initialize"]',
     '[!CommandMeasure Initialize """Matrix = "[Matrix]"""" "#ROOTCONFIG#\\Initialize"]',
-    '[!ToggleConfig "#ROOTCONFIG#\\Options" "Options.ini"]'
+    '[!ToggleConfig "#ROOTCONFIG#\\Options" "visualizer.ini"]'
   }
   local timer = -1
 

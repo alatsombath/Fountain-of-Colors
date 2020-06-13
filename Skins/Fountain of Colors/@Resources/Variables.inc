@@ -2,7 +2,7 @@
 Bands=80
 BarGap=6
 BarWidth=10
-BarHeight=252
+BarHeight=275
 MinBarHeight=1
 PaletteColor1=43,255,213
 FFTSize=2048
@@ -11,7 +11,7 @@ FFTAttack=0
 FFTDecay=0
 FreqMin=27.5
 FreqMax=16744.03618
-Sensitivity=31.65791
+Sensitivity=32.5
 AverageSize=0
 Colors=Single
 PaletteColor2=96,160,224
