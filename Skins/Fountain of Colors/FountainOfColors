@@ -23,6 +23,8 @@ FreqMin=27.5
 FreqMax=16744.03618 
 Sensitivity=32.5
 Type=BufferStatus
+DynamicVolume=0
+UpdatesPerSecond=-1
 OnUpdateAction=[!UpdateMeasureGroup Audio][!UpdateMeterGroup Bars][!Redraw][!UpdateMeasure lua_Ghost]
 
 [Include]
