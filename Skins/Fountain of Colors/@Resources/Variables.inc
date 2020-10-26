@@ -1,8 +1,8 @@
 [Variables]
 Bands=80
-BarGap=7
+BarGap=8
 BarWidth=11
-BarHeight=355
+BarHeight=370
 MinBarHeight=1
 PaletteColor1=255,255,255
 FFTSize=2048
@@ -31,7 +31,7 @@ DecayOpacityMin=0
 DecayOpacityMax=255
 bFXGhost=1
 nFXGhostAttack=3000
-nFXGhostDecay=500
+nFXGhostDecay=900
 ColorsExclude=
 ModeKeyboard=0
 FirstBandIndex=1
