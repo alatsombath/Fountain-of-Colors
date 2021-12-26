@@ -1,12 +1,12 @@
 [Variables]
 Bands=80
-BarGap=8
-BarWidth=11
-BarHeight=370
+BarGap=6
+BarWidth=10
+BarHeight=275
 MinBarHeight=1
 PaletteColor1=255,255,255
 FFTSize=2048
-FFTBufferSize=4096
+FFTBufferSize=8192
 FFTAttack=0
 FFTDecay=0
 FreqMin=27.5

@@ -6,7 +6,7 @@ Parent=Audio
 Type=Band
 [Calc1]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio1))
+Formula=(Max(0.0036463636363636, Audio1))
 [1]
 Meter=Bar
 MeasureName=Calc1
@@ -24,7 +24,7 @@ Parent=Audio
 Type=Band
 [Calc2]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio2))
+Formula=(Max(0.0036463636363636, Audio2))
 [2]
 Meter=Bar
 MeasureName=Calc2
@@ -42,7 +42,7 @@ Parent=Audio
 Type=Band
 [Calc3]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio3))
+Formula=(Max(0.0036463636363636, Audio3))
 [3]
 Meter=Bar
 MeasureName=Calc3
@@ -60,7 +60,7 @@ Parent=Audio
 Type=Band
 [Calc4]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio4))
+Formula=(Max(0.0036463636363636, Audio4))
 [4]
 Meter=Bar
 MeasureName=Calc4
@@ -78,7 +78,7 @@ Parent=Audio
 Type=Band
 [Calc5]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio5))
+Formula=(Max(0.0036463636363636, Audio5))
 [5]
 Meter=Bar
 MeasureName=Calc5
@@ -96,7 +96,7 @@ Parent=Audio
 Type=Band
 [Calc6]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio6))
+Formula=(Max(0.0036463636363636, Audio6))
 [6]
 Meter=Bar
 MeasureName=Calc6
@@ -114,7 +114,7 @@ Parent=Audio
 Type=Band
 [Calc7]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio7))
+Formula=(Max(0.0036463636363636, Audio7))
 [7]
 Meter=Bar
 MeasureName=Calc7
@@ -132,7 +132,7 @@ Parent=Audio
 Type=Band
 [Calc8]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio8))
+Formula=(Max(0.0036463636363636, Audio8))
 [8]
 Meter=Bar
 MeasureName=Calc8
@@ -150,7 +150,7 @@ Parent=Audio
 Type=Band
 [Calc9]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio9))
+Formula=(Max(0.0036463636363636, Audio9))
 [9]
 Meter=Bar
 MeasureName=Calc9
@@ -168,7 +168,7 @@ Parent=Audio
 Type=Band
 [Calc10]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio10))
+Formula=(Max(0.0036463636363636, Audio10))
 [10]
 Meter=Bar
 MeasureName=Calc10
@@ -186,7 +186,7 @@ Parent=Audio
 Type=Band
 [Calc11]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio11))
+Formula=(Max(0.0036463636363636, Audio11))
 [11]
 Meter=Bar
 MeasureName=Calc11
@@ -204,7 +204,7 @@ Parent=Audio
 Type=Band
 [Calc12]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio12))
+Formula=(Max(0.0036463636363636, Audio12))
 [12]
 Meter=Bar
 MeasureName=Calc12
@@ -222,7 +222,7 @@ Parent=Audio
 Type=Band
 [Calc13]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio13))
+Formula=(Max(0.0036463636363636, Audio13))
 [13]
 Meter=Bar
 MeasureName=Calc13
@@ -240,7 +240,7 @@ Parent=Audio
 Type=Band
 [Calc14]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio14))
+Formula=(Max(0.0036463636363636, Audio14))
 [14]
 Meter=Bar
 MeasureName=Calc14
@@ -258,7 +258,7 @@ Parent=Audio
 Type=Band
 [Calc15]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio15))
+Formula=(Max(0.0036463636363636, Audio15))
 [15]
 Meter=Bar
 MeasureName=Calc15
@@ -276,7 +276,7 @@ Parent=Audio
 Type=Band
 [Calc16]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio16))
+Formula=(Max(0.0036463636363636, Audio16))
 [16]
 Meter=Bar
 MeasureName=Calc16
@@ -294,7 +294,7 @@ Parent=Audio
 Type=Band
 [Calc17]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio17))
+Formula=(Max(0.0036463636363636, Audio17))
 [17]
 Meter=Bar
 MeasureName=Calc17
@@ -312,7 +312,7 @@ Parent=Audio
 Type=Band
 [Calc18]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio18))
+Formula=(Max(0.0036463636363636, Audio18))
 [18]
 Meter=Bar
 MeasureName=Calc18
@@ -330,7 +330,7 @@ Parent=Audio
 Type=Band
 [Calc19]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio19))
+Formula=(Max(0.0036463636363636, Audio19))
 [19]
 Meter=Bar
 MeasureName=Calc19
@@ -348,7 +348,7 @@ Parent=Audio
 Type=Band
 [Calc20]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio20))
+Formula=(Max(0.0036463636363636, Audio20))
 [20]
 Meter=Bar
 MeasureName=Calc20
@@ -366,7 +366,7 @@ Parent=Audio
 Type=Band
 [Calc21]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio21))
+Formula=(Max(0.0036463636363636, Audio21))
 [21]
 Meter=Bar
 MeasureName=Calc21
@@ -384,7 +384,7 @@ Parent=Audio
 Type=Band
 [Calc22]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio22))
+Formula=(Max(0.0036463636363636, Audio22))
 [22]
 Meter=Bar
 MeasureName=Calc22
@@ -402,7 +402,7 @@ Parent=Audio
 Type=Band
 [Calc23]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio23))
+Formula=(Max(0.0036463636363636, Audio23))
 [23]
 Meter=Bar
 MeasureName=Calc23
@@ -420,7 +420,7 @@ Parent=Audio
 Type=Band
 [Calc24]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio24))
+Formula=(Max(0.0036463636363636, Audio24))
 [24]
 Meter=Bar
 MeasureName=Calc24
@@ -438,7 +438,7 @@ Parent=Audio
 Type=Band
 [Calc25]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio25))
+Formula=(Max(0.0036463636363636, Audio25))
 [25]
 Meter=Bar
 MeasureName=Calc25
@@ -456,7 +456,7 @@ Parent=Audio
 Type=Band
 [Calc26]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio26))
+Formula=(Max(0.0036463636363636, Audio26))
 [26]
 Meter=Bar
 MeasureName=Calc26
@@ -474,7 +474,7 @@ Parent=Audio
 Type=Band
 [Calc27]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio27))
+Formula=(Max(0.0036463636363636, Audio27))
 [27]
 Meter=Bar
 MeasureName=Calc27
@@ -492,7 +492,7 @@ Parent=Audio
 Type=Band
 [Calc28]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio28))
+Formula=(Max(0.0036463636363636, Audio28))
 [28]
 Meter=Bar
 MeasureName=Calc28
@@ -510,7 +510,7 @@ Parent=Audio
 Type=Band
 [Calc29]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio29))
+Formula=(Max(0.0036463636363636, Audio29))
 [29]
 Meter=Bar
 MeasureName=Calc29
@@ -528,7 +528,7 @@ Parent=Audio
 Type=Band
 [Calc30]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio30))
+Formula=(Max(0.0036463636363636, Audio30))
 [30]
 Meter=Bar
 MeasureName=Calc30
@@ -546,7 +546,7 @@ Parent=Audio
 Type=Band
 [Calc31]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio31))
+Formula=(Max(0.0036463636363636, Audio31))
 [31]
 Meter=Bar
 MeasureName=Calc31
@@ -564,7 +564,7 @@ Parent=Audio
 Type=Band
 [Calc32]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio32))
+Formula=(Max(0.0036463636363636, Audio32))
 [32]
 Meter=Bar
 MeasureName=Calc32
@@ -582,7 +582,7 @@ Parent=Audio
 Type=Band
 [Calc33]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio33))
+Formula=(Max(0.0036463636363636, Audio33))
 [33]
 Meter=Bar
 MeasureName=Calc33
@@ -600,7 +600,7 @@ Parent=Audio
 Type=Band
 [Calc34]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio34))
+Formula=(Max(0.0036463636363636, Audio34))
 [34]
 Meter=Bar
 MeasureName=Calc34
@@ -618,7 +618,7 @@ Parent=Audio
 Type=Band
 [Calc35]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio35))
+Formula=(Max(0.0036463636363636, Audio35))
 [35]
 Meter=Bar
 MeasureName=Calc35
@@ -636,7 +636,7 @@ Parent=Audio
 Type=Band
 [Calc36]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio36))
+Formula=(Max(0.0036463636363636, Audio36))
 [36]
 Meter=Bar
 MeasureName=Calc36
@@ -654,7 +654,7 @@ Parent=Audio
 Type=Band
 [Calc37]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio37))
+Formula=(Max(0.0036463636363636, Audio37))
 [37]
 Meter=Bar
 MeasureName=Calc37
@@ -672,7 +672,7 @@ Parent=Audio
 Type=Band
 [Calc38]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio38))
+Formula=(Max(0.0036463636363636, Audio38))
 [38]
 Meter=Bar
 MeasureName=Calc38
@@ -690,7 +690,7 @@ Parent=Audio
 Type=Band
 [Calc39]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio39))
+Formula=(Max(0.0036463636363636, Audio39))
 [39]
 Meter=Bar
 MeasureName=Calc39
@@ -708,7 +708,7 @@ Parent=Audio
 Type=Band
 [Calc40]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio40))
+Formula=(Max(0.0036463636363636, Audio40))
 [40]
 Meter=Bar
 MeasureName=Calc40
@@ -726,7 +726,7 @@ Parent=Audio
 Type=Band
 [Calc41]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio41))
+Formula=(Max(0.0036463636363636, Audio41))
 [41]
 Meter=Bar
 MeasureName=Calc41
@@ -744,7 +744,7 @@ Parent=Audio
 Type=Band
 [Calc42]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio42))
+Formula=(Max(0.0036463636363636, Audio42))
 [42]
 Meter=Bar
 MeasureName=Calc42
@@ -762,7 +762,7 @@ Parent=Audio
 Type=Band
 [Calc43]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio43))
+Formula=(Max(0.0036463636363636, Audio43))
 [43]
 Meter=Bar
 MeasureName=Calc43
@@ -780,7 +780,7 @@ Parent=Audio
 Type=Band
 [Calc44]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio44))
+Formula=(Max(0.0036463636363636, Audio44))
 [44]
 Meter=Bar
 MeasureName=Calc44
@@ -798,7 +798,7 @@ Parent=Audio
 Type=Band
 [Calc45]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio45))
+Formula=(Max(0.0036463636363636, Audio45))
 [45]
 Meter=Bar
 MeasureName=Calc45
@@ -816,7 +816,7 @@ Parent=Audio
 Type=Band
 [Calc46]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio46))
+Formula=(Max(0.0036463636363636, Audio46))
 [46]
 Meter=Bar
 MeasureName=Calc46
@@ -834,7 +834,7 @@ Parent=Audio
 Type=Band
 [Calc47]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio47))
+Formula=(Max(0.0036463636363636, Audio47))
 [47]
 Meter=Bar
 MeasureName=Calc47
@@ -852,7 +852,7 @@ Parent=Audio
 Type=Band
 [Calc48]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio48))
+Formula=(Max(0.0036463636363636, Audio48))
 [48]
 Meter=Bar
 MeasureName=Calc48
@@ -870,7 +870,7 @@ Parent=Audio
 Type=Band
 [Calc49]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio49))
+Formula=(Max(0.0036463636363636, Audio49))
 [49]
 Meter=Bar
 MeasureName=Calc49
@@ -888,7 +888,7 @@ Parent=Audio
 Type=Band
 [Calc50]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio50))
+Formula=(Max(0.0036463636363636, Audio50))
 [50]
 Meter=Bar
 MeasureName=Calc50
@@ -906,7 +906,7 @@ Parent=Audio
 Type=Band
 [Calc51]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio51))
+Formula=(Max(0.0036463636363636, Audio51))
 [51]
 Meter=Bar
 MeasureName=Calc51
@@ -924,7 +924,7 @@ Parent=Audio
 Type=Band
 [Calc52]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio52))
+Formula=(Max(0.0036463636363636, Audio52))
 [52]
 Meter=Bar
 MeasureName=Calc52
@@ -942,7 +942,7 @@ Parent=Audio
 Type=Band
 [Calc53]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio53))
+Formula=(Max(0.0036463636363636, Audio53))
 [53]
 Meter=Bar
 MeasureName=Calc53
@@ -960,7 +960,7 @@ Parent=Audio
 Type=Band
 [Calc54]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio54))
+Formula=(Max(0.0036463636363636, Audio54))
 [54]
 Meter=Bar
 MeasureName=Calc54
@@ -978,7 +978,7 @@ Parent=Audio
 Type=Band
 [Calc55]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio55))
+Formula=(Max(0.0036463636363636, Audio55))
 [55]
 Meter=Bar
 MeasureName=Calc55
@@ -996,7 +996,7 @@ Parent=Audio
 Type=Band
 [Calc56]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio56))
+Formula=(Max(0.0036463636363636, Audio56))
 [56]
 Meter=Bar
 MeasureName=Calc56
@@ -1014,7 +1014,7 @@ Parent=Audio
 Type=Band
 [Calc57]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio57))
+Formula=(Max(0.0036463636363636, Audio57))
 [57]
 Meter=Bar
 MeasureName=Calc57
@@ -1032,7 +1032,7 @@ Parent=Audio
 Type=Band
 [Calc58]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio58))
+Formula=(Max(0.0036463636363636, Audio58))
 [58]
 Meter=Bar
 MeasureName=Calc58
@@ -1050,7 +1050,7 @@ Parent=Audio
 Type=Band
 [Calc59]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio59))
+Formula=(Max(0.0036463636363636, Audio59))
 [59]
 Meter=Bar
 MeasureName=Calc59
@@ -1068,7 +1068,7 @@ Parent=Audio
 Type=Band
 [Calc60]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio60))
+Formula=(Max(0.0036463636363636, Audio60))
 [60]
 Meter=Bar
 MeasureName=Calc60
@@ -1086,7 +1086,7 @@ Parent=Audio
 Type=Band
 [Calc61]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio61))
+Formula=(Max(0.0036463636363636, Audio61))
 [61]
 Meter=Bar
 MeasureName=Calc61
@@ -1104,7 +1104,7 @@ Parent=Audio
 Type=Band
 [Calc62]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio62))
+Formula=(Max(0.0036463636363636, Audio62))
 [62]
 Meter=Bar
 MeasureName=Calc62
@@ -1122,7 +1122,7 @@ Parent=Audio
 Type=Band
 [Calc63]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio63))
+Formula=(Max(0.0036463636363636, Audio63))
 [63]
 Meter=Bar
 MeasureName=Calc63
@@ -1140,7 +1140,7 @@ Parent=Audio
 Type=Band
 [Calc64]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio64))
+Formula=(Max(0.0036463636363636, Audio64))
 [64]
 Meter=Bar
 MeasureName=Calc64
@@ -1158,7 +1158,7 @@ Parent=Audio
 Type=Band
 [Calc65]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio65))
+Formula=(Max(0.0036463636363636, Audio65))
 [65]
 Meter=Bar
 MeasureName=Calc65
@@ -1176,7 +1176,7 @@ Parent=Audio
 Type=Band
 [Calc66]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio66))
+Formula=(Max(0.0036463636363636, Audio66))
 [66]
 Meter=Bar
 MeasureName=Calc66
@@ -1194,7 +1194,7 @@ Parent=Audio
 Type=Band
 [Calc67]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio67))
+Formula=(Max(0.0036463636363636, Audio67))
 [67]
 Meter=Bar
 MeasureName=Calc67
@@ -1212,7 +1212,7 @@ Parent=Audio
 Type=Band
 [Calc68]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio68))
+Formula=(Max(0.0036463636363636, Audio68))
 [68]
 Meter=Bar
 MeasureName=Calc68
@@ -1230,7 +1230,7 @@ Parent=Audio
 Type=Band
 [Calc69]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio69))
+Formula=(Max(0.0036463636363636, Audio69))
 [69]
 Meter=Bar
 MeasureName=Calc69
@@ -1248,7 +1248,7 @@ Parent=Audio
 Type=Band
 [Calc70]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio70))
+Formula=(Max(0.0036463636363636, Audio70))
 [70]
 Meter=Bar
 MeasureName=Calc70
@@ -1266,7 +1266,7 @@ Parent=Audio
 Type=Band
 [Calc71]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio71))
+Formula=(Max(0.0036463636363636, Audio71))
 [71]
 Meter=Bar
 MeasureName=Calc71
@@ -1284,7 +1284,7 @@ Parent=Audio
 Type=Band
 [Calc72]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio72))
+Formula=(Max(0.0036463636363636, Audio72))
 [72]
 Meter=Bar
 MeasureName=Calc72
@@ -1302,7 +1302,7 @@ Parent=Audio
 Type=Band
 [Calc73]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio73))
+Formula=(Max(0.0036463636363636, Audio73))
 [73]
 Meter=Bar
 MeasureName=Calc73
@@ -1320,7 +1320,7 @@ Parent=Audio
 Type=Band
 [Calc74]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio74))
+Formula=(Max(0.0036463636363636, Audio74))
 [74]
 Meter=Bar
 MeasureName=Calc74
@@ -1338,7 +1338,7 @@ Parent=Audio
 Type=Band
 [Calc75]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio75))
+Formula=(Max(0.0036463636363636, Audio75))
 [75]
 Meter=Bar
 MeasureName=Calc75
@@ -1356,7 +1356,7 @@ Parent=Audio
 Type=Band
 [Calc76]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio76))
+Formula=(Max(0.0036463636363636, Audio76))
 [76]
 Meter=Bar
 MeasureName=Calc76
@@ -1374,7 +1374,7 @@ Parent=Audio
 Type=Band
 [Calc77]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio77))
+Formula=(Max(0.0036463636363636, Audio77))
 [77]
 Meter=Bar
 MeasureName=Calc77
@@ -1392,7 +1392,7 @@ Parent=Audio
 Type=Band
 [Calc78]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio78))
+Formula=(Max(0.0036463636363636, Audio78))
 [78]
 Meter=Bar
 MeasureName=Calc78
@@ -1410,7 +1410,7 @@ Parent=Audio
 Type=Band
 [Calc79]
 Measure=Calc
-Formula=(Max(0.0027127027027027, Audio79))
+Formula=(Max(0.0036463636363636, Audio79))
 [79]
 Meter=Bar
 MeasureName=Calc79
