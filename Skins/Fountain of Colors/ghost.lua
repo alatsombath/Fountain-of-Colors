@@ -42,6 +42,7 @@ function Update()
 			t_flAlpha[ iBand ] = t_flAlpha[ iBand ] - flSTEP_DECAY
 			
 			if t_flFFTOut_Max[ iBand ] > t_msFFTOut[ iBand ]:GetValue() then
+
 				SKIN:Bang( "!SetOption", "mt_barGhost" .. iBand, "BarColor",
 					szRGB .. "," .. floor( 0.5 + t_flAlpha[ iBand ] ) )
 			end
