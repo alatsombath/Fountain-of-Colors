@@ -10,13 +10,6 @@ Formula=(Max(0.0036463636363636, Audio1))
 [1]
 Meter=Bar
 MeasureName=Calc1
-[ms_calcGhost1]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 1 )]
-[mt_barGhost1]
-Meter=Bar
-MeasureName=ms_calcGhost1
-
 [Audio2]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -28,13 +21,6 @@ Formula=(Max(0.0036463636363636, Audio2))
 [2]
 Meter=Bar
 MeasureName=Calc2
-[ms_calcGhost2]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 2 )]
-[mt_barGhost2]
-Meter=Bar
-MeasureName=ms_calcGhost2
-
 [Audio3]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -46,13 +32,6 @@ Formula=(Max(0.0036463636363636, Audio3))
 [3]
 Meter=Bar
 MeasureName=Calc3
-[ms_calcGhost3]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 3 )]
-[mt_barGhost3]
-Meter=Bar
-MeasureName=ms_calcGhost3
-
 [Audio4]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -64,13 +43,6 @@ Formula=(Max(0.0036463636363636, Audio4))
 [4]
 Meter=Bar
 MeasureName=Calc4
-[ms_calcGhost4]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 4 )]
-[mt_barGhost4]
-Meter=Bar
-MeasureName=ms_calcGhost4
-
 [Audio5]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -82,13 +54,6 @@ Formula=(Max(0.0036463636363636, Audio5))
 [5]
 Meter=Bar
 MeasureName=Calc5
-[ms_calcGhost5]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 5 )]
-[mt_barGhost5]
-Meter=Bar
-MeasureName=ms_calcGhost5
-
 [Audio6]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -100,13 +65,6 @@ Formula=(Max(0.0036463636363636, Audio6))
 [6]
 Meter=Bar
 MeasureName=Calc6
-[ms_calcGhost6]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 6 )]
-[mt_barGhost6]
-Meter=Bar
-MeasureName=ms_calcGhost6
-
 [Audio7]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -118,13 +76,6 @@ Formula=(Max(0.0036463636363636, Audio7))
 [7]
 Meter=Bar
 MeasureName=Calc7
-[ms_calcGhost7]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 7 )]
-[mt_barGhost7]
-Meter=Bar
-MeasureName=ms_calcGhost7
-
 [Audio8]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -136,13 +87,6 @@ Formula=(Max(0.0036463636363636, Audio8))
 [8]
 Meter=Bar
 MeasureName=Calc8
-[ms_calcGhost8]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 8 )]
-[mt_barGhost8]
-Meter=Bar
-MeasureName=ms_calcGhost8
-
 [Audio9]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -154,13 +98,6 @@ Formula=(Max(0.0036463636363636, Audio9))
 [9]
 Meter=Bar
 MeasureName=Calc9
-[ms_calcGhost9]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 9 )]
-[mt_barGhost9]
-Meter=Bar
-MeasureName=ms_calcGhost9
-
 [Audio10]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -172,13 +109,6 @@ Formula=(Max(0.0036463636363636, Audio10))
 [10]
 Meter=Bar
 MeasureName=Calc10
-[ms_calcGhost10]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 10 )]
-[mt_barGhost10]
-Meter=Bar
-MeasureName=ms_calcGhost10
-
 [Audio11]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -190,13 +120,6 @@ Formula=(Max(0.0036463636363636, Audio11))
 [11]
 Meter=Bar
 MeasureName=Calc11
-[ms_calcGhost11]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 11 )]
-[mt_barGhost11]
-Meter=Bar
-MeasureName=ms_calcGhost11
-
 [Audio12]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -208,13 +131,6 @@ Formula=(Max(0.0036463636363636, Audio12))
 [12]
 Meter=Bar
 MeasureName=Calc12
-[ms_calcGhost12]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 12 )]
-[mt_barGhost12]
-Meter=Bar
-MeasureName=ms_calcGhost12
-
 [Audio13]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -226,13 +142,6 @@ Formula=(Max(0.0036463636363636, Audio13))
 [13]
 Meter=Bar
 MeasureName=Calc13
-[ms_calcGhost13]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 13 )]
-[mt_barGhost13]
-Meter=Bar
-MeasureName=ms_calcGhost13
-
 [Audio14]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -244,13 +153,6 @@ Formula=(Max(0.0036463636363636, Audio14))
 [14]
 Meter=Bar
 MeasureName=Calc14
-[ms_calcGhost14]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 14 )]
-[mt_barGhost14]
-Meter=Bar
-MeasureName=ms_calcGhost14
-
 [Audio15]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -262,13 +164,6 @@ Formula=(Max(0.0036463636363636, Audio15))
 [15]
 Meter=Bar
 MeasureName=Calc15
-[ms_calcGhost15]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 15 )]
-[mt_barGhost15]
-Meter=Bar
-MeasureName=ms_calcGhost15
-
 [Audio16]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -280,13 +175,6 @@ Formula=(Max(0.0036463636363636, Audio16))
 [16]
 Meter=Bar
 MeasureName=Calc16
-[ms_calcGhost16]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 16 )]
-[mt_barGhost16]
-Meter=Bar
-MeasureName=ms_calcGhost16
-
 [Audio17]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -298,13 +186,6 @@ Formula=(Max(0.0036463636363636, Audio17))
 [17]
 Meter=Bar
 MeasureName=Calc17
-[ms_calcGhost17]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 17 )]
-[mt_barGhost17]
-Meter=Bar
-MeasureName=ms_calcGhost17
-
 [Audio18]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -316,13 +197,6 @@ Formula=(Max(0.0036463636363636, Audio18))
 [18]
 Meter=Bar
 MeasureName=Calc18
-[ms_calcGhost18]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 18 )]
-[mt_barGhost18]
-Meter=Bar
-MeasureName=ms_calcGhost18
-
 [Audio19]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -334,13 +208,6 @@ Formula=(Max(0.0036463636363636, Audio19))
 [19]
 Meter=Bar
 MeasureName=Calc19
-[ms_calcGhost19]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 19 )]
-[mt_barGhost19]
-Meter=Bar
-MeasureName=ms_calcGhost19
-
 [Audio20]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -352,13 +219,6 @@ Formula=(Max(0.0036463636363636, Audio20))
 [20]
 Meter=Bar
 MeasureName=Calc20
-[ms_calcGhost20]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 20 )]
-[mt_barGhost20]
-Meter=Bar
-MeasureName=ms_calcGhost20
-
 [Audio21]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -370,13 +230,6 @@ Formula=(Max(0.0036463636363636, Audio21))
 [21]
 Meter=Bar
 MeasureName=Calc21
-[ms_calcGhost21]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 21 )]
-[mt_barGhost21]
-Meter=Bar
-MeasureName=ms_calcGhost21
-
 [Audio22]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -388,13 +241,6 @@ Formula=(Max(0.0036463636363636, Audio22))
 [22]
 Meter=Bar
 MeasureName=Calc22
-[ms_calcGhost22]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 22 )]
-[mt_barGhost22]
-Meter=Bar
-MeasureName=ms_calcGhost22
-
 [Audio23]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -406,13 +252,6 @@ Formula=(Max(0.0036463636363636, Audio23))
 [23]
 Meter=Bar
 MeasureName=Calc23
-[ms_calcGhost23]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 23 )]
-[mt_barGhost23]
-Meter=Bar
-MeasureName=ms_calcGhost23
-
 [Audio24]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -424,13 +263,6 @@ Formula=(Max(0.0036463636363636, Audio24))
 [24]
 Meter=Bar
 MeasureName=Calc24
-[ms_calcGhost24]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 24 )]
-[mt_barGhost24]
-Meter=Bar
-MeasureName=ms_calcGhost24
-
 [Audio25]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -442,13 +274,6 @@ Formula=(Max(0.0036463636363636, Audio25))
 [25]
 Meter=Bar
 MeasureName=Calc25
-[ms_calcGhost25]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 25 )]
-[mt_barGhost25]
-Meter=Bar
-MeasureName=ms_calcGhost25
-
 [Audio26]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -460,13 +285,6 @@ Formula=(Max(0.0036463636363636, Audio26))
 [26]
 Meter=Bar
 MeasureName=Calc26
-[ms_calcGhost26]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 26 )]
-[mt_barGhost26]
-Meter=Bar
-MeasureName=ms_calcGhost26
-
 [Audio27]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -478,13 +296,6 @@ Formula=(Max(0.0036463636363636, Audio27))
 [27]
 Meter=Bar
 MeasureName=Calc27
-[ms_calcGhost27]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 27 )]
-[mt_barGhost27]
-Meter=Bar
-MeasureName=ms_calcGhost27
-
 [Audio28]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -496,13 +307,6 @@ Formula=(Max(0.0036463636363636, Audio28))
 [28]
 Meter=Bar
 MeasureName=Calc28
-[ms_calcGhost28]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 28 )]
-[mt_barGhost28]
-Meter=Bar
-MeasureName=ms_calcGhost28
-
 [Audio29]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -514,13 +318,6 @@ Formula=(Max(0.0036463636363636, Audio29))
 [29]
 Meter=Bar
 MeasureName=Calc29
-[ms_calcGhost29]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 29 )]
-[mt_barGhost29]
-Meter=Bar
-MeasureName=ms_calcGhost29
-
 [Audio30]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -532,13 +329,6 @@ Formula=(Max(0.0036463636363636, Audio30))
 [30]
 Meter=Bar
 MeasureName=Calc30
-[ms_calcGhost30]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 30 )]
-[mt_barGhost30]
-Meter=Bar
-MeasureName=ms_calcGhost30
-
 [Audio31]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -550,13 +340,6 @@ Formula=(Max(0.0036463636363636, Audio31))
 [31]
 Meter=Bar
 MeasureName=Calc31
-[ms_calcGhost31]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 31 )]
-[mt_barGhost31]
-Meter=Bar
-MeasureName=ms_calcGhost31
-
 [Audio32]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -568,13 +351,6 @@ Formula=(Max(0.0036463636363636, Audio32))
 [32]
 Meter=Bar
 MeasureName=Calc32
-[ms_calcGhost32]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 32 )]
-[mt_barGhost32]
-Meter=Bar
-MeasureName=ms_calcGhost32
-
 [Audio33]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -586,13 +362,6 @@ Formula=(Max(0.0036463636363636, Audio33))
 [33]
 Meter=Bar
 MeasureName=Calc33
-[ms_calcGhost33]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 33 )]
-[mt_barGhost33]
-Meter=Bar
-MeasureName=ms_calcGhost33
-
 [Audio34]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -604,13 +373,6 @@ Formula=(Max(0.0036463636363636, Audio34))
 [34]
 Meter=Bar
 MeasureName=Calc34
-[ms_calcGhost34]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 34 )]
-[mt_barGhost34]
-Meter=Bar
-MeasureName=ms_calcGhost34
-
 [Audio35]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -622,13 +384,6 @@ Formula=(Max(0.0036463636363636, Audio35))
 [35]
 Meter=Bar
 MeasureName=Calc35
-[ms_calcGhost35]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 35 )]
-[mt_barGhost35]
-Meter=Bar
-MeasureName=ms_calcGhost35
-
 [Audio36]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -640,13 +395,6 @@ Formula=(Max(0.0036463636363636, Audio36))
 [36]
 Meter=Bar
 MeasureName=Calc36
-[ms_calcGhost36]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 36 )]
-[mt_barGhost36]
-Meter=Bar
-MeasureName=ms_calcGhost36
-
 [Audio37]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -658,13 +406,6 @@ Formula=(Max(0.0036463636363636, Audio37))
 [37]
 Meter=Bar
 MeasureName=Calc37
-[ms_calcGhost37]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 37 )]
-[mt_barGhost37]
-Meter=Bar
-MeasureName=ms_calcGhost37
-
 [Audio38]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -676,13 +417,6 @@ Formula=(Max(0.0036463636363636, Audio38))
 [38]
 Meter=Bar
 MeasureName=Calc38
-[ms_calcGhost38]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 38 )]
-[mt_barGhost38]
-Meter=Bar
-MeasureName=ms_calcGhost38
-
 [Audio39]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -694,13 +428,6 @@ Formula=(Max(0.0036463636363636, Audio39))
 [39]
 Meter=Bar
 MeasureName=Calc39
-[ms_calcGhost39]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 39 )]
-[mt_barGhost39]
-Meter=Bar
-MeasureName=ms_calcGhost39
-
 [Audio40]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -712,13 +439,6 @@ Formula=(Max(0.0036463636363636, Audio40))
 [40]
 Meter=Bar
 MeasureName=Calc40
-[ms_calcGhost40]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 40 )]
-[mt_barGhost40]
-Meter=Bar
-MeasureName=ms_calcGhost40
-
 [Audio41]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -730,13 +450,6 @@ Formula=(Max(0.0036463636363636, Audio41))
 [41]
 Meter=Bar
 MeasureName=Calc41
-[ms_calcGhost41]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 41 )]
-[mt_barGhost41]
-Meter=Bar
-MeasureName=ms_calcGhost41
-
 [Audio42]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -748,13 +461,6 @@ Formula=(Max(0.0036463636363636, Audio42))
 [42]
 Meter=Bar
 MeasureName=Calc42
-[ms_calcGhost42]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 42 )]
-[mt_barGhost42]
-Meter=Bar
-MeasureName=ms_calcGhost42
-
 [Audio43]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -766,13 +472,6 @@ Formula=(Max(0.0036463636363636, Audio43))
 [43]
 Meter=Bar
 MeasureName=Calc43
-[ms_calcGhost43]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 43 )]
-[mt_barGhost43]
-Meter=Bar
-MeasureName=ms_calcGhost43
-
 [Audio44]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -784,13 +483,6 @@ Formula=(Max(0.0036463636363636, Audio44))
 [44]
 Meter=Bar
 MeasureName=Calc44
-[ms_calcGhost44]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 44 )]
-[mt_barGhost44]
-Meter=Bar
-MeasureName=ms_calcGhost44
-
 [Audio45]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -802,13 +494,6 @@ Formula=(Max(0.0036463636363636, Audio45))
 [45]
 Meter=Bar
 MeasureName=Calc45
-[ms_calcGhost45]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 45 )]
-[mt_barGhost45]
-Meter=Bar
-MeasureName=ms_calcGhost45
-
 [Audio46]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -820,13 +505,6 @@ Formula=(Max(0.0036463636363636, Audio46))
 [46]
 Meter=Bar
 MeasureName=Calc46
-[ms_calcGhost46]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 46 )]
-[mt_barGhost46]
-Meter=Bar
-MeasureName=ms_calcGhost46
-
 [Audio47]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -838,13 +516,6 @@ Formula=(Max(0.0036463636363636, Audio47))
 [47]
 Meter=Bar
 MeasureName=Calc47
-[ms_calcGhost47]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 47 )]
-[mt_barGhost47]
-Meter=Bar
-MeasureName=ms_calcGhost47
-
 [Audio48]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -856,13 +527,6 @@ Formula=(Max(0.0036463636363636, Audio48))
 [48]
 Meter=Bar
 MeasureName=Calc48
-[ms_calcGhost48]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 48 )]
-[mt_barGhost48]
-Meter=Bar
-MeasureName=ms_calcGhost48
-
 [Audio49]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -874,13 +538,6 @@ Formula=(Max(0.0036463636363636, Audio49))
 [49]
 Meter=Bar
 MeasureName=Calc49
-[ms_calcGhost49]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 49 )]
-[mt_barGhost49]
-Meter=Bar
-MeasureName=ms_calcGhost49
-
 [Audio50]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -892,13 +549,6 @@ Formula=(Max(0.0036463636363636, Audio50))
 [50]
 Meter=Bar
 MeasureName=Calc50
-[ms_calcGhost50]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 50 )]
-[mt_barGhost50]
-Meter=Bar
-MeasureName=ms_calcGhost50
-
 [Audio51]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -910,13 +560,6 @@ Formula=(Max(0.0036463636363636, Audio51))
 [51]
 Meter=Bar
 MeasureName=Calc51
-[ms_calcGhost51]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 51 )]
-[mt_barGhost51]
-Meter=Bar
-MeasureName=ms_calcGhost51
-
 [Audio52]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -928,13 +571,6 @@ Formula=(Max(0.0036463636363636, Audio52))
 [52]
 Meter=Bar
 MeasureName=Calc52
-[ms_calcGhost52]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 52 )]
-[mt_barGhost52]
-Meter=Bar
-MeasureName=ms_calcGhost52
-
 [Audio53]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -946,13 +582,6 @@ Formula=(Max(0.0036463636363636, Audio53))
 [53]
 Meter=Bar
 MeasureName=Calc53
-[ms_calcGhost53]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 53 )]
-[mt_barGhost53]
-Meter=Bar
-MeasureName=ms_calcGhost53
-
 [Audio54]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -964,13 +593,6 @@ Formula=(Max(0.0036463636363636, Audio54))
 [54]
 Meter=Bar
 MeasureName=Calc54
-[ms_calcGhost54]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 54 )]
-[mt_barGhost54]
-Meter=Bar
-MeasureName=ms_calcGhost54
-
 [Audio55]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -982,13 +604,6 @@ Formula=(Max(0.0036463636363636, Audio55))
 [55]
 Meter=Bar
 MeasureName=Calc55
-[ms_calcGhost55]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 55 )]
-[mt_barGhost55]
-Meter=Bar
-MeasureName=ms_calcGhost55
-
 [Audio56]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1000,13 +615,6 @@ Formula=(Max(0.0036463636363636, Audio56))
 [56]
 Meter=Bar
 MeasureName=Calc56
-[ms_calcGhost56]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 56 )]
-[mt_barGhost56]
-Meter=Bar
-MeasureName=ms_calcGhost56
-
 [Audio57]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1018,13 +626,6 @@ Formula=(Max(0.0036463636363636, Audio57))
 [57]
 Meter=Bar
 MeasureName=Calc57
-[ms_calcGhost57]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 57 )]
-[mt_barGhost57]
-Meter=Bar
-MeasureName=ms_calcGhost57
-
 [Audio58]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1036,13 +637,6 @@ Formula=(Max(0.0036463636363636, Audio58))
 [58]
 Meter=Bar
 MeasureName=Calc58
-[ms_calcGhost58]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 58 )]
-[mt_barGhost58]
-Meter=Bar
-MeasureName=ms_calcGhost58
-
 [Audio59]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1054,13 +648,6 @@ Formula=(Max(0.0036463636363636, Audio59))
 [59]
 Meter=Bar
 MeasureName=Calc59
-[ms_calcGhost59]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 59 )]
-[mt_barGhost59]
-Meter=Bar
-MeasureName=ms_calcGhost59
-
 [Audio60]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1072,13 +659,6 @@ Formula=(Max(0.0036463636363636, Audio60))
 [60]
 Meter=Bar
 MeasureName=Calc60
-[ms_calcGhost60]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 60 )]
-[mt_barGhost60]
-Meter=Bar
-MeasureName=ms_calcGhost60
-
 [Audio61]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1090,13 +670,6 @@ Formula=(Max(0.0036463636363636, Audio61))
 [61]
 Meter=Bar
 MeasureName=Calc61
-[ms_calcGhost61]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 61 )]
-[mt_barGhost61]
-Meter=Bar
-MeasureName=ms_calcGhost61
-
 [Audio62]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1108,13 +681,6 @@ Formula=(Max(0.0036463636363636, Audio62))
 [62]
 Meter=Bar
 MeasureName=Calc62
-[ms_calcGhost62]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 62 )]
-[mt_barGhost62]
-Meter=Bar
-MeasureName=ms_calcGhost62
-
 [Audio63]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1126,13 +692,6 @@ Formula=(Max(0.0036463636363636, Audio63))
 [63]
 Meter=Bar
 MeasureName=Calc63
-[ms_calcGhost63]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 63 )]
-[mt_barGhost63]
-Meter=Bar
-MeasureName=ms_calcGhost63
-
 [Audio64]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1144,13 +703,6 @@ Formula=(Max(0.0036463636363636, Audio64))
 [64]
 Meter=Bar
 MeasureName=Calc64
-[ms_calcGhost64]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 64 )]
-[mt_barGhost64]
-Meter=Bar
-MeasureName=ms_calcGhost64
-
 [Audio65]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1162,13 +714,6 @@ Formula=(Max(0.0036463636363636, Audio65))
 [65]
 Meter=Bar
 MeasureName=Calc65
-[ms_calcGhost65]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 65 )]
-[mt_barGhost65]
-Meter=Bar
-MeasureName=ms_calcGhost65
-
 [Audio66]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1180,13 +725,6 @@ Formula=(Max(0.0036463636363636, Audio66))
 [66]
 Meter=Bar
 MeasureName=Calc66
-[ms_calcGhost66]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 66 )]
-[mt_barGhost66]
-Meter=Bar
-MeasureName=ms_calcGhost66
-
 [Audio67]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1198,13 +736,6 @@ Formula=(Max(0.0036463636363636, Audio67))
 [67]
 Meter=Bar
 MeasureName=Calc67
-[ms_calcGhost67]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 67 )]
-[mt_barGhost67]
-Meter=Bar
-MeasureName=ms_calcGhost67
-
 [Audio68]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1216,13 +747,6 @@ Formula=(Max(0.0036463636363636, Audio68))
 [68]
 Meter=Bar
 MeasureName=Calc68
-[ms_calcGhost68]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 68 )]
-[mt_barGhost68]
-Meter=Bar
-MeasureName=ms_calcGhost68
-
 [Audio69]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1234,13 +758,6 @@ Formula=(Max(0.0036463636363636, Audio69))
 [69]
 Meter=Bar
 MeasureName=Calc69
-[ms_calcGhost69]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 69 )]
-[mt_barGhost69]
-Meter=Bar
-MeasureName=ms_calcGhost69
-
 [Audio70]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1252,13 +769,6 @@ Formula=(Max(0.0036463636363636, Audio70))
 [70]
 Meter=Bar
 MeasureName=Calc70
-[ms_calcGhost70]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 70 )]
-[mt_barGhost70]
-Meter=Bar
-MeasureName=ms_calcGhost70
-
 [Audio71]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1270,13 +780,6 @@ Formula=(Max(0.0036463636363636, Audio71))
 [71]
 Meter=Bar
 MeasureName=Calc71
-[ms_calcGhost71]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 71 )]
-[mt_barGhost71]
-Meter=Bar
-MeasureName=ms_calcGhost71
-
 [Audio72]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1288,13 +791,6 @@ Formula=(Max(0.0036463636363636, Audio72))
 [72]
 Meter=Bar
 MeasureName=Calc72
-[ms_calcGhost72]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 72 )]
-[mt_barGhost72]
-Meter=Bar
-MeasureName=ms_calcGhost72
-
 [Audio73]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1306,13 +802,6 @@ Formula=(Max(0.0036463636363636, Audio73))
 [73]
 Meter=Bar
 MeasureName=Calc73
-[ms_calcGhost73]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 73 )]
-[mt_barGhost73]
-Meter=Bar
-MeasureName=ms_calcGhost73
-
 [Audio74]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1324,13 +813,6 @@ Formula=(Max(0.0036463636363636, Audio74))
 [74]
 Meter=Bar
 MeasureName=Calc74
-[ms_calcGhost74]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 74 )]
-[mt_barGhost74]
-Meter=Bar
-MeasureName=ms_calcGhost74
-
 [Audio75]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1342,13 +824,6 @@ Formula=(Max(0.0036463636363636, Audio75))
 [75]
 Meter=Bar
 MeasureName=Calc75
-[ms_calcGhost75]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 75 )]
-[mt_barGhost75]
-Meter=Bar
-MeasureName=ms_calcGhost75
-
 [Audio76]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1360,13 +835,6 @@ Formula=(Max(0.0036463636363636, Audio76))
 [76]
 Meter=Bar
 MeasureName=Calc76
-[ms_calcGhost76]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 76 )]
-[mt_barGhost76]
-Meter=Bar
-MeasureName=ms_calcGhost76
-
 [Audio77]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1378,13 +846,6 @@ Formula=(Max(0.0036463636363636, Audio77))
 [77]
 Meter=Bar
 MeasureName=Calc77
-[ms_calcGhost77]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 77 )]
-[mt_barGhost77]
-Meter=Bar
-MeasureName=ms_calcGhost77
-
 [Audio78]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1396,13 +857,6 @@ Formula=(Max(0.0036463636363636, Audio78))
 [78]
 Meter=Bar
 MeasureName=Calc78
-[ms_calcGhost78]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 78 )]
-[mt_barGhost78]
-Meter=Bar
-MeasureName=ms_calcGhost78
-
 [Audio79]
 Measure=Plugin
 Plugin=AudioLevelBeta
@@ -1414,9 +868,3 @@ Formula=(Max(0.0036463636363636, Audio79))
 [79]
 Meter=Bar
 MeasureName=Calc79
-[ms_calcGhost79]
-Measure=Calc
-Formula=[&lua_Ghost:GetValue( 79 )]
-[mt_barGhost79]
-Meter=Bar
-MeasureName=ms_calcGhost79
